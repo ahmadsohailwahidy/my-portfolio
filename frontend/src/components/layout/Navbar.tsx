@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { navItems, portfolioData } from "../data/portfolio";
+import { navItems, portfolioData } from "../../data/portfolio";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -92,6 +92,7 @@ export default function Navbar() {
             />
           </span>
         </button>
+        
       </div>
 
       {/* Mobile navigation */}
@@ -116,6 +117,7 @@ export default function Navbar() {
                 {item.label}
               </a>
             );
+            
           })}
         </div>
       </nav>
