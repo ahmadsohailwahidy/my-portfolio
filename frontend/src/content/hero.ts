@@ -7,20 +7,26 @@ export const heroContent: HeroContentData = {
   primaryTitle: ["Full-Stack", "Developer"],
   secondaryTitle: "Software & Database Developer",
   description:
-    "Final-year Computer Science student and full-stack developer experienced in management systems, database design, modern web applications, and Data Warehouse and Business Intelligence projects.",
+    "Final-Year Computer Science student and Full-Stack Developer experienced in management systems, database design, modern web applications, and data warehouse and business intelligence projects.",
   specialties: [
-    {
-      number: "01",
-      label: "Web Applications",
-    },
-    {
-      number: "02",
-      label: "Backend Systems",
-    },
-    {
-      number: "03",
-      label: "Database Engineering",
-    },
+    { number: "01", label: "Web Applications" },
+    { number: "02", label: "Backend Systems" },
+    { number: "03", label: "Database Engineering" },
+  ],
+  stages: [
+    { id: "home", number: "00", label: "Intro" },
+    { id: "about", number: "01", label: "About" },
+    { id: "expertise", number: "02", label: "Expertise" },
+    { id: "projects", number: "03", label: "Projects" },
+    { id: "skills", number: "04", label: "Skills" },
+    { id: "experience", number: "05", label: "Experience" },
+    { id: "education", number: "06", label: "Education" },
+    { id: "certifications", number: "07", label: "Credentials" },
+    { id: "github", number: "08", label: "GitHub" },
+    { id: "services", number: "09", label: "Services" },
+    { id: "soft-skills", number: "10", label: "Profile" },
+    { id: "resume", number: "11", label: "Resume" },
+    { id: "contact", number: "12", label: "Contact" },
   ],
   actions: {
     projects: {

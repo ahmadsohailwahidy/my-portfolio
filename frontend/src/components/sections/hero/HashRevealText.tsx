@@ -5,7 +5,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import styles from "./HeroSection.module.css";
 
 const HASH_GLYPHS = "01#<>/{}[]*+=-_";
-const FRAME_INTERVAL = 52;
+const FRAME_INTERVAL = 48;
 
 interface HashRevealTextProps {
   text: string;
@@ -69,40 +69,48 @@ export function HashRevealText({
       "(prefers-reduced-motion: reduce)",
     );
 
-    if (reduceMotionQuery.matches) {
-      setVisibleText(text);
-      return;
-    }
-
     let animationFrameId = 0;
     let frame = 0;
     let previousFrameTime = 0;
-    const startTime = performance.now() + delay;
 
-    const animate = (currentTime: number) => {
-      if (currentTime < startTime) {
-        animationFrameId = window.requestAnimationFrame(animate);
+    const initialize = (initialTime: number) => {
+      if (reduceMotionQuery.matches) {
+        setVisibleText(text);
         return;
       }
 
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(1, elapsed / duration);
+      setVisibleText(createHashFrame(text, 0, 0));
 
-      if (currentTime - previousFrameTime >= FRAME_INTERVAL || progress === 1) {
-        previousFrameTime = currentTime;
-        frame += 1;
-        setVisibleText(createHashFrame(text, progress, frame));
-      }
+      const safeDelay = Math.max(0, delay);
+      const safeDuration = Math.max(1, duration);
+      const startTime = initialTime + safeDelay;
 
-      if (progress < 1) {
+      const animate = (currentTime: number) => {
+        if (currentTime < startTime) {
+          animationFrameId = window.requestAnimationFrame(animate);
+          return;
+        }
+
+        const progress = Math.min(1, (currentTime - startTime) / safeDuration);
+
+        if (progress >= 1) {
+          setVisibleText(text);
+          return;
+        }
+
+        if (currentTime - previousFrameTime >= FRAME_INTERVAL) {
+          previousFrameTime = currentTime;
+          frame += 1;
+          setVisibleText(createHashFrame(text, progress, frame));
+        }
+
         animationFrameId = window.requestAnimationFrame(animate);
-      } else {
-        setVisibleText(text);
-      }
+      };
+
+      animationFrameId = window.requestAnimationFrame(animate);
     };
 
-    setVisibleText(createHashFrame(text, 0, 0));
-    animationFrameId = window.requestAnimationFrame(animate);
+    animationFrameId = window.requestAnimationFrame(initialize);
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);

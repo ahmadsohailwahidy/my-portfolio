@@ -9,14 +9,16 @@ interface HeroActionsProps {
 
 export function HeroActions({ actions }: HeroActionsProps) {
   return (
-    <div className={styles.actions}>
+    <div className={styles.actions} aria-label="Hero actions">
       <a
         className={styles.primaryAction}
         href={actions.projects.href}
         aria-label={actions.projects.ariaLabel}
       >
-        <span>{actions.projects.label}</span>
-        <ArrowUpRightIcon className={styles.actionIcon} />
+        <span className={styles.actionText}>{actions.projects.label}</span>
+        <span className={styles.actionIconBox} aria-hidden="true">
+          <ArrowUpRightIcon className={styles.actionIcon} />
+        </span>
       </a>
 
       <a
@@ -25,8 +27,10 @@ export function HeroActions({ actions }: HeroActionsProps) {
         aria-label={actions.resume.ariaLabel}
         download={actions.resume.download}
       >
-        <DownloadIcon className={styles.actionIcon} />
-        <span>{actions.resume.label}</span>
+        <span className={styles.actionIconBox} aria-hidden="true">
+          <DownloadIcon className={styles.actionIcon} />
+        </span>
+        <span className={styles.actionText}>{actions.resume.label}</span>
       </a>
     </div>
   );

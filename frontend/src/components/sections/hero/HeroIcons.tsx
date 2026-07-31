@@ -62,7 +62,7 @@ export function LinkedinIcon({ className }: IconProps) {
   );
 }
 
-export function ArrowDownIcon({ className }: IconProps) {
+export function SparkIcon({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -70,8 +70,7 @@ export function ArrowDownIcon({ className }: IconProps) {
       fill="none"
       aria-hidden="true"
     >
-      <path d="M12 4v15" />
-      <path d="m6.5 13.5 5.5 5.5 5.5-5.5" />
+      <path d="M12 2.8c.7 5.2 4 8.5 9.2 9.2-5.2.7-8.5 4-9.2 9.2-.7-5.2-4-8.5-9.2-9.2 5.2-.7 8.5-4 9.2-9.2Z" />
     </svg>
   );
 }

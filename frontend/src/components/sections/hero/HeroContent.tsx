@@ -2,68 +2,68 @@ import { heroContent } from "@/content/hero";
 
 import { HashRevealText } from "./HashRevealText";
 import { HeroActions } from "./HeroActions";
-import { HeroSocialLinks } from "./HeroSocialLinks";
+import { SparkIcon } from "./HeroIcons";
 import styles from "./HeroSection.module.css";
 
 export function HeroContent() {
   return (
-    <div className={styles.contentGrid} data-grid-ignore>
-      <aside className={styles.introRail} aria-label="Personal introduction">
-        <div className={styles.railHeading}>
-          <span className={styles.railIndex}>00 / INTRO</span>
-          <span className={styles.railLine} aria-hidden="true" />
-        </div>
-
+    <div className={styles.heroContent} data-grid-ignore>
+      <div className={styles.identityColumn}>
         <div className={styles.identityBlock}>
-          <p>{heroContent.greeting}</p>
+          <span className={styles.greeting}>{heroContent.greeting}</span>
+
           <HashRevealText
             className={styles.identityName}
             text={heroContent.name}
-            delay={120}
-            duration={760}
+            delay={130}
+            duration={900}
           />
         </div>
 
-        <HeroSocialLinks socials={heroContent.socials} />
-      </aside>
-
-      <div className={styles.mainContent}>
         <div className={styles.roleLabel}>
-          <span className={styles.rolePulse} aria-hidden="true" />
+          <span className={styles.roleSignal} aria-hidden="true">
+            <SparkIcon className={styles.roleSignalIcon} />
+          </span>
           <span>{heroContent.studentRole}</span>
         </div>
 
         <h1 id="hero-title" className={styles.headline}>
-          <span className={`${styles.headlineLine} ${styles.headlineBase}`}>
+          <span className={styles.headlinePrimary}>
             {heroContent.primaryTitle[0]}
           </span>
 
           <HashRevealText
-            className={`${styles.headlineLine} ${styles.headlineAccent}`}
+            className={styles.headlineAccent}
             text={heroContent.primaryTitle[1]}
-            delay={300}
-            duration={1100}
+            delay={380}
+            duration={1120}
           />
         </h1>
 
-        <div className={styles.supportingContent}>
-          <p className={styles.secondaryTitle}>{heroContent.secondaryTitle}</p>
-          <p className={styles.description}>{heroContent.description}</p>
+        <p className={styles.secondaryTitle}>{heroContent.secondaryTitle}</p>
+
+        <HeroActions actions={heroContent.actions} />
+      </div>
+
+      <aside className={styles.summaryColumn} aria-label="Professional summary">
+        <div className={styles.summaryHeader}>
+          <span>Profile / 01</span>
+          <span className={styles.summaryHeaderRule} aria-hidden="true" />
         </div>
 
-        <div className={styles.actionRow}>
-          <HeroActions actions={heroContent.actions} />
-        </div>
+        <p className={styles.description}>{heroContent.description}</p>
 
         <ol className={styles.specialties} aria-label="Core specialties">
           {heroContent.specialties.map((specialty) => (
-            <li key={specialty.number}>
-              <span>{specialty.number}</span>
+            <li key={specialty.number} className={styles.specialtyItem}>
+              <span className={styles.specialtyNumber}>{specialty.number}</span>
+              <span className={styles.specialtyRule} aria-hidden="true" />
               <strong>{specialty.label}</strong>
+              <span className={styles.specialtyDot} aria-hidden="true" />
             </li>
           ))}
         </ol>
-      </div>
+      </aside>
     </div>
   );
 }

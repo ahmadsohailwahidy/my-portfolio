@@ -11,6 +11,12 @@ export interface HeroSpecialty {
   label: string;
 }
 
+export interface HeroStage {
+  id: string;
+  number: string;
+  label: string;
+}
+
 export interface HeroContentData {
   greeting: string;
   name: string;
@@ -19,6 +25,7 @@ export interface HeroContentData {
   secondaryTitle: string;
   description: string;
   specialties: readonly HeroSpecialty[];
+  stages: readonly HeroStage[];
   actions: {
     projects: HeroLink;
     resume: HeroLink;
