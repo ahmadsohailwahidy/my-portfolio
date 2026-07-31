@@ -1,43 +1,52 @@
-export const heroContent = {
-  greeting: "Hello, I am",
+import type { HeroContentData } from "@/types/hero";
 
+export const heroContent: HeroContentData = {
+  greeting: "Hi, I'm",
   name: "Ahmad Sohail Wahidy",
-
-  roles: [
-    "Full-Stack Developer",
-    "Computer Science Student",
-    "Software & Database Developer",
-  ],
-
+  studentRole: "Final-year Computer Science Student",
+  primaryTitle: ["Full-Stack", "Developer"],
+  secondaryTitle: "Software & Database Developer",
   description:
-    "last year student of Computer Science and Full-Stack Developer with working experience on Management Systems, Database Design, Modern Websites and Data Warehouse and Business Intelligence prjects.",
-
+    "Final-year Computer Science student and full-stack developer experienced in management systems, database design, modern web applications, and Data Warehouse and Business Intelligence projects.",
+  specialties: [
+    {
+      number: "01",
+      label: "Web Applications",
+    },
+    {
+      number: "02",
+      label: "Backend Systems",
+    },
+    {
+      number: "03",
+      label: "Database Engineering",
+    },
+  ],
   actions: {
     projects: {
-      label: "See Projects",
+      label: "Explore Projects",
       href: "#projects",
+      ariaLabel: "Go to featured projects",
     },
-
     resume: {
       label: "Download CV",
       href: "/resume/Ahmad-Sohail-CV.pdf",
+      ariaLabel: "Download Ahmad Sohail Wahidy's CV",
+      download: true,
     },
   },
-
-  socialLinks: {
+  socials: {
     github: {
       label: "GitHub",
       href: "https://github.com/ahmadsohailwahidy",
+      ariaLabel: "Open Ahmad Sohail Wahidy's GitHub profile",
+      external: true,
     },
-
     linkedin: {
       label: "LinkedIn",
-      href: "https://linkedin.com/ahmadsohailwahidy",
+      href: "https://www.linkedin.com/in/ahmadsohailwahidy",
+      ariaLabel: "Open Ahmad Sohail Wahidy's LinkedIn profile",
+      external: true,
     },
-  },
-
-  image: {
-    src: "/images/hero/profile.webp",
-    alt: "Ahmad Sohail Wahidy",
   },
 };
