@@ -1,12 +1,12 @@
 import type { AboutContentData } from "@/types/about";
 
 export const aboutContent = {
-  eyebrow: "01 / About",
-  heading: "Engineering ideas into structured, dependable software.",
+  eyebrow: "ABOUT / 02",
+  heading: "Clear systems. Dependable software. Structured data.",
   introduction:
-    "I’m Ahmad Sohail Wahidy, a seventh-semester, final-year Computer Science student working across full-stack, software, and database development. I focus on translating defined problems into clear interfaces, maintainable application logic, and well-organized data systems.",
+    "I’m Ahmad Sohail Wahidy, a seventh-semester, final-year Computer Science student working across full-stack, software, and database development. I focus on turning defined problems into clear user interfaces, maintainable application logic, and well-organized data systems.",
   projectStory:
-    "My experience has grown through a Final Year Project Management System, a modern real estate web application, an Employee Management System, a Data Warehouse project, an ASP.NET project, and other academic and personal software projects. Together, these projects have strengthened how I approach management systems, backend development, database design, modern web applications, and technical problem-solving.",
+    "My practical experience has grown through a Final Year Project Management System, a modern real estate web application, an Employee Management System, a Data Warehouse project, an ASP.NET project, and other academic and personal software projects. Together, these projects have strengthened how I approach management systems, backend development, database design, modern web applications, and technical problem-solving.",
   careerObjectiveLabel: "Professional direction",
   careerObjective:
     "My goal is to grow into a software engineer who designs scalable, reliable, data-intensive, and AI-enabled systems. I want to deepen my expertise in backend engineering, cloud technologies, system design, databases, and data engineering while contributing to meaningful enterprise and SaaS products.",
@@ -32,6 +32,11 @@ export const aboutContent = {
     professionalIdentity: "Full-Stack · Software · Database Development",
     availabilityLabel: "Open to selected opportunities",
     placeholderLabel: "Portrait slot — ready for a real photo",
+    // To use a real photo later, add:
+    photo: {
+      src: "/images/profile/ahmad-sohail-wahidy.png",
+      alt: "Portrait of Ahmad Sohail Wahidy",
+    },
   },
   highlights: [
     {
@@ -52,12 +57,12 @@ export const aboutContent = {
   ],
   selectedTechnologiesLabel: "Selected technologies",
   selectedTechnologies: [
-    "Next.js",
-    "TypeScript",
-    "React",
-    "FastAPI",
-    "PostgreSQL",
-    "Docker",
+    { name: "Next.js", icon: "nextjs" },
+    { name: "TypeScript", icon: "typescript" },
+    { name: "React", icon: "react" },
+    { name: "FastAPI", icon: "fastapi" },
+    { name: "PostgreSQL", icon: "postgresql" },
+    { name: "Docker", icon: "docker" },
   ],
   interestsLabel: "Technical interests",
   interestsHeading: "Where I want to build deeper capability next.",

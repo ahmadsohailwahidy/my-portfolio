@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { TypingName } from "./TypingName";
+
 import type { AboutProfile } from "@/types/about";
 
 import styles from "./AboutSection.module.css";
@@ -21,29 +24,49 @@ export function AboutVisual({ profile }: AboutVisualProps) {
         </span>
       </div>
 
-      <div className={styles.portraitStage} aria-hidden="true">
-        <span className={styles.orbitOuter} />
-        <span className={styles.orbitInner} />
-        <span className={styles.axisHorizontal} />
-        <span className={styles.axisVertical} />
-        <span className={styles.cornerMarkerTop} />
-        <span className={styles.cornerMarkerBottom} />
+      <div className={styles.portraitStage}>
+        <span className={styles.orbitOuter} aria-hidden="true" />
+        <span className={styles.orbitInner} aria-hidden="true" />
+        <span className={styles.axisHorizontal} aria-hidden="true" />
+        <span className={styles.axisVertical} aria-hidden="true" />
+        <span className={styles.cornerMarkerTop} aria-hidden="true" />
+        <span className={styles.cornerMarkerBottom} aria-hidden="true" />
 
-        <div className={styles.monogramShell}>
-          <span className={styles.monogram}>{profile.initials}</span>
-          <span className={styles.monogramCaption}>Developer profile</span>
-        </div>
+        {profile.photo ? (
+          <div className={styles.photoShell}>
+            <span className={styles.photoRing} aria-hidden="true" />
+
+            <Image
+              src={profile.photo.src}
+              alt={profile.photo.alt}
+              fill
+              className={styles.profilePhoto}
+              sizes="(max-width: 48rem) 15rem, 17rem"
+              priority={false}
+            />
+
+            <span className={styles.photoOverlay} aria-hidden="true" />
+          </div>
+        ) : (
+          <div className={styles.monogramShell} aria-hidden="true">
+            <span className={styles.monogram}>{profile.initials}</span>
+            <span className={styles.monogramCaption}>Developer profile</span>
+          </div>
+        )}
       </div>
 
       <figcaption className={styles.visualCaption}>
-        <div>
-          <p className={styles.profileName} id="about-profile-name">
-            {profile.name}
+        <div className={styles.profileTitleBlock}>
+          <p className={styles.profileNameWrap} id="about-profile-name">
+            <TypingName text={profile.name} />
           </p>
           <p className={styles.profileAcademic}>{profile.academicStatus}</p>
         </div>
+
         <p className={styles.profileIdentity}>{profile.professionalIdentity}</p>
-        <p className={styles.placeholderNote}>{profile.placeholderLabel}</p>
+        {!profile.photo ? (
+          <p className={styles.placeholderNote}>{profile.placeholderLabel}</p>
+        ) : null}
       </figcaption>
     </figure>
   );

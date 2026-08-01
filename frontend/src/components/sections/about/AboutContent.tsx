@@ -13,13 +13,36 @@ export function AboutContent({ content }: AboutContentProps) {
   return (
     <article className={styles.story} aria-labelledby="about-title">
       <header className={styles.sectionHeader}>
-        <p className={styles.eyebrow}>{content.eyebrow}</p>
+        <div className={styles.headingMeta}>
+          <p className={styles.eyebrow}>{content.eyebrow}</p>
+          <p className={styles.headingSupport}>
+            A focused profile of how I build, learn, and where I want to grow
+            next.
+          </p>
+        </div>
         <h2 id="about-title">{content.heading}</h2>
       </header>
 
       <div className={styles.narrative}>
-        <p className={styles.lead}>{content.introduction}</p>
-        <p>{content.projectStory}</p>
+        <section
+          className={`${styles.storyPanel} ${styles.storyLeadPanel}`}
+          aria-labelledby="about-summary-title"
+        >
+          <p className={styles.storyPanelLabel} id="about-summary-title">
+            Professional summary
+          </p>
+          <p className={styles.lead}>{content.introduction}</p>
+        </section>
+
+        <section
+          className={styles.storyPanel}
+          aria-labelledby="about-project-story-title"
+        >
+          <p className={styles.storyPanelLabel} id="about-project-story-title">
+            Project-backed experience
+          </p>
+          <p>{content.projectStory}</p>
+        </section>
       </div>
 
       <blockquote className={styles.objective}>

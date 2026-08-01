@@ -14,7 +14,7 @@ export default function HeroSection() {
       <div className={styles.heroGlowTwo} aria-hidden="true" />
 
       <div className={styles.shell}>
-        <div className={styles.frame} data-grid-ignore>
+        <div className={styles.frame} > {/*data-grid-ignore*/}
           <header className={styles.topMeta}>
             <span className={styles.metaLabel}>Portfolio / 2026</span>
             <span className={styles.metaRule} aria-hidden="true" />

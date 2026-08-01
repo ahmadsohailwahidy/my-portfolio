@@ -22,8 +22,14 @@ export function AboutInterests({
       aria-labelledby="about-interests-title"
     >
       <header className={styles.interestsHeader}>
-        <p className={styles.subsectionLabel}>{label}</p>
-        <div>
+        <div className={styles.interestsHeaderSide}>
+          <p className={styles.subsectionLabel}>{label}</p>
+          <p className={styles.interestsMeta}>
+            Focus map / {groups.length} tracks
+          </p>
+        </div>
+
+        <div className={styles.interestsHeadingBlock}>
           <h3 id="about-interests-title">{heading}</h3>
           <p>{description}</p>
         </div>

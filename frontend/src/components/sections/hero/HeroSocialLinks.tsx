@@ -33,12 +33,14 @@ export function HeroSocialLinks({ socials }: HeroSocialLinksProps) {
                 target={social.external ? "_blank" : undefined}
                 rel={social.external ? "noreferrer" : undefined}
               >
-                <span className={styles.socialIconWrap} aria-hidden="true">
-                  <SocialIcon className={styles.socialIcon} />
-                </span>
+                
+                  <span className={styles.socialIconWrap} aria-hidden="true">
+                    <SocialIcon className={styles.socialIcon} />
+                  </span>
 
-                <span>{social.label}</span>
-                <ArrowUpRightIcon className={styles.socialArrow} />
+                  <span>{social.label}</span>
+                  <ArrowUpRightIcon className={styles.socialArrow} />
+                
               </a>
             );
           },

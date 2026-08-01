@@ -7,7 +7,7 @@ import styles from "./HeroSection.module.css";
 
 export function HeroContent() {
   return (
-    <div className={styles.heroContent} data-grid-ignore>
+    <div className={styles.heroContent} > {/*data-grid-ignore*/}
       <div className={styles.identityColumn}>
         <div className={styles.identityBlock}>
           <span className={styles.greeting}>{heroContent.greeting}</span>
