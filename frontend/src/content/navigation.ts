@@ -26,20 +26,20 @@ export const navigationItems: readonly NavigationItem[] = [
     description: "Main areas of technical specialization",
   },
   {
-    id: "projects",
-    label: "Featured Projects",
-    shortLabel: "Projects",
-    href: "#projects",
-    group: "primary",
-    description: "Selected projects and measurable outcomes",
-  },
-  {
     id: "skills",
     label: "Technical Skills",
     shortLabel: "Skills",
     href: "#skills",
     group: "primary",
     description: "Languages, frameworks, databases and tools",
+  },
+  {
+    id: "projects",
+    label: "Featured Projects",
+    shortLabel: "Projects",
+    href: "#projects",
+    group: "primary",
+    description: "Selected projects and measurable outcomes",
   },
   {
     id: "experience",
