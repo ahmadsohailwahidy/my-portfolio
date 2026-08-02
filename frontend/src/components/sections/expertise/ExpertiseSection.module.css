@@ -1,0 +1,1153 @@
+.section {
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 7.5rem;
+  padding: clamp(3.75rem, 6vw, 6.5rem) clamp(1rem, 4vw, 3rem)
+    clamp(6rem, 9vw, 8.5rem);
+  overflow: clip;
+}
+
+.section::before,
+.section::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.section::before {
+  z-index: -3;
+  inset: 4% 0 auto;
+  height: min(38rem, 58vw);
+  background:
+    radial-gradient(
+      circle at 16% 34%,
+      rgba(34, 211, 238, 0.09),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 86% 58%,
+      rgba(52, 211, 153, 0.07),
+      transparent 31%
+    );
+}
+
+.section::after {
+  z-index: -2;
+  inset: auto 8% 2.5rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(103, 232, 249, 0.22),
+    rgba(52, 211, 153, 0.17),
+    transparent
+  );
+}
+
+.ambientGlow {
+  position: absolute;
+  z-index: -2;
+  top: 18%;
+  left: 50%;
+  width: min(58rem, 78vw);
+  height: min(28rem, 42vw);
+  border-radius: 50%;
+  background: rgba(34, 211, 238, 0.045);
+  filter: blur(110px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.coordinateGrid {
+  position: absolute;
+  z-index: -1;
+  top: clamp(9rem, 15vw, 14rem);
+  right: max(1rem, calc((100vw - 76rem) / 2 - 2rem));
+  width: clamp(9rem, 18vw, 16rem);
+  aspect-ratio: 1;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(
+      rgba(103, 232, 249, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(103, 232, 249, 0.1) 1px,
+      transparent 1px
+    );
+  background-size: 2rem 2rem;
+  mask-image: linear-gradient(
+    135deg,
+    transparent 8%,
+    #000 52%,
+    transparent 96%
+  );
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(76rem, 100%);
+  margin-inline: auto;
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns:
+    minmax(12rem, 0.34fr)
+    minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5.5rem);
+  align-items: end;
+  padding-bottom: clamp(2rem, 4vw, 3.35rem);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.headerMeta {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: 0 0 0.35rem 1.15rem;
+}
+
+.headerMarker {
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.35rem;
+  left: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.95),
+    rgba(52, 211, 153, 0.38),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.22);
+}
+
+.sectionLabel,
+.sectionMeta,
+.architectureHeading,
+.capabilityEyebrow,
+.blockLabel,
+.growthLabel {
+  margin: 0;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.sectionLabel {
+  color: #67e8f9;
+  font-size: clamp(0.72rem, 1vw, 0.82rem);
+}
+
+.sectionMeta {
+  margin-top: 0.85rem;
+  color: rgba(145, 165, 186, 0.7);
+  font-size: clamp(0.62rem, 0.9vw, 0.7rem);
+  line-height: 1.65;
+}
+
+.headerCopy {
+  min-width: 0;
+}
+
+.headerCopy h2 {
+  max-width: 18ch;
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(2.35rem, 5.2vw, 4.35rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 0.99;
+  text-wrap: balance;
+}
+
+.headerCopy > p {
+  max-width: 66ch;
+  margin: clamp(1.2rem, 2.2vw, 1.65rem) 0 0;
+  color: #91a5ba;
+  font-size: clamp(0.98rem, 1.35vw, 1.1rem);
+  line-height: 1.82;
+}
+
+.architectureHeading {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(2rem, 1fr)
+    auto;
+  gap: 1rem;
+  align-items: center;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  color: rgba(145, 165, 186, 0.72);
+  font-size: clamp(0.58rem, 0.85vw, 0.68rem);
+  line-height: 1.5;
+}
+
+.architectureHeading > span:last-child {
+  color: rgba(103, 232, 249, 0.68);
+  letter-spacing: 0.11em;
+}
+
+.architectureRule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.08),
+    rgba(34, 211, 238, 0.3),
+    rgba(52, 211, 153, 0.16),
+    rgba(148, 163, 184, 0.06)
+  );
+}
+
+.architecture {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.12fr)
+    repeat(2, minmax(0, 0.82fr));
+  grid-template-areas:
+    "anchor backend database"
+    "anchor data data";
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.connectionPath {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.connectionHorizontal,
+.connectionVertical,
+.connectionPulse {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.connectionHorizontal {
+  top: 47.5%;
+  left: 37.2%;
+  width: 7.2%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 0.08),
+    rgba(34, 211, 238, 0.58),
+    rgba(52, 211, 153, 0.28)
+  );
+}
+
+.connectionVertical {
+  top: 26%;
+  left: 44.3%;
+  width: 1px;
+  height: 48%;
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.18),
+    rgba(103, 232, 249, 0.5),
+    rgba(52, 211, 153, 0.22)
+  );
+}
+
+.connectionPulse {
+  top: calc(47.5% - 3px);
+  left: calc(44.3% - 3px);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #67e8f9;
+  box-shadow:
+    0 0 0 5px rgba(34, 211, 238, 0.08),
+    0 0 18px rgba(34, 211, 238, 0.5);
+}
+
+.capability {
+  --accent-primary: 34, 211, 238;
+  --accent-secondary: 103, 232, 249;
+
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: clamp(1.15rem, 2vw, 1.55rem);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(var(--accent-primary), 0.055),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(7, 17, 31, 0.92),
+      rgba(4, 13, 25, 0.84)
+    );
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.capability::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(103, 232, 249, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      rgba(103, 232, 249, 0.045) 1px,
+      transparent 1px
+    );
+  background-size: 3.5rem 3.5rem;
+  opacity: 0.32;
+  mask-image: linear-gradient(
+    135deg,
+    #000 0%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+.cyanAccent {
+  --accent-primary: 34, 211, 238;
+  --accent-secondary: 103, 232, 249;
+}
+
+.emeraldAccent {
+  --accent-primary: 52, 211, 153;
+  --accent-secondary: 94, 234, 181;
+}
+
+.mixedAccent {
+  --accent-primary: 34, 211, 238;
+  --accent-secondary: 52, 211, 153;
+}
+
+.anchorCapability {
+  grid-area: anchor;
+  padding: clamp(1.45rem, 2.8vw, 2.1rem);
+}
+
+.anchorCapability::before {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: -38%;
+  width: 34%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(103, 232, 249, 0.95),
+    rgba(52, 211, 153, 0.72),
+    transparent
+  );
+  animation:
+    capability-scan
+    8s
+    cubic-bezier(0.45, 0, 0.55, 1)
+    infinite;
+  pointer-events: none;
+}
+
+.backendCapability,
+.databaseCapability {
+  padding: clamp(1.25rem, 2.2vw, 1.65rem);
+}
+
+.backendCapability {
+  grid-area: backend;
+}
+
+.databaseCapability {
+  grid-area: database;
+}
+
+.dataCapability {
+  grid-area: data;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(15rem, 0.9fr);
+  grid-template-areas:
+    "header flow"
+    "body flow"
+    "evidence technologies";
+  column-gap: clamp(1.25rem, 2.8vw, 2.25rem);
+  padding: clamp(1.35rem, 2.6vw, 1.85rem);
+}
+
+.capabilityCoordinate {
+  position: absolute;
+  z-index: 1;
+  top: 0.95rem;
+  right: 1rem;
+  color: rgba(var(--accent-secondary), 0.11);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.capabilityHeader {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 0.95rem;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.dataCapability .capabilityHeader {
+  grid-area: header;
+}
+
+.iconShell {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(var(--accent-secondary), 0.22);
+  border-radius: 0.78rem;
+  color: rgb(var(--accent-secondary));
+  background: rgba(var(--accent-primary), 0.075);
+  box-shadow:
+    0 0 22px rgba(var(--accent-primary), 0.08);
+}
+
+.icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.capabilityHeadingGroup {
+  min-width: 0;
+}
+
+.capabilityEyebrow {
+  padding-right: 2.4rem;
+  color: rgba(var(--accent-secondary), 0.8);
+  font-size: 0.62rem;
+  line-height: 1.55;
+}
+
+.capabilityHeader h3 {
+  max-width: 24ch;
+  margin: 0.65rem 0 0;
+  color: #edf5fc;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.anchorCapability .capabilityHeader h3 {
+  max-width: 17ch;
+  font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+}
+
+.dataCapability .capabilityHeader h3 {
+  max-width: 20ch;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+}
+
+.capabilityBody {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(1.25rem, 2.4vw, 1.8rem);
+}
+
+.dataCapability .capabilityBody {
+  grid-area: body;
+}
+
+.capabilityDescription,
+.valueStatement {
+  margin: 0;
+}
+
+.capabilityDescription {
+  color: #a8b8c9;
+  font-size: clamp(0.91rem, 1.15vw, 1rem);
+  line-height: 1.75;
+}
+
+.valueStatement {
+  margin-top: 1rem;
+  padding-left: 0.9rem;
+  border-left: 1px solid
+    rgba(var(--accent-secondary), 0.34);
+  color: #7f94aa;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.systemFlow {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 0.65rem;
+  margin: clamp(1.35rem, 2.8vw, 2rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.systemFlow li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  min-width: 0;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid
+    rgba(var(--accent-secondary), 0.13);
+  border-radius: 0.78rem;
+  color: #cbd7e3;
+  background: rgba(2, 10, 21, 0.52);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.systemFlow li:not(:last-child)::after {
+  position: absolute;
+  top: 100%;
+  left: 1.25rem;
+  width: 1px;
+  height: 0.66rem;
+  content: "";
+  background: linear-gradient(
+    180deg,
+    rgba(var(--accent-secondary), 0.42),
+    rgba(var(--accent-secondary), 0.05)
+  );
+}
+
+.flowIndex {
+  color: rgba(var(--accent-secondary), 0.78);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+}
+
+.dataCapability .systemFlow {
+  grid-area: flow;
+  align-self: start;
+  margin: 0;
+}
+
+.dataCapability .systemFlow li {
+  grid-template-columns: auto 1fr;
+}
+
+.evidenceBlock {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding-top: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.dataCapability .evidenceBlock {
+  grid-area: evidence;
+  align-self: end;
+}
+
+.blockLabel {
+  color: rgba(145, 165, 186, 0.62);
+  font-size: 0.58rem;
+}
+
+.evidenceBlock ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidenceBlock li {
+  position: relative;
+  padding-left: 0.95rem;
+  color: #c3cfdb;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.evidenceBlock li::before {
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 0.35rem;
+  height: 1px;
+  content: "";
+  background: rgb(var(--accent-secondary));
+  box-shadow:
+    0 0 8px rgba(var(--accent-primary), 0.35);
+}
+
+.technologyList {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dataCapability .technologyList {
+  grid-area: technologies;
+  align-self: end;
+  justify-content: flex-end;
+}
+
+.technologyList li {
+  padding: 0.42rem 0.62rem;
+  border: 1px solid
+    rgba(var(--accent-secondary), 0.14);
+  border-radius: 0.58rem;
+  color: #a8bacb;
+  background: rgba(var(--accent-primary), 0.045);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0.025em;
+  line-height: 1.25;
+}
+
+.growth {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(15rem, 0.37fr)
+    minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 4rem);
+  margin-top: clamp(1rem, 2.2vw, 1.4rem);
+  padding: clamp(1.45rem, 3vw, 2.2rem);
+  overflow: hidden;
+  border: 1px solid rgba(52, 211, 153, 0.18);
+  border-radius: clamp(1.15rem, 2vw, 1.55rem);
+  background:
+    linear-gradient(
+      110deg,
+      rgba(52, 211, 153, 0.055),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 18, 30, 0.9),
+      rgba(3, 13, 24, 0.82)
+    );
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.18);
+}
+
+.growth::before {
+  position: absolute;
+  top: -5rem;
+  right: -4rem;
+  width: 16rem;
+  height: 16rem;
+  border: 1px solid rgba(52, 211, 153, 0.08);
+  border-radius: 50%;
+  content: "";
+  box-shadow:
+    0 0 0 2.25rem rgba(34, 211, 238, 0.018),
+    0 0 0 4.5rem rgba(52, 211, 153, 0.012);
+  pointer-events: none;
+}
+
+.growthIntro {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.growthLabel {
+  color: #5ee7b5;
+  font-size: 0.64rem;
+}
+
+.growthIntro h3 {
+  max-width: 19ch;
+  margin: 0.75rem 0 0;
+  color: #eef8f5;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.growthIntro > p:last-child {
+  max-width: 42ch;
+  margin: 1rem 0 0;
+  color: #8298aa;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.growthTracks {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.growthTracks li {
+  display: grid;
+  grid-template-columns:
+    auto
+    auto
+    minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: start;
+  min-width: 0;
+  padding: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.11);
+  border-radius: 0.88rem;
+  background: rgba(2, 10, 21, 0.44);
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.growthIndex {
+  padding-top: 0.15rem;
+  color: rgba(94, 231, 181, 0.58);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.growthIcon {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(94, 231, 181, 0.16);
+  border-radius: 0.6rem;
+  color: #5ee7b5;
+  background: rgba(52, 211, 153, 0.055);
+}
+
+.growthIcon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.growthCopy {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.growthCopy strong {
+  color: #dbe8e6;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.growthCopy > span {
+  color: #7890a3;
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .capability:hover {
+    border-color:
+      rgba(var(--accent-secondary), 0.28);
+    box-shadow:
+      0 26px 70px rgba(0, 0, 0, 0.24),
+      0 0 0 1px
+        rgba(var(--accent-primary), 0.035)
+        inset;
+    transform: translateY(-2px);
+  }
+
+  .growthTracks li:hover {
+    border-color: rgba(94, 231, 181, 0.22);
+    background: rgba(5, 20, 31, 0.62);
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes capability-scan {
+  0%,
+  18% {
+    left: -38%;
+    opacity: 0;
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  62% {
+    left: 108%;
+    opacity: 0.8;
+  }
+
+  63%,
+  100% {
+    left: 108%;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 67rem) {
+  .sectionHeader {
+    grid-template-columns:
+      minmax(10.5rem, 0.28fr)
+      minmax(0, 1fr);
+  }
+
+  .architecture {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "anchor anchor"
+      "backend database"
+      "data data";
+  }
+
+  .connectionPath {
+    display: none;
+  }
+
+  .anchorCapability {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(14rem, 0.75fr);
+    grid-template-areas:
+      "header flow"
+      "body flow"
+      "evidence technologies";
+    column-gap: 2rem;
+  }
+
+  .anchorCapability .capabilityHeader {
+    grid-area: header;
+  }
+
+  .anchorCapability .capabilityBody {
+    grid-area: body;
+  }
+
+  .anchorCapability .systemFlow {
+    grid-area: flow;
+    align-self: start;
+    margin: 0;
+  }
+
+  .anchorCapability .evidenceBlock {
+    grid-area: evidence;
+  }
+
+  .anchorCapability .technologyList {
+    grid-area: technologies;
+    align-self: end;
+    justify-content: flex-end;
+  }
+
+  .growth {
+    grid-template-columns: 1fr;
+  }
+
+  .growthIntro {
+    display: grid;
+    grid-template-columns:
+      minmax(12rem, 0.42fr)
+      minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+
+  .growthLabel {
+    grid-column: 1;
+  }
+
+  .growthIntro h3 {
+    grid-column: 1;
+  }
+
+  .growthIntro > p:last-child {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 61.3125rem) and (max-width: 80rem) {
+  .container {
+    padding-left: 2.75rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .section {
+    scroll-margin-top: 6.5rem;
+    padding-inline: 0.85rem;
+    padding-top: 3.5rem;
+  }
+
+  .coordinateGrid {
+    display: none;
+  }
+
+  .sectionHeader {
+    grid-template-columns: 1fr;
+    gap: 1.65rem;
+    align-items: start;
+  }
+
+  .headerMeta {
+    min-height: 5.25rem;
+    justify-content: flex-start;
+  }
+
+  .headerCopy h2 {
+    max-width: 16ch;
+    font-size: clamp(2.15rem, 10vw, 3.45rem);
+  }
+
+  .headerCopy > p {
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
+
+  .architectureHeading {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .architectureHeading > span:last-child {
+    font-size: 0.56rem;
+  }
+
+  .architectureRule {
+    grid-row: 2;
+  }
+
+  .architecture {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "anchor"
+      "backend"
+      "database"
+      "data";
+  }
+
+  .anchorCapability,
+  .dataCapability {
+    display: flex;
+    padding: 1.25rem;
+  }
+
+  .backendCapability,
+  .databaseCapability {
+    padding: 1.25rem;
+  }
+
+  .anchorCapability .systemFlow,
+  .dataCapability .systemFlow {
+    margin-top: 1.35rem;
+  }
+
+  .anchorCapability .technologyList,
+  .dataCapability .technologyList {
+    justify-content: flex-start;
+  }
+
+  .capabilityCoordinate {
+    font-size: 3.4rem;
+  }
+
+  .growth {
+    padding: 1.25rem;
+  }
+
+  .growthIntro {
+    display: block;
+  }
+
+  .growthIntro > p:last-child {
+    margin-top: 0.9rem;
+  }
+
+  .growthTracks {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 34rem) {
+  .section {
+    padding-bottom: 6.75rem;
+  }
+
+  .headerCopy h2 {
+    max-width: 100%;
+    font-size: clamp(2rem, 11vw, 2.85rem);
+  }
+
+  .capabilityHeader {
+    gap: 0.8rem;
+  }
+
+  .iconShell {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .capabilityEyebrow {
+    padding-right: 1.7rem;
+    font-size: 0.56rem;
+  }
+
+  .anchorCapability .capabilityHeader h3,
+  .dataCapability .capabilityHeader h3,
+  .capabilityHeader h3 {
+    max-width: 100%;
+    font-size: 1.45rem;
+  }
+
+  .systemFlow li {
+    padding: 0.7rem 0.75rem;
+  }
+
+  .technologyList {
+    gap: 0.38rem;
+  }
+
+  .technologyList li {
+    font-size: 0.59rem;
+  }
+
+  .growthTracks li {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+  }
+
+  .growthIndex {
+    display: none;
+  }
+}
+
+@media (max-height: 48rem) and (min-width: 48.01rem) {
+  .section {
+    padding-top: 3.5rem;
+    padding-bottom: 5.75rem;
+  }
+
+  .sectionHeader {
+    padding-bottom: 2rem;
+  }
+
+  .headerCopy h2 {
+    font-size: clamp(2.2rem, 4.6vw, 3.55rem);
+  }
+
+  .architectureHeading {
+    margin-top: 1.55rem;
+  }
+
+  .capability {
+    border-radius: 1.15rem;
+  }
+
+  .anchorCapability,
+  .backendCapability,
+  .databaseCapability,
+  .dataCapability,
+  .growth {
+    padding: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anchorCapability::before {
+    display: none;
+  }
+
+  .capability,
+  .growthTracks li {
+    transition: none;
+  }
+
+  .capability:hover,
+  .growthTracks li:hover {
+    transform: none;
+  }
+}
