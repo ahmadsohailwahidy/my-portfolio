@@ -2,6 +2,7 @@ import { skillsContent } from "@/content/skills";
 import type { SkillStatus } from "@/types/skills";
 
 import { SkillsCluster } from "./SkillsCluster";
+import { SkillsFlowController } from "./SkillsFlowController";
 import { SkillsRail } from "./SkillsRail";
 import styles from "./SkillsSection.module.css";
 
@@ -56,67 +57,86 @@ export function SkillsSection() {
 
         <SkillsRail content={skillsContent.foundation} variant="foundation" />
 
-        <div className={styles.topology}>
+        <div className={styles.topology} data-skills-topology>
+          <SkillsFlowController />
+
           <svg
             className={styles.connectorMap}
-            viewBox="0 0 1200 940"
+            data-flow-map
+            viewBox="0 0 1 1"
             preserveAspectRatio="none"
             aria-hidden="true"
-            focusable="false"
+            focusable={false}
           >
             <defs>
-              <linearGradient id="skills-path-cyan" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#22d3ee" stopOpacity="0.08" />
-                <stop offset="0.48" stopColor="#67e8f9" stopOpacity="0.72" />
-                <stop offset="1" stopColor="#34d399" stopOpacity="0.2" />
+              <linearGradient id="skills-flow-cyan" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#22d3ee" stopOpacity="0.2" />
+                <stop offset="0.48" stopColor="#d8fbff" stopOpacity="0.96" />
+                <stop offset="1" stopColor="#34d399" stopOpacity="0.62" />
               </linearGradient>
 
               <linearGradient
-                id="skills-path-emerald"
+                id="skills-flow-emerald"
                 x1="0"
                 y1="1"
                 x2="1"
                 y2="0"
               >
-                <stop offset="0" stopColor="#34d399" stopOpacity="0.12" />
-                <stop offset="0.52" stopColor="#5ee7b5" stopOpacity="0.68" />
-                <stop offset="1" stopColor="#22d3ee" stopOpacity="0.12" />
+                <stop offset="0" stopColor="#34d399" stopOpacity="0.28" />
+                <stop offset="0.52" stopColor="#bafbe2" stopOpacity="0.95" />
+                <stop offset="1" stopColor="#22d3ee" stopOpacity="0.55" />
               </linearGradient>
             </defs>
 
             <path
               className={styles.connectorBase}
-              d="M600 70V870M600 190H430M600 190H770M600 665H430M600 665H770"
+              data-flow-base="1"
+              d="M 0 0"
+            />
+            <path
+              className={styles.connectorBase}
+              data-flow-base="2"
+              d="M 0 0"
+            />
+            <path
+              className={styles.connectorBase}
+              data-flow-base="3"
+              d="M 0 0"
             />
 
             <path
-              className={styles.connectorActive}
-              d="M600 70V870M600 190H430M600 190H770"
-              stroke="url(#skills-path-cyan)"
+              className={styles.flowSegment}
+              data-flow-segment="1"
+              pathLength="1"
+              d="M 0 0"
+              stroke="url(#skills-flow-cyan)"
             />
-
             <path
-              className={styles.connectorActiveSecondary}
-              d="M600 430V870M600 665H430M600 665H770"
-              stroke="url(#skills-path-emerald)"
+              className={styles.flowSegment}
+              data-flow-segment="2"
+              pathLength="1"
+              d="M 0 0"
+              stroke="url(#skills-flow-emerald)"
+            />
+            <path
+              className={styles.flowSegment}
+              data-flow-segment="3"
+              pathLength="1"
+              d="M 0 0"
+              stroke="url(#skills-flow-cyan)"
             />
           </svg>
 
           <div className={styles.stackSpine} aria-hidden="true">
-            <span className={styles.spineLine} />
-
             <span className={styles.spineNode} data-node="01">
               Interface
             </span>
-
             <span className={styles.spineNode} data-node="02">
               Application
             </span>
-
             <span className={styles.spineNode} data-node="03">
               Data
             </span>
-
             <span className={styles.spineNode} data-node="04">
               Insight
             </span>

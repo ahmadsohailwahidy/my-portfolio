@@ -37,6 +37,7 @@ export function SkillsCluster({ cluster }: SkillsClusterProps) {
     <article
       className={className}
       aria-labelledby={`${cluster.id}-title`}
+      data-flow-step={cluster.index}
       data-grid-ignore
     >
       <span className={styles.clusterIndex} aria-hidden="true">
@@ -52,6 +53,7 @@ export function SkillsCluster({ cluster }: SkillsClusterProps) {
           <p className={styles.clusterEyebrow}>
             {cluster.index} / {cluster.eyebrow}
           </p>
+
           <h3 id={`${cluster.id}-title`}>{cluster.title}</h3>
         </div>
       </header>
@@ -77,6 +79,7 @@ export function SkillsCluster({ cluster }: SkillsClusterProps) {
       {cluster.evidence ? (
         <p className={styles.evidenceLine}>
           <span>{cluster.evidence.label}</span>
+
           <strong>{cluster.evidence.project}</strong>
         </p>
       ) : null}
