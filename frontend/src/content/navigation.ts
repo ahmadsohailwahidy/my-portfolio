@@ -39,7 +39,7 @@ export const navigationItems: readonly NavigationItem[] = [
     shortLabel: "Projects",
     href: "#projects",
     group: "primary",
-    description: "Selected projects and measurable outcomes",
+    description: "Selected project work and implementation evidence",
   },
   {
     id: "experience",
