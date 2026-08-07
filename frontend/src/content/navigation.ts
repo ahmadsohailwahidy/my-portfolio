@@ -42,28 +42,13 @@ export const navigationItems: readonly NavigationItem[] = [
     description: "Selected project work and implementation evidence",
   },
   {
-    id: "experience",
-    label: "Project Experience",
-    shortLabel: "Experience",
-    href: "#experience",
-    group: "secondary",
-    description: "Detailed responsibilities and implementation work",
-  },
-  {
     id: "education",
-    label: "Education",
+    label: "Education & Academic Foundation",
     shortLabel: "Education",
     href: "#education",
     group: "secondary",
-    description: "Academic background and current studies",
-  },
-  {
-    id: "certifications",
-    label: "Certifications & Achievements",
-    shortLabel: "Achievements",
-    href: "#certifications",
-    group: "secondary",
-    description: "Certificates, awards and milestones",
+    description:
+      "University studies, academic focus and self-directed learning",
   },
   {
     id: "github",
@@ -83,11 +68,11 @@ export const navigationItems: readonly NavigationItem[] = [
   },
   {
     id: "soft-skills",
-    label: "Soft Skills & Languages",
-    shortLabel: "Soft Skills",
+    label: "Professional Profile",
+    shortLabel: "Profile",
     href: "#soft-skills",
     group: "secondary",
-    description: "Communication, teamwork and spoken languages",
+    description: "Professional strengths, languages and work preferences",
   },
   {
     id: "resume",
@@ -103,7 +88,7 @@ export const navigationItems: readonly NavigationItem[] = [
     shortLabel: "Contact",
     href: "#contact",
     group: "secondary",
-    description: "Start a conversation or discuss a project",
+    description: "Start a conversation or discuss an opportunity",
   },
 ] as const;
 

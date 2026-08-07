@@ -1,4 +1,5 @@
 import { AboutSection } from "@/components/sections/about";
+import { EducationSection } from "@/components/sections/education";
 import { ExpertiseSection } from "@/components/sections/expertise";
 import { HeroSection } from "@/components/sections/hero";
 import { FeaturedProjectsSection } from "@/components/sections/projects";
@@ -12,6 +13,7 @@ export default function HomePage() {
       <ExpertiseSection />
       <SkillsSection />
       <FeaturedProjectsSection />
+      <EducationSection />
     </main>
   );
 }
