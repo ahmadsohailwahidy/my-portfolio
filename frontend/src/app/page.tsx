@@ -4,6 +4,7 @@ import { ExpertiseSection } from "@/components/sections/expertise";
 import { GitHubSection } from "@/components/sections/github/GitHubSection";
 import { HeroSection } from "@/components/sections/hero";
 import { FeaturedProjectsSection } from "@/components/sections/projects";
+import { ServicesSection } from "@/components/sections/services";
 import { SkillsSection } from "@/components/sections/skills";
 
 export default function HomePage() {
@@ -16,6 +17,7 @@ export default function HomePage() {
       <FeaturedProjectsSection />
       <EducationSection />
       <GitHubSection />
+      <ServicesSection />
     </main>
   );
 }

@@ -60,11 +60,11 @@ export const navigationItems: readonly NavigationItem[] = [
   },
   {
     id: "services",
-    label: "Services",
+    label: "Services & Collaboration",
     shortLabel: "Services",
     href: "#services",
     group: "secondary",
-    description: "Professional services and ways I can help",
+    description: "Practical development services and collaboration fit",
   },
   {
     id: "soft-skills",
