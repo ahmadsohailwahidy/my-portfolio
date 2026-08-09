@@ -1,4 +1,5 @@
 import { AboutSection } from "@/components/sections/about";
+import { ContactSection } from "@/components/sections/contact";
 import { EducationSection } from "@/components/sections/education";
 import { ExpertiseSection } from "@/components/sections/expertise";
 import { GitHubSection } from "@/components/sections/github/GitHubSection";
@@ -20,6 +21,7 @@ export default function HomePage() {
       <GitHubSection />
       <ServicesSection />
       <ProfessionalProfileSection />
+      <ContactSection />
     </main>
   );
 }
