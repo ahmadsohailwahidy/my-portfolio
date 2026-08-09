@@ -67,20 +67,13 @@ export const navigationItems: readonly NavigationItem[] = [
     description: "Practical development services and collaboration fit",
   },
   {
-    id: "soft-skills",
-    label: "Professional Profile",
+    id: "profile",
+    label: "Professional Profile & Resume",
     shortLabel: "Profile",
-    href: "#soft-skills",
+    href: "#profile",
     group: "secondary",
-    description: "Professional strengths, languages and work preferences",
-  },
-  {
-    id: "resume",
-    label: "Resume",
-    shortLabel: "Resume",
-    href: "#resume",
-    group: "secondary",
-    description: "Career summary and downloadable CV",
+    description:
+      "Professional strengths, languages, opportunity fit and Resume access",
   },
   {
     id: "contact",

@@ -1,0 +1,1 @@
+export { ProfessionalProfileSection } from "./ProfessionalProfileSection";

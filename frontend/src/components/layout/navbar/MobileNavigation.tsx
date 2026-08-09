@@ -2,6 +2,7 @@
 
 import { useEffect, type MouseEvent } from "react";
 
+import { resumeContent } from "@/content/resume";
 import type { NavigationItem } from "@/types/navigation";
 
 import { ArrowUpRightIcon, CloseIcon, GithubIcon } from "./NavbarIcons";
@@ -121,8 +122,8 @@ export function MobileNavigation({
             GitHub profile
           </a>
 
-          <a href="/resume/Ahmad-Sohail-CV.pdf" download>
-            Download CV
+          <a href={resumeContent.href} download={resumeContent.fileName}>
+            {resumeContent.downloadLabel}
             <ArrowUpRightIcon />
           </a>
         </div>

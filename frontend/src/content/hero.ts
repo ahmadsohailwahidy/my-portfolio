@@ -1,3 +1,4 @@
+import { resumeContent } from "@/content/resume";
 import type { HeroContentData } from "@/types/hero";
 
 export const heroContent: HeroContentData = {
@@ -22,9 +23,8 @@ export const heroContent: HeroContentData = {
     { id: "education", number: "05", label: "Education" },
     { id: "github", number: "06", label: "GitHub" },
     { id: "services", number: "07", label: "Services" },
-    { id: "soft-skills", number: "08", label: "Profile" },
-    { id: "resume", number: "09", label: "Resume" },
-    { id: "contact", number: "10", label: "Contact" },
+    { id: "profile", number: "08", label: "Profile" },
+    { id: "contact", number: "09", label: "Contact" },
   ],
   actions: {
     projects: {
@@ -33,9 +33,9 @@ export const heroContent: HeroContentData = {
       ariaLabel: "Go to featured projects",
     },
     resume: {
-      label: "Download CV",
-      href: "/resume/Ahmad-Sohail-CV.pdf",
-      ariaLabel: "Download Ahmad Sohail Wahidy's CV",
+      label: resumeContent.downloadLabel,
+      href: resumeContent.href,
+      ariaLabel: `Download Ahmad Sohail Wahidy's Resume (${resumeContent.fileName})`,
       download: true,
     },
   },
