@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import styles from "./AboutSection.module.css";
 
@@ -24,6 +24,9 @@ export function TypingName({ text }: TypingNameProps) {
     isDeleting: false,
   });
 
+  const splitIndex = useMemo(() => text.lastIndexOf(" "), [text]);
+  const firstLineSource = splitIndex > 0 ? text.slice(0, splitIndex) : text;
+
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -31,31 +34,20 @@ export function TypingName({ text }: TypingNameProps) {
 
     if (reducedMotionQuery.matches) {
       const frameId = window.requestAnimationFrame(() => {
-        setTypingState({
-          characterCount: text.length,
-          isDeleting: false,
-        });
+        setTypingState({ characterCount: text.length, isDeleting: false });
       });
 
-      return () => {
-        window.cancelAnimationFrame(frameId);
-      };
+      return () => window.cancelAnimationFrame(frameId);
     }
 
     const hasCompletedTyping = typingState.characterCount === text.length;
-
     const hasCompletedDeleting =
       typingState.characterCount === 0 && typingState.isDeleting;
 
     let delay = typingState.isDeleting ? DELETING_SPEED : TYPING_SPEED;
 
-    if (hasCompletedTyping && !typingState.isDeleting) {
-      delay = COMPLETED_PAUSE;
-    }
-
-    if (hasCompletedDeleting) {
-      delay = RESTART_PAUSE;
-    }
+    if (hasCompletedTyping && !typingState.isDeleting) delay = COMPLETED_PAUSE;
+    if (hasCompletedDeleting) delay = RESTART_PAUSE;
 
     const timeoutId = window.setTimeout(() => {
       if (hasCompletedTyping && !typingState.isDeleting) {
@@ -63,16 +55,11 @@ export function TypingName({ text }: TypingNameProps) {
           ...currentState,
           isDeleting: true,
         }));
-
         return;
       }
 
       if (hasCompletedDeleting) {
-        setTypingState({
-          characterCount: 0,
-          isDeleting: false,
-        });
-
+        setTypingState({ characterCount: 0, isDeleting: false });
         return;
       }
 
@@ -84,18 +71,31 @@ export function TypingName({ text }: TypingNameProps) {
       }));
     }, delay);
 
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
+    return () => window.clearTimeout(timeoutId);
   }, [text, typingState]);
 
   const visibleText = text.slice(0, typingState.characterCount);
+  const firstVisible = visibleText.slice(
+    0,
+    Math.min(visibleText.length, firstLineSource.length),
+  );
+  const lastStart = firstLineSource.length + 1;
+  const lastVisible =
+    visibleText.length > lastStart ? visibleText.slice(lastStart) : "";
+
+  const isTypingLastLine = visibleText.length > firstLineSource.length;
 
   return (
     <span className={styles.typingName} aria-label={text}>
       <span className={styles.typingNameVisible} aria-hidden="true">
-        <span className={styles.typedCharacters}>{visibleText}</span>
-        <span className={styles.typingCursor} />
+        <span className={styles.typedFirstLine}>
+          {firstVisible}
+          {!isTypingLastLine ? <span className={styles.typingCursor} /> : null}
+        </span>
+        <span className={styles.typedLastLine}>
+          {lastVisible}
+          {isTypingLastLine ? <span className={styles.typingCursor} /> : null}
+        </span>
       </span>
     </span>
   );

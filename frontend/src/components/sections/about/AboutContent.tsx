@@ -1,12 +1,25 @@
 import type { AboutContentData } from "@/types/about";
 
-import { ArrowIcon } from "./AboutIcons";
-import { AboutHighlights } from "./AboutHighlights";
-import { AboutTechStack } from "./AboutTechStack";
+import {
+  ArrowIcon,
+  CodePanelIcon,
+  DocumentPanelIcon,
+  UsersPanelIcon,
+} from "./AboutIcons";
 import styles from "./AboutSection.module.css";
 
 interface AboutContentProps {
   content: AboutContentData;
+}
+
+function PanelDots() {
+  return (
+    <span className={styles.panelDots} aria-hidden="true">
+      {Array.from({ length: 12 }).map((_, index) => (
+        <span key={index} />
+      ))}
+    </span>
+  );
 }
 
 export function AboutContent({ content }: AboutContentProps) {
@@ -19,44 +32,64 @@ export function AboutContent({ content }: AboutContentProps) {
             A concise look at how I approach building useful, reliable software.
           </p>
         </div>
-        <h2 id="about-title">{content.heading}</h2>
+
+        <h2 id="about-title" className={styles.aboutHeading}>
+          <span>Clear systems.</span>
+          <span>Dependable software.</span>
+          <span className={styles.aboutHeadingAccent}>Structured data.</span>
+        </h2>
+
+        <div className={styles.headingBeam} aria-hidden="true">
+          <span />
+        </div>
       </header>
 
       <div className={styles.narrative}>
         <section
-          className={`${styles.storyPanel} ${styles.storyLeadPanel}`}
+          className={styles.storyPanel}
           aria-labelledby="about-summary-title"
         >
-          <p className={styles.storyPanelLabel} id="about-summary-title">
-            Professional summary
-          </p>
-          <p className={styles.lead}>{content.introduction}</p>
+          <div className={styles.panelIconWrap} aria-hidden="true">
+            <DocumentPanelIcon className={styles.panelIcon} />
+          </div>
+
+          <div className={styles.panelCopy}>
+            <p className={styles.storyPanelLabel} id="about-summary-title">
+              Professional summary
+            </p>
+            <p>{content.introduction}</p>
+          </div>
+
+          <PanelDots />
         </section>
 
         <section
           className={styles.storyPanel}
           aria-labelledby="about-project-story-title"
         >
-          <p className={styles.storyPanelLabel} id="about-project-story-title">
-            Project-backed experience
-          </p>
-          <p>{content.projectStory}</p>
+          <div className={styles.panelIconWrap} aria-hidden="true">
+            <CodePanelIcon className={styles.panelIcon} />
+          </div>
+
+          <div className={styles.panelCopy}>
+            <p
+              className={styles.storyPanelLabel}
+              id="about-project-story-title"
+            >
+              Project-backed experience
+            </p>
+            <p>{content.projectStory}</p>
+          </div>
+
+          <PanelDots />
         </section>
       </div>
 
-      <blockquote className={styles.objective}>
-        {/* <p className={styles.subsectionLabel}>{content.careerObjectiveLabel}</p>
-        <p>{content.careerObjective}</p> */}
-      </blockquote>
-
-      {/* <AboutHighlights highlights={content.highlights} /> */}
-
-      {/* <AboutTechStack
-        label={content.selectedTechnologiesLabel}
-        technologies={content.selectedTechnologies}
-      /> */}
-
       <aside className={styles.opportunity} aria-label="Opportunity status">
+        <div className={styles.panelIconWrap} aria-hidden="true">
+          <UsersPanelIcon className={styles.panelIcon} />
+        </div>
+
         <div className={styles.opportunityCopy}>
           <p className={styles.subsectionLabel}>{content.opportunityLabel}</p>
           <p>{content.opportunityStatement}</p>

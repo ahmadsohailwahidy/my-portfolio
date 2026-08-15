@@ -190,3 +190,65 @@ export function TechnologyIcon({ name, className }: TechnologyIconProps) {
       );
   }
 }
+
+export function DocumentPanelIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      focusable="false"
+      aria-hidden="true"
+    >
+      <path d="M7 3.5h7l4 4V20.5H7z" />
+      <path d="M14 3.5v4h4" />
+      <path d="M10 12h5" />
+      <path d="M10 15.5h5" />
+    </svg>
+  );
+}
+
+export function CodePanelIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      focusable="false"
+      aria-hidden="true"
+    >
+      <path d="m8.5 7-4 5 4 5" />
+      <path d="m15.5 7 4 5-4 5" />
+      <path d="m13.5 4.5-3 15" />
+    </svg>
+  );
+}
+
+export function UsersPanelIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.65"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      focusable="false"
+      aria-hidden="true"
+    >
+      <circle cx="8" cy="8" r="3" />
+      <circle cx="16.5" cy="8.5" r="2.5" />
+      <path d="M2.8 19c.4-3.4 2.4-5.2 5.2-5.2s4.9 1.8 5.3 5.2" />
+      <path d="M13.5 14.5c.9-.7 1.9-1 3-1 2.5 0 4.3 1.6 4.7 4.5" />
+    </svg>
+  );
+}

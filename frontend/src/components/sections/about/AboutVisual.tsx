@@ -1,12 +1,22 @@
 import Image from "next/image";
-import { TypingName } from "./TypingName";
 
 import type { AboutProfile } from "@/types/about";
 
 import styles from "./AboutSection.module.css";
+import { TypingName } from "./TypingName";
 
 interface AboutVisualProps {
   profile: AboutProfile;
+}
+
+function DecorativeDots() {
+  return (
+    <span className={styles.visualDots} aria-hidden="true">
+      {Array.from({ length: 12 }).map((_, index) => (
+        <span key={index} />
+      ))}
+    </span>
+  );
 }
 
 export function AboutVisual({ profile }: AboutVisualProps) {
@@ -16,6 +26,10 @@ export function AboutVisual({ profile }: AboutVisualProps) {
       aria-labelledby="about-profile-name"
       data-grid-ignore
     >
+      <span className={styles.visualCornerTop} aria-hidden="true" />
+      <span className={styles.visualCornerBottom} aria-hidden="true" />
+      <DecorativeDots />
+
       <div className={styles.visualHeader}>
         <span className={styles.visualLabel}>Identity profile</span>
         <span className={styles.visualStatus}>
@@ -25,12 +39,22 @@ export function AboutVisual({ profile }: AboutVisualProps) {
       </div>
 
       <div className={styles.portraitStage}>
+        <span className={styles.circuitGlow} aria-hidden="true" />
         <span className={styles.orbitOuter} aria-hidden="true" />
         <span className={styles.orbitInner} aria-hidden="true" />
         <span className={styles.axisHorizontal} aria-hidden="true" />
         <span className={styles.axisVertical} aria-hidden="true" />
-        <span className={styles.cornerMarkerTop} aria-hidden="true" />
-        <span className={styles.cornerMarkerBottom} aria-hidden="true" />
+
+        <div className={styles.circuitLines} aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
 
         {profile.photo ? (
           <div className={styles.photoShell}>
@@ -41,7 +65,7 @@ export function AboutVisual({ profile }: AboutVisualProps) {
               alt={profile.photo.alt}
               fill
               className={styles.profilePhoto}
-              sizes="(max-width: 48rem) 15rem, 17rem"
+              sizes="(max-width: 48rem) 18rem, 20rem"
               priority={false}
             />
 
@@ -50,7 +74,6 @@ export function AboutVisual({ profile }: AboutVisualProps) {
         ) : (
           <div className={styles.monogramShell} aria-hidden="true">
             <span className={styles.monogram}>{profile.initials}</span>
-            <span className={styles.monogramCaption}>Developer profile</span>
           </div>
         )}
       </div>
@@ -63,10 +86,23 @@ export function AboutVisual({ profile }: AboutVisualProps) {
           <p className={styles.profileAcademic}>{profile.academicStatus}</p>
         </div>
 
-        <p className={styles.profileIdentity}>{profile.professionalIdentity}</p>
-        {!profile.photo ? (
-          <p className={styles.placeholderNote}>{profile.placeholderLabel}</p>
-        ) : null}
+        <p className={styles.profileIdentity}>
+          {profile.professionalIdentity
+            .split(" · ")
+            .map((item, index, items) => (
+              <span className={styles.profileIdentityItem} key={item}>
+                {item}
+                {index < items.length - 1 ? (
+                  <span
+                    className={styles.profileIdentityDot}
+                    aria-hidden="true"
+                  >
+                    •
+                  </span>
+                ) : null}
+              </span>
+            ))}
+        </p>
       </figcaption>
     </figure>
   );
