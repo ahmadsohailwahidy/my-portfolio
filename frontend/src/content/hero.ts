@@ -2,18 +2,13 @@ import { resumeContent } from "@/content/resume";
 import type { HeroContentData } from "@/types/hero";
 
 export const heroContent: HeroContentData = {
+  eyebrow: "Portfolio / 2026",
+  contextLabel: "Web · Systems · Data",
   greeting: "Hi, I'm",
   name: "Ahmad Sohail Wahidy",
-  studentRole: "Final-year Computer Science Student",
   primaryTitle: ["Full-Stack", "Developer"],
-  secondaryTitle: "Software & Database Developer",
-  description:
-    "Final-Year Computer Science student and Full-Stack Developer experienced in management systems, database design, modern web applications, and data warehouse and business intelligence projects.",
-  specialties: [
-    { number: "01", label: "Web Applications" },
-    { number: "02", label: "Backend Systems" },
-    { number: "03", label: "Database Engineering" },
-  ],
+  valueProposition:
+    "I build modern web applications backed by reliable APIs and well-structured database systems.",
   stages: [
     { id: "home", number: "00", label: "Intro" },
     { id: "about", number: "01", label: "About" },

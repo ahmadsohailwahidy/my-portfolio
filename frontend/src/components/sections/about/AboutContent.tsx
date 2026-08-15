@@ -16,8 +16,7 @@ export function AboutContent({ content }: AboutContentProps) {
         <div className={styles.headingMeta}>
           <p className={styles.eyebrow}>{content.eyebrow}</p>
           <p className={styles.headingSupport}>
-            A focused profile of how I build, learn, and where I want to grow
-            next.
+            A concise look at how I approach building useful, reliable software.
           </p>
         </div>
         <h2 id="about-title">{content.heading}</h2>
@@ -46,16 +45,16 @@ export function AboutContent({ content }: AboutContentProps) {
       </div>
 
       <blockquote className={styles.objective}>
-        <p className={styles.subsectionLabel}>{content.careerObjectiveLabel}</p>
-        <p>{content.careerObjective}</p>
+        {/* <p className={styles.subsectionLabel}>{content.careerObjectiveLabel}</p>
+        <p>{content.careerObjective}</p> */}
       </blockquote>
 
-      <AboutHighlights highlights={content.highlights} />
+      {/* <AboutHighlights highlights={content.highlights} /> */}
 
-      <AboutTechStack
+      {/* <AboutTechStack
         label={content.selectedTechnologiesLabel}
         technologies={content.selectedTechnologies}
-      />
+      /> */}
 
       <aside className={styles.opportunity} aria-label="Opportunity status">
         <div className={styles.opportunityCopy}>

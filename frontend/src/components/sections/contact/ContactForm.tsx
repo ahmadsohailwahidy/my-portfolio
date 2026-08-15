@@ -1,10 +1,24 @@
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 
 import { contactContent } from "@/content/contact";
 
-import { AlertIcon, CheckIcon, SendIcon } from "./ContactIcons";
+import {
+  AlertIcon,
+  AtIcon,
+  CheckIcon,
+  MessageIcon,
+  SendIcon,
+  SubjectIcon,
+  UserIcon,
+} from "./ContactIcons";
 import styles from "./ContactSection.module.css";
 
 type FieldName = "name" | "email" | "subject" | "message";
@@ -57,12 +71,16 @@ function validateForm(formData: FormData): FormErrors {
 }
 
 export function ContactForm() {
-  const [loadedAt] = useState(() => Date.now());
+  const loadedAtRef = useRef<number | null>(null);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>({
     type: "idle",
     message: "",
   });
+
+  useEffect(() => {
+    loadedAtRef.current = Date.now();
+  }, []);
 
   const clearFieldError = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -82,7 +100,8 @@ export function ContactForm() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     const honeypot = readText(formData, "website");
-    const elapsed = Date.now() - loadedAt;
+    const loadedAt = loadedAtRef.current;
+    const elapsed = loadedAt === null ? null : Date.now() - loadedAt;
 
     if (honeypot) {
       setStatus({
@@ -92,7 +111,7 @@ export function ContactForm() {
       return;
     }
 
-    if (elapsed < MINIMUM_FILL_TIME_MS) {
+    if (elapsed !== null && elapsed < MINIMUM_FILL_TIME_MS) {
       setStatus({
         type: "error",
         message: "Please review your message and try again.",
@@ -149,97 +168,119 @@ export function ContactForm() {
 
   return (
     <form className={styles.contactForm} onSubmit={handleSubmit} noValidate>
-      <div className={styles.formRow}>
-        <div className={styles.fieldGroup}>
-          <label htmlFor="contact-name">Name</label>
-          <input
-            id="contact-name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            required
-            maxLength={80}
-            placeholder="Your name"
-            aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? "contact-name-error" : undefined}
-            onChange={clearFieldError}
-          />
-          {errors.name ? (
-            <span id="contact-name-error" className={styles.fieldError}>
-              {errors.name}
-            </span>
-          ) : null}
-        </div>
-
-        <div className={styles.fieldGroup}>
-          <label htmlFor="contact-email">Email</label>
-          <input
-            id="contact-email"
-            name="email"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            required
-            maxLength={160}
-            placeholder="you@example.com"
-            aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? "contact-email-error" : undefined}
-            onChange={clearFieldError}
-          />
-          {errors.email ? (
-            <span id="contact-email-error" className={styles.fieldError}>
-              {errors.email}
-            </span>
-          ) : null}
-        </div>
-      </div>
-
-      <div className={styles.fieldGroup}>
-        <label htmlFor="contact-subject">Subject</label>
-        <input
-          id="contact-subject"
-          name="subject"
-          type="text"
-          autoComplete="off"
-          required
-          maxLength={120}
-          placeholder="What would you like to discuss?"
-          aria-invalid={Boolean(errors.subject)}
-          aria-describedby={
-            errors.subject ? "contact-subject-error" : undefined
-          }
-          onChange={clearFieldError}
-        />
-        {errors.subject ? (
-          <span id="contact-subject-error" className={styles.fieldError}>
-            {errors.subject}
+      <div className={styles.formGrid}>
+        <div className={styles.fieldShell}>
+          <span className={styles.fieldIcon} aria-hidden="true">
+            <UserIcon />
           </span>
-        ) : null}
-      </div>
-
-      <div className={styles.fieldGroup}>
-        <div className={styles.messageLabelRow}>
-          <label htmlFor="contact-message">Message</label>
-          <span>20–1,200 characters</span>
+          <div className={styles.fieldBody}>
+            <label htmlFor="contact-name">Name</label>
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              required
+              maxLength={80}
+              placeholder="Your name"
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? "contact-name-error" : undefined}
+              onChange={clearFieldError}
+            />
+            {errors.name ? (
+              <span id="contact-name-error" className={styles.fieldError}>
+                {errors.name}
+              </span>
+            ) : null}
+          </div>
         </div>
-        <textarea
-          id="contact-message"
-          name="message"
-          rows={6}
-          required
-          maxLength={1200}
-          placeholder="A short overview of the opportunity, project, or collaboration..."
-          aria-invalid={Boolean(errors.message)}
-          aria-describedby={
-            errors.message ? "contact-message-error" : undefined
-          }
-          onChange={clearFieldError}
-        />
-        {errors.message ? (
-          <span id="contact-message-error" className={styles.fieldError}>
-            {errors.message}
+
+        <div className={styles.fieldShell}>
+          <span className={styles.fieldIcon} aria-hidden="true">
+            <AtIcon />
           </span>
-        ) : null}
+          <div className={styles.fieldBody}>
+            <label htmlFor="contact-email">Email</label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              required
+              maxLength={160}
+              placeholder="you@example.com"
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={
+                errors.email ? "contact-email-error" : undefined
+              }
+              onChange={clearFieldError}
+            />
+            {errors.email ? (
+              <span id="contact-email-error" className={styles.fieldError}>
+                {errors.email}
+              </span>
+            ) : null}
+          </div>
+        </div>
+
+        <div className={`${styles.fieldShell} ${styles.subjectField}`}>
+          <span className={styles.fieldIcon} aria-hidden="true">
+            <SubjectIcon />
+          </span>
+          <div className={styles.fieldBody}>
+            <label htmlFor="contact-subject">Subject</label>
+            <input
+              id="contact-subject"
+              name="subject"
+              type="text"
+              autoComplete="off"
+              required
+              maxLength={120}
+              placeholder="What would you like to discuss?"
+              aria-invalid={Boolean(errors.subject)}
+              aria-describedby={
+                errors.subject ? "contact-subject-error" : undefined
+              }
+              onChange={clearFieldError}
+            />
+            {errors.subject ? (
+              <span id="contact-subject-error" className={styles.fieldError}>
+                {errors.subject}
+              </span>
+            ) : null}
+          </div>
+        </div>
+
+        <div className={`${styles.fieldShell} ${styles.messageField}`}>
+          <span className={styles.fieldIcon} aria-hidden="true">
+            <MessageIcon />
+          </span>
+          <div className={styles.fieldBody}>
+            <div className={styles.messageLabelRow}>
+              <label htmlFor="contact-message">Message</label>
+              <span>20–1,200 characters</span>
+            </div>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows={6}
+              required
+              maxLength={1200}
+              placeholder="A short overview of the opportunity, project, or collaboration..."
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={
+                errors.message ? "contact-message-error" : undefined
+              }
+              onChange={clearFieldError}
+            />
+            {errors.message ? (
+              <span id="contact-message-error" className={styles.fieldError}>
+                {errors.message}
+              </span>
+            ) : null}
+          </div>
+        </div>
       </div>
 
       <div className={styles.honeypot} aria-hidden="true">
@@ -254,7 +295,10 @@ export function ContactForm() {
       </div>
 
       <div className={styles.formFooter}>
-        <p>{contactContent.formPrivacyNote}</p>
+        <div className={styles.formNote}>
+          <span aria-hidden="true" />
+          <p>{contactContent.formPrivacyNote}</p>
+        </div>
 
         <button type="submit" className={styles.submitButton}>
           <span>Send Message</span>

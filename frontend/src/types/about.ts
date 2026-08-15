@@ -57,17 +57,17 @@ export interface AboutContentData {
   heading: string;
   introduction: string;
   projectStory: string;
-  careerObjectiveLabel: string;
-  careerObjective: string;
+  // careerObjectiveLabel: string;
+  // careerObjective: string;
   opportunityLabel: string;
   opportunityStatement: string;
   opportunityLinks: readonly AboutLink[];
   profile: AboutProfile;
-  highlights: readonly AboutHighlight[];
-  selectedTechnologiesLabel: string;
-  selectedTechnologies: readonly AboutTechnology[];
-  interestsLabel: string;
-  interestsHeading: string;
-  interestsDescription: string;
-  interestGroups: readonly AboutInterestGroup[];
+  // highlights: readonly AboutHighlight[];
+  // selectedTechnologiesLabel: string;
+  // selectedTechnologies: readonly AboutTechnology[];
+  // interestsLabel: string;
+  // interestsHeading: string;
+  // interestsDescription: string;
+  // interestGroups: readonly AboutInterestGroup[];
 }

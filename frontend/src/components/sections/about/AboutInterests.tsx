@@ -22,12 +22,12 @@ export function AboutInterests({
       aria-labelledby="about-interests-title"
     >
       <header className={styles.interestsHeader}>
-        <div className={styles.interestsHeaderSide}>
+        {/* <div className={styles.interestsHeaderSide}>
           <p className={styles.subsectionLabel}>{label}</p>
           <p className={styles.interestsMeta}>
             Focus map / {groups.length} tracks
           </p>
-        </div>
+        </div> */}
 
         <div className={styles.interestsHeadingBlock}>
           <h3 id="about-interests-title">{heading}</h3>
@@ -35,7 +35,7 @@ export function AboutInterests({
         </div>
       </header>
 
-      <ul className={styles.interestGrid} data-grid-ignore>
+      {/* <ul className={styles.interestGrid} data-grid-ignore>
         {groups.map((group, index) => (
           <li className={styles.interestGroup} key={group.id} data-grid-ignore>
             <div className={styles.interestTopline}>
@@ -52,7 +52,7 @@ export function AboutInterests({
             </ul>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </article>
   );
 }

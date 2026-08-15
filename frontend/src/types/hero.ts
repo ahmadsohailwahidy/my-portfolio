@@ -6,11 +6,6 @@ export interface HeroLink {
   download?: boolean;
 }
 
-export interface HeroSpecialty {
-  number: string;
-  label: string;
-}
-
 export interface HeroStage {
   id: string;
   number: string;
@@ -18,13 +13,12 @@ export interface HeroStage {
 }
 
 export interface HeroContentData {
+  eyebrow: string;
+  contextLabel: string;
   greeting: string;
   name: string;
-  studentRole: string;
   primaryTitle: readonly [string, string];
-  secondaryTitle: string;
-  description: string;
-  specialties: readonly HeroSpecialty[];
+  valueProposition: string;
   stages: readonly HeroStage[];
   actions: {
     projects: HeroLink;
