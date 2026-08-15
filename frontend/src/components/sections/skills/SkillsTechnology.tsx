@@ -8,19 +8,13 @@ interface SkillsTechnologyProps {
 }
 
 const statusLabels: Record<SkillStatus, string> = {
-  primary: "Primary",
   applied: "Applied",
-  supporting: "Supporting",
-  foundation: "Foundation",
-  growth: "Growth",
+  learning: "Learning",
 };
 
 const statusClasses: Record<SkillStatus, string> = {
-  primary: styles.statusPrimary,
   applied: styles.statusApplied,
-  supporting: styles.statusSupporting,
-  foundation: styles.statusFoundation,
-  growth: styles.statusGrowth,
+  learning: styles.statusLearning,
 };
 
 export function SkillsTechnology({ technology }: SkillsTechnologyProps) {

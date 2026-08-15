@@ -22,8 +22,8 @@ const layoutClasses: Record<SkillClusterLayout, string> = {
 const accentClasses: Record<SkillAccent, string> = {
   cyan: styles.accentCyan,
   emerald: styles.accentEmerald,
-  mixed: styles.accentMixed,
   violet: styles.accentViolet,
+  teal: styles.accentTeal,
 };
 
 export function SkillsCluster({ cluster }: SkillsClusterProps) {
@@ -40,22 +40,23 @@ export function SkillsCluster({ cluster }: SkillsClusterProps) {
       data-flow-step={cluster.index}
       data-grid-ignore
     >
-      <span className={styles.clusterIndex} aria-hidden="true">
-        {cluster.index}
-      </span>
+      <div className={styles.clusterChrome} aria-hidden="true">
+        <span className={styles.clusterGlow} />
+        <span className={styles.clusterScan} />
+      </div>
 
       <header className={styles.clusterHeader}>
+        <div className={styles.clusterHeading}>
+          <span className={styles.clusterBadge}>{cluster.index}</span>
+          <div>
+            <p className={styles.clusterEyebrow}>{cluster.eyebrow}</p>
+            <h3 id={`${cluster.id}-title`}>{cluster.title}</h3>
+          </div>
+        </div>
+
         <span className={styles.clusterIcon} aria-hidden="true">
           <SkillIcon name={cluster.icon} />
         </span>
-
-        <div>
-          <p className={styles.clusterEyebrow}>
-            {cluster.index} / {cluster.eyebrow}
-          </p>
-
-          <h3 id={`${cluster.id}-title`}>{cluster.title}</h3>
-        </div>
       </header>
 
       <p className={styles.clusterDescription}>{cluster.description}</p>
@@ -67,20 +68,18 @@ export function SkillsCluster({ cluster }: SkillsClusterProps) {
       </ul>
 
       <div className={styles.supportingLayer}>
-        <p>SUPPORTING LAYER</p>
-
-        <ul aria-label={`${cluster.title} supporting skills`}>
+        <p>{cluster.supportingLabel}</p>
+        <ul aria-label={`${cluster.title} supporting details`}>
           {cluster.supporting.map((skill) => (
             <li key={skill}>{skill}</li>
           ))}
         </ul>
       </div>
 
-      {cluster.evidence ? (
+      {cluster.footerLabel && cluster.footerText ? (
         <p className={styles.evidenceLine}>
-          <span>{cluster.evidence.label}</span>
-
-          <strong>{cluster.evidence.project}</strong>
+          <span>{cluster.footerLabel}</span>
+          <strong>{cluster.footerText}</strong>
         </p>
       ) : null}
     </article>

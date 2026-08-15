@@ -1,11 +1,6 @@
-export type SkillStatus =
-  | "primary"
-  | "applied"
-  | "supporting"
-  | "foundation"
-  | "growth";
+export type SkillStatus = "applied" | "learning";
 
-export type SkillAccent = "cyan" | "emerald" | "mixed" | "violet";
+export type SkillAccent = "cyan" | "emerald" | "violet" | "teal";
 
 export type SkillClusterLayout =
   | "frontend"
@@ -14,35 +9,26 @@ export type SkillClusterLayout =
   | "intelligence";
 
 export type SkillIconName =
-  | "foundation"
   | "frontend"
   | "backend"
   | "database"
   | "intelligence"
-  | "delivery"
   | "react"
   | "nextjs"
   | "typescript"
   | "tailwind"
+  | "nodejs"
+  | "express"
   | "java"
-  | "csharp"
   | "dotnet"
-  | "api"
-  | "python"
-  | "fastapi"
-  | "database-design"
   | "postgresql"
+  | "mongodb"
+  | "mysql"
   | "sqlserver"
-  | "data-model"
   | "warehouse"
-  | "bi"
-  | "ai"
-  | "prompt"
-  | "git"
-  | "docker"
-  | "automation"
-  | "cloud"
-  | "kubernetes";
+  | "powerbi"
+  | "tableau"
+  | "chartjs";
 
 export interface SkillTechnology {
   readonly name: string;
@@ -51,46 +37,33 @@ export interface SkillTechnology {
   readonly note?: string;
 }
 
-export interface SkillEvidence {
-  readonly label: string;
-  readonly project: string;
-}
-
 export interface SkillCluster {
   readonly id: string;
   readonly index: string;
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
-  readonly icon: SkillIconName;
+  readonly icon:
+    | SkillIconName
+    | "frontend"
+    | "backend"
+    | "database"
+    | "intelligence";
   readonly accent: SkillAccent;
   readonly layout: SkillClusterLayout;
   readonly featured: readonly SkillTechnology[];
+  readonly supportingLabel: string;
   readonly supporting: readonly string[];
-  readonly evidence?: SkillEvidence;
-}
-
-export interface SkillRail {
-  readonly label: string;
-  readonly title: string;
-  readonly description: string;
-  readonly icon: SkillIconName;
-  readonly items: readonly SkillTechnology[];
-}
-
-export interface SkillLegendItem {
-  readonly status: SkillStatus;
-  readonly label: string;
-  readonly description: string;
+  readonly footerLabel?: string;
+  readonly footerText?: string;
 }
 
 export interface SkillsContent {
   readonly label: string;
   readonly meta: string;
   readonly heading: string;
+  readonly accentWord: string;
   readonly introduction: string;
-  readonly legend: readonly SkillLegendItem[];
-  readonly foundation: SkillRail;
+  readonly axis: string;
   readonly clusters: readonly SkillCluster[];
-  readonly delivery: SkillRail;
 }
