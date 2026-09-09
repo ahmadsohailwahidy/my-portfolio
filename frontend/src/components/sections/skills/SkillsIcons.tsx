@@ -30,7 +30,7 @@ function SymbolIcon({ symbol, className, compact = false }: SymbolIconProps) {
         y="3.25"
         width="17.5"
         height="17.5"
-        rx="4.4"
+        rx="3.2"
         stroke="currentColor"
         strokeWidth="1.5"
       />
@@ -67,7 +67,7 @@ export function SkillIcon({ name, className }: SkillIconProps) {
     case "frontend":
       return (
         <svg {...commonProps}>
-          <rect x="3" y="4" width="18" height="15.8" rx="2.6" />
+          <rect x="3" y="4" width="18" height="15.8" rx="2.2" />
           <path d="M3 8.5h18M8.5 13.2 6.2 15.5l2.3 2.3M15.5 13.2l2.3 2.3-2.3 2.3M13.5 11.3l-3 8" />
         </svg>
       );
@@ -75,8 +75,8 @@ export function SkillIcon({ name, className }: SkillIconProps) {
     case "backend":
       return (
         <svg {...commonProps}>
-          <rect x="4" y="4" width="16" height="5.2" rx="2" />
-          <rect x="4" y="14.8" width="16" height="5.2" rx="2" />
+          <rect x="4" y="4" width="16" height="5.2" rx="1.7" />
+          <rect x="4" y="14.8" width="16" height="5.2" rx="1.7" />
           <path d="M7.8 6.6h.01M11.2 6.6h5.2M7.8 17.4h.01M11.2 17.4h5.2M12 9.2v5.6" />
         </svg>
       );
@@ -92,8 +92,8 @@ export function SkillIcon({ name, className }: SkillIconProps) {
     case "intelligence":
       return (
         <svg {...commonProps}>
-          <path d="M12 4.5a4.5 4.5 0 0 0-4.5 4.5v1.5A3 3 0 0 1 6 13v1.5A3.5 3.5 0 0 0 9.5 18h5A3.5 3.5 0 0 0 18 14.5V13a3 3 0 0 1-1.5-2.5V9A4.5 4.5 0 0 0 12 4.5Z" />
-          <path d="M9.8 20h4.4M10.5 8.8h3M10.5 12h3M12 4.5V3" />
+          <path d="M9.1 5.1A3.4 3.4 0 0 0 5.8 8.5c0 .6.14 1.16.4 1.67A3.55 3.55 0 0 0 7.4 17h1.7M14.9 5.1a3.4 3.4 0 0 1 3.3 3.4c0 .6-.14 1.16-.4 1.67A3.55 3.55 0 0 1 16.6 17h-1.7M9.1 5.1A3.1 3.1 0 0 1 12 3.7a3.1 3.1 0 0 1 2.9 1.4M9.1 5.1v13.8M14.9 5.1v13.8" />
+          <path d="M7.5 9.2h1.6M14.9 9.2h1.6M7.8 13h1.3M14.9 13h1.3M12 7.1v9.8M10.2 20.3h3.6" />
         </svg>
       );
 
@@ -120,7 +120,13 @@ export function SkillIcon({ name, className }: SkillIconProps) {
       );
 
     case "nextjs":
-      return <SymbolIcon symbol="N" className={className} />;
+      return (
+        <svg {...commonProps}>
+          <circle cx="12" cy="12" r="8.4" />
+          <path d="M8.4 16V8.2l7.25 8.2V8.2" />
+          <path d="m14.8 14.9 3.2 3.2" opacity="0.55" />
+        </svg>
+      );
 
     case "typescript":
       return <SymbolIcon symbol="TS" className={className} compact />;
@@ -134,7 +140,12 @@ export function SkillIcon({ name, className }: SkillIconProps) {
       );
 
     case "nodejs":
-      return <SymbolIcon symbol="JS" className={className} compact />;
+      return (
+        <svg {...commonProps}>
+          <path d="m12 3.5 7.2 4.15v8.7L12 20.5l-7.2-4.15v-8.7L12 3.5Z" />
+          <path d="M8.4 13.8c.65.75 1.55 1.15 2.7 1.15 1.3 0 2.1-.52 2.1-1.4 0-.78-.55-1.2-1.85-1.48l-.8-.18c-1.36-.3-2.05-.94-2.05-1.93 0-1.17.98-1.95 2.55-1.95 1.02 0 1.9.32 2.55.9" />
+        </svg>
+      );
 
     case "express":
       return (
@@ -157,13 +168,30 @@ export function SkillIcon({ name, className }: SkillIconProps) {
       return <SymbolIcon symbol=".NET" className={className} compact />;
 
     case "postgresql":
-      return <SymbolIcon symbol="PG" className={className} compact />;
+      return (
+        <svg {...commonProps}>
+          <path d="M7.1 7.7c0-2.5 1.85-4.2 4.9-4.2s4.9 1.7 4.9 4.2v4.5c0 2.1-1.5 3.7-3.9 4.05" />
+          <path d="M9.05 16.2c-1.2-.7-1.95-1.92-1.95-3.5v-5M10.1 8.2c.35-1.15 1.05-1.75 2.05-1.75 1.45 0 2.2 1.05 2.2 2.55v4.2c0 2.45-.95 4.6-2.35 6.1-.55.58-1.2.45-1.3-.32l-.22-2.06" />
+          <path d="M10.5 13.5c-1.15.25-2.05.92-2.05 1.72 0 1 1.35 1.78 3.1 1.78.55 0 1.05-.08 1.5-.22" />
+        </svg>
+      );
 
     case "mongodb":
-      return <SymbolIcon symbol="MDB" className={className} compact />;
+      return (
+        <svg {...commonProps}>
+          <path d="M12 3.2c3.35 3.15 5.1 6.05 5.1 8.72 0 3.2-2.05 5.85-5.1 7.55-3.05-1.7-5.1-4.35-5.1-7.55C6.9 9.25 8.65 6.35 12 3.2Z" />
+          <path d="M12 5.2v14.9M12 19.45l-1.45 1.35" />
+        </svg>
+      );
 
     case "mysql":
-      return <SymbolIcon symbol="SQL" className={className} compact />;
+      return (
+        <svg {...commonProps}>
+          <ellipse cx="10.3" cy="8.2" rx="5.8" ry="2.7" />
+          <path d="M4.5 8.2v5.6c0 1.5 2.6 2.7 5.8 2.7 1.5 0 2.85-.27 3.85-.72M15.95 8.15v2.6" />
+          <path d="M14.2 14.1c1.5-1.6 3.15-1.65 5.3-.35-1.1.1-1.82.55-2.2 1.35.75.05 1.35.33 1.8.82-1.85.25-3.5-.35-4.9-1.82Z" />
+        </svg>
+      );
 
     case "sqlserver":
       return (

@@ -14,7 +14,7 @@ export default function HomePage() {
     <main>
       <HeroSection />
       <AboutSection />
-      <ExpertiseSection />
+      {/* <ExpertiseSection /> */}
       <SkillsSection />
       <FeaturedProjectsSection />
       <EducationSection />
