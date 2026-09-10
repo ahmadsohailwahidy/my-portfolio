@@ -1,10 +1,6 @@
 import Image from "next/image";
 
-import type {
-  FeaturedProject,
-  ProjectMediaLayout,
-  ProjectMediaRole,
-} from "@/types/projects";
+import type { FeaturedProject, ProjectMediaAsset } from "@/types/projects";
 
 import styles from "./FeaturedProjectsSection.module.css";
 
@@ -12,70 +8,135 @@ interface ProjectMediaProps {
   readonly project: FeaturedProject;
 }
 
-const layoutClasses: Record<ProjectMediaLayout, string> = {
-  flagship: styles.mediaFlagship,
-  dashboard: styles.mediaDashboard,
-  diagram: styles.mediaDiagram,
-  responsive: styles.mediaResponsive,
-  desktop: styles.mediaDesktop,
-};
-
-const roleClasses: Record<ProjectMediaRole, string> = {
-  primary: styles.assetPrimary,
-  supporting: styles.assetSupporting,
-  mobile: styles.assetMobile,
-};
-
-function getImageSizes(project: FeaturedProject, role: ProjectMediaRole) {
-  if (role === "mobile") {
-    return "(max-width: 48rem) 38vw, 13rem";
+function getImageSizes(project: FeaturedProject, asset: ProjectMediaAsset) {
+  if (asset.role === "mobile") {
+    return "(max-width: 56rem) 30vw, 7.5rem";
   }
 
-  if (project.tier === "flagship") {
-    return role === "primary"
-      ? "(max-width: 68rem) 100vw, 78rem"
-      : "(max-width: 48rem) 100vw, 39rem";
+  switch (project.mediaLayout) {
+    case "flagship":
+      return "(max-width: 56rem) calc(100vw - 4rem), 34.75rem";
+    case "dashboard":
+    case "diagram":
+      return "(max-width: 56rem) calc(100vw - 4rem), 28.5rem";
+    case "responsive":
+      return "(max-width: 56rem) calc(100vw - 4rem), 27rem";
+    case "desktop":
+      return asset.role === "supporting"
+        ? "(max-width: 56rem) 64vw, 17rem"
+        : "(max-width: 56rem) calc(100vw - 4rem), 23rem";
   }
+}
 
-  if (project.tier === "major") {
-    return "(max-width: 68rem) 100vw, 43rem";
-  }
+function ProjectImage({
+  project,
+  asset,
+}: {
+  readonly project: FeaturedProject;
+  readonly asset: ProjectMediaAsset;
+}) {
+  return (
+    <Image
+      src={asset.src}
+      alt={asset.alt}
+      fill
+      sizes={getImageSizes(project, asset)}
+      className={styles.projectImage}
+    />
+  );
+}
 
-  return "(max-width: 48rem) 100vw, 39rem";
+function WindowChrome() {
+  return (
+    <span className={styles.windowChrome} aria-hidden="true">
+      <i />
+      <i />
+      <i />
+      <b />
+    </span>
+  );
 }
 
 export function ProjectMedia({ project }: ProjectMediaProps) {
-  const mediaClassName = [
-    styles.projectMedia,
-    layoutClasses[project.mediaLayout],
-  ].join(" ");
+  const primary = project.media.find((asset) => asset.role === "primary");
+
+  if (!primary) {
+    return null;
+  }
+
+  if (project.mediaLayout === "responsive") {
+    const mobile = project.media.find((asset) => asset.role === "mobile");
+
+    return (
+      <figure className={[styles.projectMedia, styles.mediaResponsive].join(" ")}>
+        <div className={styles.mediaReveal}>
+          <div className={styles.laptopFrame}>
+            <div className={styles.laptopScreen}>
+              <ProjectImage project={project} asset={primary} />
+            </div>
+            <span className={styles.laptopBase} aria-hidden="true" />
+          </div>
+
+          {mobile ? (
+            <div className={styles.phoneFrame}>
+              <span className={styles.phoneNotch} aria-hidden="true" />
+              <div className={styles.phoneScreen}>
+                <ProjectImage project={project} asset={mobile} />
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </figure>
+    );
+  }
+
+  if (project.mediaLayout === "desktop") {
+    const supporting = project.media.find((asset) => asset.role === "supporting");
+
+    return (
+      <figure className={[styles.projectMedia, styles.mediaDesktop].join(" ")}>
+        <div className={styles.mediaReveal}>
+          <div className={[styles.desktopWindow, styles.desktopWindowMain].join(" ")}>
+            <WindowChrome />
+            <div className={styles.desktopWindowViewport}>
+              <ProjectImage project={project} asset={primary} />
+            </div>
+          </div>
+
+          {supporting ? (
+            <div
+              className={[styles.desktopWindow, styles.desktopWindowSupporting].join(
+                " ",
+              )}
+            >
+              <WindowChrome />
+              <div className={styles.desktopWindowViewport}>
+                <ProjectImage project={project} asset={supporting} />
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </figure>
+    );
+  }
+
+  const layoutClass =
+    project.mediaLayout === "flagship"
+      ? styles.mediaFlagship
+      : project.mediaLayout === "dashboard"
+        ? styles.mediaDashboard
+        : styles.mediaDiagram;
 
   return (
-    <figure className={mediaClassName} data-grid-ignore>
-      <div className={styles.mediaCanvas}>
-        {project.media.map((asset, index) => (
-          <div
-            key={asset.src}
-            className={[styles.mediaAsset, roleClasses[asset.role]].join(" ")}
-          >
-            <Image
-              src={asset.src}
-              alt={asset.alt}
-              fill
-              sizes={getImageSizes(project, asset.role)}
-              className={styles.projectImage}
-            />
-
-            <span className={styles.mediaIndex} aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
+    <figure className={[styles.projectMedia, layoutClass].join(" ")}>
+      <div className={styles.mediaReveal}>
+        <div className={styles.flatMediaFrame}>
+          {project.mediaLayout === "flagship" ? <WindowChrome /> : null}
+          <div className={styles.flatMediaViewport}>
+            <ProjectImage project={project} asset={primary} />
           </div>
-        ))}
-
-        <span className={styles.mediaSweep} aria-hidden="true" />
+        </div>
       </div>
-
-      <figcaption>{project.caption}</figcaption>
     </figure>
   );
 }

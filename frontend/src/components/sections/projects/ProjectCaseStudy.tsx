@@ -1,11 +1,5 @@
-import type {
-  FeaturedProject,
-  ProjectAccent,
-  ProjectAlignment,
-  ProjectTier,
-} from "@/types/projects";
+import type { FeaturedProject, ProjectMediaLayout } from "@/types/projects";
 
-import { ProjectEvidence } from "./ProjectEvidence";
 import { ProjectMedia } from "./ProjectMedia";
 import styles from "./FeaturedProjectsSection.module.css";
 
@@ -13,31 +7,61 @@ interface ProjectCaseStudyProps {
   readonly project: FeaturedProject;
 }
 
-const tierClasses: Record<ProjectTier, string> = {
-  flagship: styles.flagshipChapter,
-  major: styles.majorChapter,
-  compact: styles.compactChapter,
+const variantClasses: Record<ProjectMediaLayout, string> = {
+  flagship: styles.project01,
+  dashboard: styles.project02,
+  diagram: styles.project03,
+  responsive: styles.project04,
+  desktop: styles.project05,
 };
 
-const accentClasses: Record<ProjectAccent, string> = {
-  cyan: styles.accentCyan,
-  emerald: styles.accentEmerald,
-  violet: styles.accentViolet,
-  amber: styles.accentAmber,
-};
+function getContextLabel(project: FeaturedProject) {
+  return project.context ?? "Flagship project";
+}
 
-const alignmentClasses: Record<ProjectAlignment, string> = {
-  "copy-first": styles.copyFirst,
-  "media-first": styles.mediaFirst,
-};
+function getVisibleTechnologies(project: FeaturedProject) {
+  if (project.mediaLayout === "flagship") {
+    const preferred = ["React", "Node.js", "MongoDB", "PostgreSQL"];
+    return preferred.filter((technology) => project.technologies.includes(technology));
+  }
+
+  if (project.mediaLayout === "dashboard") {
+    const preferred = ["PostgreSQL", "Python", "Flask", "Chart.js"];
+    return preferred.filter((technology) => project.technologies.includes(technology));
+  }
+
+  if (project.mediaLayout === "diagram") {
+    const preferred = ["MySQL 8.0+", "InnoDB", "SQL", "ERD"];
+    return preferred.filter((technology) => project.technologies.includes(technology));
+  }
+
+  return project.technologies.slice(0, 4);
+}
+
+function HeroFacts({ project }: { readonly project: FeaturedProject }) {
+  return (
+    <dl className={styles.heroFacts}>
+      <div>
+        <dt>Category</dt>
+        <dd>{project.category}</dd>
+      </div>
+      <div>
+        <dt>Core stack</dt>
+        <dd>{project.technologies.slice(0, 3).join(" · ")}</dd>
+      </div>
+      <div className={styles.heroFactWide}>
+        <dt>Data + auth</dt>
+        <dd>{project.technologies.slice(3).join(" · ")}</dd>
+      </div>
+    </dl>
+  );
+}
 
 export function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
-  const className = [
-    styles.projectChapter,
-    tierClasses[project.tier],
-    accentClasses[project.accent],
-    alignmentClasses[project.alignment],
-  ].join(" ");
+  const technologies = getVisibleTechnologies(project);
+  const className = [styles.projectChapter, variantClasses[project.mediaLayout]].join(
+    " ",
+  );
 
   return (
     <article
@@ -45,48 +69,49 @@ export function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
       className={className}
       aria-labelledby={`${project.id}-title`}
       data-project-reveal
+      data-grid-ignore
     >
-      <span className={styles.projectNumber} aria-hidden="true">
+      <span className={styles.cardGlow} aria-hidden="true" />
+      <span className={styles.projectIndex} aria-hidden="true">
         {project.number}
       </span>
 
-      <div className={styles.projectCopy} data-grid-ignore>
-        <div className={styles.projectIdentity}>
-          <p className={styles.projectEyebrow}>
-            {project.number} / {project.category}
-          </p>
+      {(project.mediaLayout === "flagship" || project.mediaLayout === "diagram") && (
+        <span className={styles.statusDots} aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
+      )}
 
-          {project.context ? (
-            <p className={styles.projectContext}>{project.context}</p>
-          ) : null}
-        </div>
+      <div className={styles.projectCopy}>
+        <p className={styles.projectEyebrow}>
+          <span>{getContextLabel(project)}</span>
+          <span aria-hidden="true">/</span>
+          <span>{project.category}</span>
+        </p>
 
         <h3 id={`${project.id}-title`}>{project.title}</h3>
-
         <p className={styles.projectSummary}>{project.summary}</p>
-
-        <div className={styles.projectNarrative}>
-          <div>
-            <p className={styles.blockLabel}>WORKFLOW</p>
-            <p>{project.workflow}</p>
-          </div>
-
-          {project.role ? (
-            <div>
-              <p className={styles.blockLabel}>MY ROLE</p>
-              <p>{project.role}</p>
-            </div>
-          ) : null}
-
-          <div>
-            <p className={styles.blockLabel}>ARCHITECTURE SIGNAL</p>
-            <p>{project.architecture}</p>
-          </div>
-        </div>
       </div>
 
+      {project.mediaLayout === "flagship" ? <HeroFacts project={project} /> : null}
+
       <ProjectMedia project={project} />
-      <ProjectEvidence project={project} />
+
+      <ul
+        className={styles.projectTags}
+        aria-label={`${project.title} selected technologies`}
+      >
+        {technologies.map((technology) => (
+          <li key={technology}>{technology}</li>
+        ))}
+      </ul>
+
+      <span className={styles.projectFooterSignal} aria-hidden="true">
+        <span>{project.number}</span>
+        <i />
+      </span>
     </article>
   );
 }

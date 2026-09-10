@@ -4,12 +4,6 @@ import { useEffect, useRef } from "react";
 
 import styles from "./FeaturedProjectsSection.module.css";
 
-const revealSelector = [
-  "[data-project-intro-reveal]",
-  "[data-project-reveal]",
-  "[data-project-decorative-reveal]",
-].join(",");
-
 export function ProjectsReveal() {
   const markerRef = useRef<HTMLSpanElement>(null);
 
@@ -21,9 +15,11 @@ export function ProjectsReveal() {
       return;
     }
 
-    const targets = Array.from(section.querySelectorAll<HTMLElement>(revealSelector));
+    const chapters = Array.from(
+      section.querySelectorAll<HTMLElement>("[data-project-reveal]"),
+    );
 
-    if (targets.length === 0) {
+    if (chapters.length === 0) {
       return;
     }
 
@@ -32,9 +28,10 @@ export function ProjectsReveal() {
     ).matches;
 
     if (reducedMotion || !("IntersectionObserver" in window)) {
-      targets.forEach((target) => {
-        target.dataset.projectVisible = "true";
+      chapters.forEach((chapter) => {
+        chapter.dataset.projectVisible = "true";
       });
+
       return;
     }
 
@@ -45,18 +42,18 @@ export function ProjectsReveal() {
             return;
           }
 
-          const target = entry.target as HTMLElement;
-          target.dataset.projectVisible = "true";
-          observer.unobserve(target);
+          const chapter = entry.target as HTMLElement;
+          chapter.dataset.projectVisible = "true";
+          observer.unobserve(chapter);
         });
       },
       {
-        rootMargin: "0px 0px -8% 0px",
-        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.16,
       },
     );
 
-    targets.forEach((target) => observer.observe(target));
+    chapters.forEach((chapter) => observer.observe(chapter));
 
     return () => observer.disconnect();
   }, []);
