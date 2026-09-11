@@ -1,9 +1,26 @@
 import { servicesContent } from "@/content/services";
 
-import { ServiceCard } from "./ServiceCard";
+import { ServiceModule } from "./ServiceModule";
 import { ServicesIcon } from "./ServicesIcons";
 import { ServicesReveal } from "./ServicesReveal";
 import styles from "./ServicesSection.module.css";
+
+const capabilitySignals = [
+  { label: "BUILD", icon: "build" as const, warm: false },
+  { label: "IMPROVE", icon: "improve" as const, warm: false },
+  { label: "INTEGRATE", icon: "integrate" as const, warm: false },
+  { label: "DELIVER", icon: "deliver" as const, warm: true },
+] as const;
+
+function SectionKicker({ label }: { label: string }) {
+  return (
+    <div className={styles.sectionKicker} aria-hidden="true">
+      <span>{label}</span>
+      <i className={styles.kickerWarmLine} />
+      <i className={styles.kickerCoolLine} />
+    </div>
+  );
+}
 
 export function ServicesSection() {
   return (
@@ -17,28 +34,48 @@ export function ServicesSection() {
 
       <div className={styles.container}>
         <header className={styles.sectionHeader} data-services-reveal>
-          <div className={styles.phaseMark} aria-hidden="true">
-            <span>SERVICES</span>
+          <aside className={styles.phaseMark} aria-hidden="true">
+            <span className={styles.railMarkerTop} />
+            <span className={styles.railMarkerMid} />
+            <span className={styles.phaseLabel}>SERVICES</span>
             <strong>04</strong>
-            <i />
-            <small>SERVICE BLUEPRINT</small>
-          </div>
+            <i className={styles.phaseRule} />
+            <small>
+              SERVICE
+              <br />
+              BLUEPRINT
+            </small>
+          </aside>
 
           <div className={styles.headerCopy}>
             <div className={styles.headerMeta}>
               <span>{servicesContent.label}</span>
-              <i aria-hidden="true" />
               <span>{servicesContent.meta}</span>
             </div>
 
-            <h2 id="services-heading">{servicesContent.heading}</h2>
+            <h2 id="services-heading">
+              Development <em>support</em>
+              <br />
+              focused on clear, <em>useful</em>
+              <br />
+              outcomes.
+            </h2>
+
             <p>{servicesContent.introduction}</p>
 
-            <div className={styles.headerSignals} aria-label="Service focus">
-              <span>BUILD</span>
-              <span>IMPROVE</span>
-              <span>INTEGRATE</span>
-              <span>DELIVER</span>
+            <div
+              className={styles.headerSignals}
+              aria-label="Core delivery capabilities"
+            >
+              {capabilitySignals.map((signal) => (
+                <span
+                  key={signal.label}
+                  className={signal.warm ? styles.signalWarm : undefined}
+                >
+                  <ServicesIcon name={signal.icon} />
+                  <b>{signal.label}</b>
+                </span>
+              ))}
             </div>
           </div>
         </header>
@@ -48,104 +85,94 @@ export function ServicesSection() {
           aria-labelledby="services-list-heading"
         >
           <div className={styles.subsectionHeader} data-services-reveal>
-            <div>
-              <p>{servicesContent.servicesLabel}</p>
-              <h3 id="services-list-heading">
-                {servicesContent.servicesHeading}
-              </h3>
-            </div>
-            {/* <p>{servicesContent.servicesDescription}</p> */}
+            <SectionKicker label={servicesContent.servicesLabel} />
+            <h3 id="services-list-heading">
+              {servicesContent.servicesHeading}
+            </h3>
           </div>
 
-          <div className={styles.servicesGrid}>
+          <div className={styles.serviceModules}>
             {servicesContent.services.map((service, index) => (
-              <ServiceCard key={service.id} service={service} index={index} />
+              <ServiceModule key={service.id} service={service} index={index} />
             ))}
           </div>
         </section>
 
-        <div className={styles.collaborationLayout}>
-          <section
-            className={styles.collaborationPanel}
-            aria-labelledby="collaboration-heading"
-            data-services-reveal
-          >
-            <div className={styles.panelHeading}>
-              <div className={styles.panelIcon} aria-hidden="true">
-                <ServicesIcon name="collaboration" />
-              </div>
-              <div>
-                <p>{servicesContent.collaborationLabel}</p>
-                <h3 id="collaboration-heading">
-                  {servicesContent.collaborationHeading}
-                </h3>
-              </div>
-            </div>
+        <section
+          className={styles.collaborationSection}
+          aria-labelledby="collaboration-heading"
+          data-services-reveal
+        >
+          <SectionKicker label={servicesContent.collaborationLabel} />
+          <h3 id="collaboration-heading">
+            {servicesContent.collaborationHeading}
+          </h3>
+          <p className={styles.sectionIntro}>
+            {servicesContent.collaborationDescription}
+          </p>
 
-            <p className={styles.panelDescription}>
-              {servicesContent.collaborationDescription}
-            </p>
+          <div className={styles.collaborationGrid}>
+            {servicesContent.collaborationTypes.map((item, index) => (
+              <article key={item.title} className={styles.collaborationCard}>
+                <span className={styles.collaborationNumber}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className={styles.collaborationIcon} aria-hidden="true">
+                  <ServicesIcon name={item.icon} />
+                </div>
+                <div className={styles.collaborationCopy}>
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+                </div>
+                <span
+                  className={styles.collaborationCorner}
+                  aria-hidden="true"
+                />
+              </article>
+            ))}
+          </div>
+        </section>
 
-            <div className={styles.collaborationList}>
-              {servicesContent.collaborationTypes.map((item, index) => (
-                <article key={item.title} className={styles.collaborationItem}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h4>{item.title}</h4>
-                    <p>{item.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+        <section
+          className={styles.deliverySection}
+          aria-labelledby="workflow-heading"
+          data-services-reveal
+        >
+          <SectionKicker label={servicesContent.workflowLabel} />
+          <h3 id="workflow-heading">{servicesContent.workflowHeading}</h3>
 
-          <section
-            className={styles.workflowPanel}
-            aria-labelledby="workflow-heading"
-            data-services-reveal
-          >
-            <div className={styles.panelHeading}>
-              <div className={styles.panelIcon} aria-hidden="true">
-                <ServicesIcon name="workflow" />
-              </div>
-              <div>
-                <p>{servicesContent.workflowLabel}</p>
-                <h3 id="workflow-heading">{servicesContent.workflowHeading}</h3>
-              </div>
-            </div>
+          <ol className={styles.deliveryTrack}>
+            {servicesContent.workflow.map((step) => (
+              <li key={step.index} className={styles.deliveryStep}>
+                <div className={styles.deliveryHeader}>
+                  <span>{step.index}</span>
+                  <ServicesIcon name={step.icon} />
+                  <h4>{step.title}</h4>
+                </div>
+                <p>{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-            {/* <p className={styles.panelDescription}>
-              {servicesContent.workflowDescription}
-            </p> */}
+        <aside
+          className={styles.contactHandoff}
+          data-services-reveal
+          aria-labelledby="services-handoff-heading"
+        >
+          <span className={styles.handoffWarmTrace} aria-hidden="true" />
+          <span className={styles.handoffCoolTrace} aria-hidden="true" />
+          <span className={styles.handoffLabel}>
+            {servicesContent.ctaEyebrow}
+          </span>
 
-            <ol className={styles.workflowRail}>
-              {servicesContent.workflow.map((step) => (
-                <li key={step.index}>
-                  <div className={styles.workflowNode}>
-                    <span>{step.index}</span>
-                    <i aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h4>{step.title}</h4>
-                    <p>{step.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
-        </div>
-
-        <aside className={styles.contactHandoff} data-services-reveal>
-          <div className={styles.handoffMarker} aria-hidden="true">
-            <span>04</span>
-            <i />
-            <ServicesIcon name="check" />
+          <div className={styles.handoffIcon} aria-hidden="true">
+            <ServicesIcon name="checkCircle" />
           </div>
 
           <div className={styles.handoffCopy}>
-            <p>{servicesContent.ctaEyebrow}</p>
-            <h3>{servicesContent.ctaHeading}</h3>
-            <span>{servicesContent.ctaDescription}</span>
+            <h3 id="services-handoff-heading">{servicesContent.ctaHeading}</h3>
+            <p>{servicesContent.ctaDescription}</p>
           </div>
 
           <a className={styles.contactAction} href={servicesContent.ctaHref}>
@@ -153,6 +180,12 @@ export function ServicesSection() {
             <ServicesIcon name="arrow" />
           </a>
         </aside>
+
+        <div className={styles.sectionEnd} aria-hidden="true">
+          <i />
+          <span>{servicesContent.meta}</span>
+          <i />
+        </div>
       </div>
     </section>
   );

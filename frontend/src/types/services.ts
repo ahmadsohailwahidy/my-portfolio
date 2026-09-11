@@ -1,14 +1,21 @@
 export type ServiceIconName =
-  | "frontend"
-  | "react"
-  | "api"
-  | "dashboard"
-  | "arrow"
+  | "interface"
+  | "integration"
+  | "analytics"
+  | "build"
+  | "improve"
+  | "integrate"
+  | "deliver"
   | "collaboration"
-  | "workflow"
-  | "check";
+  | "team"
+  | "launch"
+  | "define"
+  | "implement"
+  | "review"
+  | "handoff"
+  | "checkCircle"
+  | "arrow";
 
-export type ServiceAccent = "coral" | "sky" | "mint" | "amber";
 export type ServiceCapabilityStatus = "applied" | "growth";
 
 export interface ServiceCapability {
@@ -23,19 +30,20 @@ export interface PortfolioService {
   description: string;
   bestFor: string;
   icon: ServiceIconName;
-  accent: ServiceAccent;
   capabilities: readonly ServiceCapability[];
 }
 
 export interface CollaborationType {
   title: string;
   description: string;
+  icon: ServiceIconName;
 }
 
 export interface ServiceWorkflowStep {
   index: string;
   title: string;
   description: string;
+  icon: ServiceIconName;
 }
 
 export interface ServicesContentData {

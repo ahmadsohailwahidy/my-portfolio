@@ -8,103 +8,127 @@ interface ServicesIconProps extends SVGProps<SVGSVGElement> {
 
 export function ServicesIcon({ name, ...props }: ServicesIconProps) {
   const commonProps = {
-    viewBox: "0 0 24 24",
+    viewBox: "0 0 32 32",
     fill: "none",
     stroke: "currentColor",
     strokeWidth: 1.7,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
+    focusable: false,
     ...props,
   };
 
   switch (name) {
-    case "frontend":
+    case "interface":
       return (
         <svg {...commonProps}>
-          <rect x="3" y="4" width="18" height="16" rx="2.2" />
-          <path d="M3 8h18" />
-          <path d="m8 12-2 2 2 2" />
-          <path d="m16 12 2 2-2 2" />
-          <path d="m13.5 11-3 6" />
+          <rect x="5.5" y="6.5" width="21" height="15" rx="1.5" />
+          <path d="M12 26h8M16 21.5V26M9 10h8M9 13h5" />
         </svg>
       );
-    case "react":
+    case "integration":
       return (
         <svg {...commonProps}>
-          <circle cx="12" cy="12" r="1.7" />
-          <ellipse cx="12" cy="12" rx="8.8" ry="3.5" />
-          <ellipse
-            cx="12"
-            cy="12"
-            rx="8.8"
-            ry="3.5"
-            transform="rotate(60 12 12)"
-          />
-          <ellipse
-            cx="12"
-            cy="12"
-            rx="8.8"
-            ry="3.5"
-            transform="rotate(120 12 12)"
-          />
+          <circle cx="8" cy="16" r="3" />
+          <circle cx="23" cy="8" r="3" />
+          <circle cx="23" cy="24" r="3" />
+          <path d="m10.7 14.6 9.5-5M10.7 17.4l9.5 5" />
         </svg>
       );
-    case "api":
+    case "analytics":
       return (
         <svg {...commonProps}>
-          <path d="M8.5 8.5 5 12l3.5 3.5" />
-          <path d="m15.5 8.5 3.5 3.5-3.5 3.5" />
-          <path d="m13.5 5-3 14" />
-          <circle cx="4" cy="5" r="1.5" />
-          <circle cx="20" cy="19" r="1.5" />
-          <path d="M5.4 5.6 8 7" />
-          <path d="m16 17 2.6 1.4" />
+          <path d="M7 25V17M15 25V11M23 25V5" />
         </svg>
       );
-    case "dashboard":
+    case "build":
       return (
         <svg {...commonProps}>
-          <rect x="3" y="3" width="18" height="18" rx="2.4" />
-          <path d="M9 3v18" />
-          <path d="M9 10h12" />
-          <path d="M13 15h4" />
-          <path d="M13 18h2" />
-          <circle cx="6" cy="7" r="1" />
-          <circle cx="6" cy="12" r="1" />
+          <path d="m10 8-6 8 6 8M22 8l6 8-6 8M20 4 12 28" />
+        </svg>
+      );
+    case "improve":
+      return (
+        <svg {...commonProps}>
+          <path d="M7 25v-7M15 25V12M23 25V5" />
+        </svg>
+      );
+    case "integrate":
+      return (
+        <svg {...commonProps}>
+          <circle cx="8" cy="16" r="3" />
+          <circle cx="23" cy="8" r="3" />
+          <circle cx="23" cy="24" r="3" />
+          <path d="m10.7 14.6 9.5-5M10.7 17.4l9.5 5" />
+        </svg>
+      );
+    case "deliver":
+      return (
+        <svg {...commonProps}>
+          <circle cx="16" cy="16" r="7" />
+          <circle cx="16" cy="16" r="2" />
+          <path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M25.2 6.8l-2.8 2.8M9.6 22.4l-2.8 2.8" />
         </svg>
       );
     case "collaboration":
       return (
         <svg {...commonProps}>
-          <circle cx="8" cy="9" r="3" />
-          <circle cx="17" cy="8" r="2.3" />
-          <path d="M3.5 19c.6-3 2.4-4.7 4.5-4.7s3.9 1.7 4.5 4.7" />
-          <path d="M14.2 13.5c2.7-.6 5.3 1 6.3 3.9" />
+          <circle cx="11" cy="11" r="4" />
+          <circle cx="22" cy="12" r="3.5" />
+          <path d="M4 26c0-5 3-8 7-8s7 3 7 8M17 26c0-4 2-6.5 5-6.5s5 2.5 5 6.5" />
         </svg>
       );
-    case "workflow":
+    case "team":
       return (
         <svg {...commonProps}>
-          <circle cx="5" cy="12" r="2" />
-          <circle cx="19" cy="6" r="2" />
-          <circle cx="19" cy="18" r="2" />
-          <path d="M7 12h4.5a3 3 0 0 0 3-3V8" />
-          <path d="M11.5 12a3 3 0 0 1 3 3v1" />
-          <path d="m17 4 2-2 2 2" />
+          <rect x="6" y="7" width="20" height="15" rx="1.5" />
+          <path d="M3 26h26M11 22l-2 4M21 22l2 4" />
         </svg>
       );
-    case "check":
+    case "launch":
       return (
         <svg {...commonProps}>
-          <path d="m5 12.5 4 4L19 7" />
+          <path d="M18 5c5 1 8 4 9 9l-7 7-7-7zM13 14l-5 1-3 5 7 1M20 21l-1 7-5-3-1-4M18 9l-5 5" />
+          <circle cx="20" cy="12" r="2" />
+        </svg>
+      );
+    case "define":
+      return (
+        <svg {...commonProps}>
+          <path d="M8 3h11l5 5v21H8zM19 3v7h5M12 16h8M12 21h8" />
+        </svg>
+      );
+    case "implement":
+      return (
+        <svg {...commonProps}>
+          <path d="m11 8-7 8 7 8M21 8l7 8-7 8M20 4 12 28" />
+        </svg>
+      );
+    case "review":
+      return (
+        <svg {...commonProps}>
+          <circle cx="14" cy="14" r="8" />
+          <path d="m20 20 8 8" />
+        </svg>
+      );
+    case "handoff":
+      return (
+        <svg {...commonProps}>
+          <path d="m6 16 7 7L27 8" />
+        </svg>
+      );
+    case "checkCircle":
+      return (
+        <svg {...commonProps}>
+          <circle cx="16" cy="16" r="10" />
+          <path d="m10 16 4 4 8-9" />
         </svg>
       );
     case "arrow":
       return (
         <svg {...commonProps}>
-          <path d="M5 12h14" />
-          <path d="m14 7 5 5-5 5" />
+          <path d="M6 16h20M20 10l6 6-6 6" />
         </svg>
       );
   }

@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 import type { PortfolioService } from "@/types/services";
 
 import { ServicesIcon } from "./ServicesIcons";
@@ -7,56 +5,31 @@ import styles from "./ServicesSection.module.css";
 
 interface ServiceCardProps {
   service: PortfolioService;
-  index: number;
 }
 
-export function ServiceCard({ service, index }: ServiceCardProps) {
+export function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <article
-      className={styles.serviceCard}
-      data-accent={service.accent}
-      data-services-reveal
-      style={{ "--service-order": index } as CSSProperties}
-    >
-      <div className={styles.cardTopline}>
-        <span>{service.index}</span>
-        <span>BUILD MODULE</span>
+    <article className={styles.serviceCard}>
+      <span className={styles.warmTrace} aria-hidden="true" />
+      <span className={styles.coolTrace} aria-hidden="true" />
+      <span className={styles.cardCornerWarm} aria-hidden="true" />
+      <span className={styles.cardCornerCool} aria-hidden="true" />
+
+      <span className={styles.serviceNumber}>{service.index}</span>
+
+      <div className={styles.serviceIcon} aria-hidden="true">
+        <ServicesIcon name={service.icon} />
       </div>
 
-      <div className={styles.cardHeadingRow}>
-        <div className={styles.cardIcon} aria-hidden="true">
-          <ServicesIcon name={service.icon} />
-        </div>
+      <div className={styles.serviceCopy}>
         <h4>{service.title}</h4>
+        <p>{service.description}</p>
       </div>
 
-      <p className={styles.cardDescription}>{service.description}</p>
-
-      <div className={styles.bestFor}>
+      <div className={styles.bestFit}>
         <span>Best fit</span>
         <p>{service.bestFor}</p>
       </div>
-{/* 
-      <div className={styles.capabilityBlock}>
-        <span className={styles.capabilityLabel}>Capabilities</span>
-        <div className={styles.capabilityList}>
-          {service.capabilities.map((capability) => (
-            <span
-              key={capability.label}
-              className={
-                capability.status === "growth"
-                  ? styles.growthCapability
-                  : styles.capability
-              }
-            >
-              {capability.label}
-              {capability.status === "growth" ? <small>growth</small> : null}
-            </span>
-          ))}
-        </div>
-      </div> */}
-
-      <span className={styles.cardCorner} aria-hidden="true" />
     </article>
   );
 }

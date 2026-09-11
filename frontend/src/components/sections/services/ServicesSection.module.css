@@ -1,24 +1,24 @@
 .section {
-  --services-coral: #ff8f78;
-  --services-coral-soft: rgba(255, 143, 120, 0.14);
-  --services-sky: #7dd3fc;
-  --services-sky-soft: rgba(125, 211, 252, 0.13);
-  --services-mint: #5eead4;
-  --services-mint-soft: rgba(94, 234, 212, 0.12);
-  --services-amber: #ffd18a;
-  --services-amber-soft: rgba(255, 209, 138, 0.12);
-  --services-text: #f7fafc;
-  --services-muted: #a4b3c4;
-  --services-dim: #728399;
-  --services-line: rgba(148, 163, 184, 0.16);
-  --services-panel: rgba(5, 13, 24, 0.72);
-  --services-panel-strong: rgba(6, 15, 28, 0.9);
+  --services-coral: #ff806d;
+  --services-coral-bright: #ff9b88;
+  --services-coral-soft: rgba(255, 128, 109, 0.13);
+  --services-cyan: var(--cyan, #22d3ee);
+  --services-cyan-bright: #00e3e8;
+  --services-cyan-soft: rgba(34, 211, 238, 0.11);
+  --services-text: #f8fafc;
+  --services-muted: #aebdc9;
+  --services-dim: #7890a3;
+  --services-line: rgba(61, 166, 190, 0.24);
+  --services-panel: rgba(3, 17, 31, 0.7);
+  --services-panel-strong: rgba(4, 19, 34, 0.82);
+  --services-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --services-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
 
   position: relative;
   isolation: isolate;
   scroll-margin-top: 7.5rem;
-  padding: clamp(8rem, 12vw, 12rem) clamp(1rem, 4vw, 3rem)
-    clamp(7rem, 10vw, 10rem);
+  padding: clamp(5.75rem, 7vw, 7rem) clamp(1.25rem, 4vw, 3rem) 3.5rem;
   overflow: clip;
   color: var(--services-text);
   background: transparent;
@@ -40,978 +40,1367 @@
   pointer-events: none;
 }
 
+/* Hero / section index */
+
 .sectionHeader {
   display: grid;
-  grid-template-columns: clamp(7rem, 12vw, 10rem) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: 13.15rem minmax(0, 1fr);
+  gap: 2.75rem;
+  min-height: 29.8rem;
   align-items: start;
-  padding: 0 0 clamp(4rem, 7vw, 6rem);
-  opacity: 0;
-  transform: translateY(2rem);
-}
-
-.sectionHeader[data-services-visible="true"] {
-  animation: services-rise 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .phaseMark {
-  position: sticky;
-  top: 8rem;
-  display: grid;
-  min-height: 19rem;
-  align-content: start;
-  justify-items: start;
-  padding: 1rem 0 1rem 1.2rem;
-  border-left: 2px solid rgba(255, 143, 120, 0.56);
+  position: relative;
+  min-height: 28.2rem;
+  border-left: 1px solid rgba(0, 211, 220, 0.58);
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 580ms var(--services-ease),
+    transform 650ms var(--services-ease);
 }
 
-.phaseMark::before,
 .phaseMark::after {
   position: absolute;
-  left: -0.35rem;
-  width: 0.55rem;
-  height: 0.55rem;
-  border: 1px solid rgba(255, 143, 120, 0.6);
-  background: #020617;
+  top: 0;
+  bottom: 0;
+  left: 4.85rem;
+  width: 1px;
+  background: rgba(0, 135, 161, 0.32);
   content: "";
+  transform: scaleY(0.12);
+  transform-origin: top;
+  transition: transform 720ms 100ms var(--services-ease);
 }
 
-.phaseMark::before {
+.railMarkerTop,
+.railMarkerMid {
+  position: absolute;
+  left: -0.3rem;
+  z-index: 2;
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid var(--services-coral);
+  background: var(--background, #020617);
+}
+
+.railMarkerTop {
   top: 0;
 }
 
-.phaseMark::after {
-  bottom: 0;
+.railMarkerMid {
+  top: 22rem;
 }
 
-.phaseMark span,
+.phaseLabel,
 .phaseMark small,
 .headerMeta,
-.headerSignals,
-.subsectionHeader > div > p,
-.cardTopline,
-.bestFor > span,
-.capabilityLabel,
-.capabilityList,
-.panelHeading p,
-.collaborationItem > span,
-.workflowNode span,
-.handoffCopy > p,
-.handoffMarker span {
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    monospace;
+.headerSignals b,
+.sectionKicker,
+.serviceNumber,
+.bestFit > span,
+.collaborationNumber,
+.deliveryHeader > span,
+.handoffLabel,
+.sectionEnd span {
+  font-family: var(--services-mono);
+  text-transform: uppercase;
 }
 
-.phaseMark span {
+.phaseLabel {
+  position: absolute;
+  top: 1.35rem;
+  left: 1.35rem;
   color: var(--services-coral);
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
 }
 
 .phaseMark strong {
-  margin: 1rem 0 0;
+  position: absolute;
+  top: 3rem;
+  left: 2.15rem;
   color: transparent;
   background: linear-gradient(
     180deg,
-    #fff6f2 0%,
-    var(--services-coral) 72%,
-    rgba(255, 143, 120, 0.45) 100%
+    #ffffff 4%,
+    #ffd2c7 41%,
+    var(--services-coral-bright) 98%
   );
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: clamp(4.25rem, 8vw, 7rem);
-  font-weight: 690;
-  letter-spacing: -0.1em;
-  line-height: 0.85;
+  font-size: 7.15rem;
+  font-weight: 800;
+  letter-spacing: -0.075em;
+  line-height: 0.92;
+  text-shadow: 0 0.65rem 1.5rem rgba(255, 112, 89, 0.12);
 }
 
-.phaseMark i {
-  width: 3rem;
+.phaseRule {
+  position: absolute;
+  top: 12.7rem;
+  left: 1.35rem;
+  width: 6.85rem;
   height: 1px;
-  margin: 1.5rem 0 1.2rem;
   background: linear-gradient(
     90deg,
-    var(--services-coral),
-    rgba(125, 211, 252, 0.35),
-    transparent
+    var(--services-coral) 0 38%,
+    rgba(53, 137, 159, 0.72) 38% 100%
   );
 }
 
 .phaseMark small {
-  max-width: 10ch;
-  color: rgba(164, 179, 196, 0.6);
-  font-size: 0.48rem;
-  font-weight: 720;
-  letter-spacing: 0.18em;
-  line-height: 1.8;
+  position: absolute;
+  top: 15rem;
+  left: 1.35rem;
+  color: rgba(137, 160, 178, 0.76);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  line-height: 1.7;
+}
+
+.sectionHeader[data-services-visible="true"] .phaseMark {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sectionHeader[data-services-visible="true"] .phaseMark::after {
+  transform: scaleY(1);
 }
 
 .headerCopy {
   min-width: 0;
+  padding-top: 0.9rem;
+}
+
+.headerMeta,
+.headerCopy h2,
+.headerCopy > p,
+.headerSignals {
+  opacity: 0;
+  transform: translateY(0.8rem);
+  transition:
+    opacity 600ms var(--services-ease),
+    transform 680ms var(--services-ease);
 }
 
 .headerMeta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1rem;
-  align-items: center;
+  gap: 2.7rem;
+  align-items: baseline;
   color: var(--services-coral);
-  font-size: clamp(0.62rem, 0.9vw, 0.72rem);
-  font-weight: 780;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.headerMeta i {
-  width: clamp(2rem, 5vw, 4rem);
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 143, 120, 0.8),
-    rgba(125, 211, 252, 0.15)
-  );
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
 }
 
 .headerMeta span:last-child {
-  color: rgba(164, 179, 196, 0.62);
+  color: rgba(154, 174, 190, 0.66);
 }
 
 .headerCopy h2 {
-  max-width: 13ch;
-  margin: clamp(1.25rem, 2.5vw, 1.9rem) 0 0;
+  max-width: 51rem;
+  margin: 2rem 0 0;
+  color: #f8fafc;
+  font-size: clamp(3.9rem, 5.2vw, 4.65rem);
+  font-weight: 720;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+}
+
+.headerCopy h2 em {
   color: transparent;
-  background: linear-gradient(
-    102deg,
-    #f8fafc 5%,
-    #fff1e8 44%,
-    var(--services-coral) 72%,
-    var(--services-sky) 108%
-  );
+  background: linear-gradient(180deg, #ffd4ca 0%, #ff9b88 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: clamp(3rem, 7.2vw, 6.4rem);
-  font-weight: 600;
-  letter-spacing: -0.076em;
-  line-height: 0.91;
-  text-wrap: balance;
+  font-style: normal;
 }
 
 .headerCopy > p {
-  max-width: 68ch;
-  margin: clamp(1.5rem, 3vw, 2.2rem) 0 0;
+  max-width: 51.5rem;
+  margin: 1.45rem 0 0;
   color: var(--services-muted);
-  font-size: clamp(1rem, 1.35vw, 1.13rem);
-  line-height: 1.86;
+  font-size: 1.12rem;
+  letter-spacing: -0.015em;
+  line-height: 1.55;
 }
 
 .headerSignals {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: clamp(1.8rem, 3vw, 2.6rem);
+  gap: 1rem;
+  margin-top: 1.8rem;
 }
 
-.headerSignals span {
-  position: relative;
-  padding: 0.48rem 0.7rem 0.48rem 1.3rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
-  color: rgba(226, 232, 240, 0.65);
-  font-size: 0.58rem;
-  font-weight: 760;
-  letter-spacing: 0.14em;
+.headerSignals > span {
+  display: inline-flex;
+  min-width: 10.7rem;
+  height: 3.15rem;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0 1.15rem;
+  border: 1px solid rgba(0, 217, 225, 0.56);
+  border-radius: 999px;
+  color: var(--services-text);
+  background: rgba(1, 20, 35, 0.36);
+  box-shadow: inset 0 0 1.5rem rgba(0, 194, 207, 0.025);
 }
 
-.headerSignals span::before {
-  position: absolute;
-  top: 50%;
-  left: 0.4rem;
-  width: 0.35rem;
-  height: 0.35rem;
-  background: var(--services-coral);
-  content: "";
-  transform: translateY(-50%) rotate(45deg);
+.headerSignals > span:nth-child(2) {
+  min-width: 11rem;
 }
 
-.headerSignals span:nth-child(2)::before {
-  background: var(--services-sky);
+.headerSignals > span:nth-child(3),
+.headerSignals > span:nth-child(4) {
+  min-width: 11.7rem;
 }
 
-.headerSignals span:nth-child(3)::before {
-  background: var(--services-mint);
+.headerSignals svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+  color: var(--services-cyan-bright);
 }
 
-.headerSignals span:nth-child(4)::before {
-  background: var(--services-amber);
+.headerSignals b {
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
 }
+
+.headerSignals .signalWarm {
+  border-color: rgba(255, 112, 91, 0.56);
+  background: rgba(45, 23, 29, 0.18);
+}
+
+.headerSignals .signalWarm svg {
+  color: var(--services-coral);
+}
+
+.sectionHeader[data-services-visible="true"] .headerMeta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 70ms;
+}
+
+.sectionHeader[data-services-visible="true"] .headerCopy h2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 140ms;
+}
+
+.sectionHeader[data-services-visible="true"] .headerCopy > p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 220ms;
+}
+
+.sectionHeader[data-services-visible="true"] .headerSignals {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+
+/* Repeated section header motif */
 
 .servicesBlock {
-  padding-top: clamp(1rem, 2vw, 2rem);
+  margin-top: 6.5rem;
 }
 
-.subsectionHeader {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.65fr);
-  gap: clamp(2rem, 6vw, 7rem);
-  align-items: end;
-  padding-bottom: clamp(2rem, 4vw, 3rem);
-  border-bottom: 1px solid var(--services-line);
+.subsectionHeader,
+.collaborationSection > .sectionKicker,
+.collaborationSection > h3,
+.collaborationSection > .sectionIntro,
+.deliverySection > .sectionKicker,
+.deliverySection > h3 {
   opacity: 0;
-  transform: translateY(1.5rem);
+  transform: translateY(0.75rem);
+  transition:
+    opacity 560ms var(--services-ease),
+    transform 640ms var(--services-ease);
 }
 
-.subsectionHeader[data-services-visible="true"] {
-  animation: services-rise 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.subsectionHeader > div > p,
-.panelHeading p,
-.handoffCopy > p {
-  margin: 0;
+.sectionKicker {
+  display: flex;
+  width: 100%;
+  align-items: center;
   color: var(--services-coral);
-  font-size: clamp(0.6rem, 0.86vw, 0.7rem);
-  font-weight: 780;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.sectionKicker > span {
+  flex: 0 0 auto;
+}
+
+.kickerWarmLine,
+.kickerCoolLine {
+  display: block;
+  height: 1px;
+  font-style: normal;
+}
+
+.kickerWarmLine {
+  width: 5.35rem;
+  margin-left: 1.35rem;
+  background: linear-gradient(90deg, var(--services-coral), rgba(255, 112, 93, 0.18));
+}
+
+.kickerCoolLine {
+  position: relative;
+  flex: 1;
+  margin-left: 0.35rem;
+  background: rgba(15, 98, 126, 0.32);
+}
+
+.kickerCoolLine::after {
+  position: absolute;
+  top: -0.75rem;
+  right: 0;
+  width: 1px;
+  height: 1.5rem;
+  background: rgba(0, 211, 220, 0.45);
+  content: "";
 }
 
 .subsectionHeader h3,
-.panelHeading h3,
-.handoffCopy h3 {
-  margin: 0.75rem 0 0;
+.collaborationSection > h3,
+.deliverySection > h3 {
+  margin: 1.15rem 0 0;
   color: #f8fafc;
-  font-weight: 610;
-  letter-spacing: -0.045em;
-  line-height: 1.05;
-  text-wrap: balance;
+  font-size: clamp(2.15rem, 3vw, 2.55rem);
+  font-weight: 510;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
 }
 
-.subsectionHeader h3 {
-  max-width: 18ch;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+.subsectionHeader[data-services-visible="true"],
+.collaborationSection[data-services-visible="true"] > .sectionKicker,
+.collaborationSection[data-services-visible="true"] > h3,
+.collaborationSection[data-services-visible="true"] > .sectionIntro,
+.deliverySection[data-services-visible="true"] > .sectionKicker,
+.deliverySection[data-services-visible="true"] > h3 {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.subsectionHeader > p {
-  margin: 0;
-  color: rgba(164, 179, 196, 0.8);
-  font-size: clamp(0.92rem, 1.2vw, 1rem);
-  line-height: 1.75;
+.collaborationSection[data-services-visible="true"] > h3,
+.deliverySection[data-services-visible="true"] > h3 {
+  transition-delay: 70ms;
 }
 
-.servicesGrid {
+.collaborationSection[data-services-visible="true"] > .sectionIntro {
+  transition-delay: 130ms;
+}
+
+/* Primary service modules */
+
+.serviceModules {
+  margin-top: 3.25rem;
+}
+
+.serviceModule {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  margin-top: clamp(2rem, 4vw, 3.2rem);
-  border: 1px solid rgba(148, 163, 184, 0.13);
-  background: rgba(148, 163, 184, 0.11);
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.serviceModule[data-service-variant="1"] {
+  grid-template-columns: 59.3% 30.5%;
+  grid-template-areas: "card visual";
+  min-height: 20.8rem;
+}
+
+.serviceModule[data-service-variant="2"] {
+  grid-template-columns: 31.6% 57.2%;
+  grid-template-areas: "visual card";
+  min-height: 22.4rem;
+  margin-top: 6.75rem;
+}
+
+.serviceModule[data-service-variant="3"] {
+  grid-template-columns: 57.2% 32.8%;
+  grid-template-areas: "card visual";
+  min-height: 19.8rem;
+  margin-top: 7.25rem;
 }
 
 .serviceCard {
-  --card-accent: var(--services-coral);
-  --card-accent-soft: var(--services-coral-soft);
-  --service-order: 0;
-
   position: relative;
-  min-width: 0;
-  min-height: 31rem;
-  padding: clamp(1.5rem, 3vw, 2.2rem);
-  overflow: hidden;
+  grid-area: card;
+  width: 100%;
+  min-height: 20.8rem;
+  padding: 3.55rem 1.55rem 7.65rem 10.7rem;
+  overflow: visible;
+  border: 1px solid rgba(78, 145, 166, 0.35);
   background:
-    linear-gradient(150deg, var(--card-accent-soft), transparent 34%),
-    rgba(4, 12, 23, 0.82);
+    radial-gradient(circle at 5% 8%, rgba(255, 124, 103, 0.16), transparent 36%),
+    linear-gradient(108deg, rgba(5, 22, 38, 0.82), rgba(2, 14, 27, 0.66));
+  box-shadow: inset 0 0 1.35rem rgba(0, 205, 218, 0.025);
   opacity: 0;
-  transform: translateY(1.6rem);
+  transform: translateX(-0.85rem);
   transition:
-    background 240ms ease,
-    box-shadow 240ms ease,
-    transform 240ms ease;
+    opacity 630ms var(--services-ease),
+    transform 680ms var(--services-ease);
 }
 
-.serviceCard[data-services-visible="true"] {
-  animation: services-card-arrive 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--service-order) * 70ms);
+.serviceModule[data-service-variant="2"] .serviceCard {
+  min-height: 22.4rem;
+  padding-top: 4rem;
+  transform: translateX(0.85rem);
 }
 
-.serviceCard[data-accent="sky"] {
-  --card-accent: var(--services-sky);
-  --card-accent-soft: var(--services-sky-soft);
+.serviceModule[data-service-variant="3"] .serviceCard {
+  min-height: 19.8rem;
+  padding-top: 4.05rem;
+  padding-bottom: 6.5rem;
 }
 
-.serviceCard[data-accent="mint"] {
-  --card-accent: var(--services-mint);
-  --card-accent-soft: var(--services-mint-soft);
-}
-
-.serviceCard[data-accent="amber"] {
-  --card-accent: var(--services-amber);
-  --card-accent-soft: var(--services-amber-soft);
-}
-
-.serviceCard::before {
+.warmTrace,
+.coolTrace {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 4.5rem;
-  height: 2px;
-  background: var(--card-accent);
-  box-shadow: 0 0 1.3rem color-mix(in srgb, var(--card-accent) 34%, transparent);
-  content: "";
-  transition: width 240ms ease;
-}
-
-.serviceCard::after {
-  position: absolute;
-  inset: 0;
-  border: 1px solid transparent;
-  content: "";
+  z-index: 1;
   pointer-events: none;
-  transition: border-color 240ms ease;
 }
 
-.serviceCard:hover {
+.warmTrace {
+  inset: -1px auto auto -1px;
+  width: 46%;
+  height: 66%;
+  border-top: 1px solid rgba(255, 124, 103, 0.92);
+  border-left: 1px solid rgba(255, 124, 103, 0.9);
+  clip-path: inset(0 100% 100% 0);
+  transition: clip-path 560ms 80ms var(--services-ease);
+}
+
+.coolTrace {
+  inset: auto -1px -1px auto;
+  width: 43%;
+  height: 67%;
+  border-right: 1px solid rgba(0, 231, 233, 0.92);
+  border-bottom: 1px solid rgba(0, 231, 233, 0.62);
+  clip-path: inset(100% 0 0 100%);
+  transition: clip-path 580ms 170ms var(--services-ease);
+}
+
+.cardCornerWarm,
+.cardCornerCool {
+  position: absolute;
+  bottom: -0.1rem;
   z-index: 2;
-  background:
-    linear-gradient(150deg, var(--card-accent-soft), transparent 44%),
-    rgba(5, 15, 27, 0.94);
-  box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.26);
-  transform: translateY(-0.25rem);
+  width: 1.45rem;
+  height: 1.45rem;
+  pointer-events: none;
 }
 
-.serviceCard:hover::before {
-  width: 8rem;
+.cardCornerWarm {
+  left: -0.1rem;
+  border-bottom: 1px solid rgba(255, 126, 104, 0.58);
+  border-left: 1px solid rgba(255, 126, 104, 0.68);
 }
 
-.serviceCard:hover::after {
-  border-color: color-mix(in srgb, var(--card-accent) 22%, transparent);
+.cardCornerCool {
+  right: -0.1rem;
+  border-right: 1px solid var(--services-cyan-bright);
+  border-bottom: 1px solid var(--services-cyan-bright);
 }
 
-.cardTopline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  color: rgba(164, 179, 196, 0.48);
-  font-size: 0.54rem;
-  font-weight: 760;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.serviceNumber {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.1rem;
+  z-index: 3;
+  color: var(--services-coral);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
-.cardTopline span:first-child {
-  color: var(--card-accent);
-}
-
-.cardHeadingRow {
+.serviceIcon {
+  position: absolute;
+  top: 2.2rem;
+  left: 3.7rem;
+  z-index: 3;
   display: grid;
-  grid-template-columns: 3.7rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: center;
-  margin-top: 2.2rem;
-}
-
-.cardIcon {
-  display: grid;
-  width: 3.7rem;
-  height: 3.7rem;
+  width: 5.15rem;
+  height: 5.15rem;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--card-accent) 32%, transparent);
-  color: var(--card-accent);
-  background: color-mix(in srgb, var(--card-accent) 7%, rgba(3, 10, 19, 0.72));
-  transform: rotate(-4deg);
-  transition: transform 240ms ease;
+  border: 1px solid rgba(255, 119, 98, 0.46);
+  border-radius: 0.35rem;
+  color: var(--services-coral);
+  background: rgba(13, 29, 44, 0.72);
+  box-shadow: 0 0 1.6rem rgba(255, 102, 82, 0.04);
+  opacity: 0.45;
+  transform: scale(0.94);
+  transition:
+    opacity 380ms 150ms var(--services-ease),
+    transform 420ms 150ms var(--services-ease),
+    border-color 200ms ease,
+    background 200ms ease;
 }
 
-.serviceCard:hover .cardIcon {
-  transform: rotate(0deg) translateY(-0.15rem);
+.serviceModule[data-service-variant="2"] .serviceIcon {
+  top: 2.95rem;
 }
 
-.cardIcon svg {
-  width: 1.55rem;
-  height: 1.55rem;
+.serviceModule[data-service-variant="3"] .serviceIcon {
+  top: 2.8rem;
 }
 
-.cardHeadingRow h4 {
+.serviceIcon svg {
+  width: 2.65rem;
+  height: 2.65rem;
+}
+
+.serviceCopy {
+  position: relative;
+  z-index: 3;
+}
+
+.serviceCopy h4 {
   margin: 0;
   color: #f8fafc;
-  font-size: clamp(1.35rem, 2vw, 1.75rem);
-  font-weight: 620;
+  font-size: 1.4rem;
+  font-weight: 640;
   letter-spacing: -0.035em;
   line-height: 1.12;
 }
 
-.cardDescription {
-  margin: 1.55rem 0 0;
+.serviceCopy p {
+  max-width: 39rem;
+  margin: 0.9rem 0 0;
   color: var(--services-muted);
-  font-size: 0.96rem;
-  line-height: 1.78;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  line-height: 1.52;
 }
 
-.bestFor {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.9rem;
-  align-items: start;
-  margin-top: 1.7rem;
-  padding: 1rem 0;
-  border-top: 1px solid rgba(148, 163, 184, 0.13);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.13);
-}
-
-.bestFor > span {
-  padding-top: 0.18rem;
-  color: var(--card-accent);
-  font-size: 0.54rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.bestFor p {
-  margin: 0;
-  color: rgba(226, 232, 240, 0.82);
-  font-size: 0.82rem;
-  line-height: 1.6;
-}
-
-.capabilityBlock {
-  margin-top: 1.45rem;
-}
-
-.capabilityLabel {
-  display: block;
-  color: rgba(164, 179, 196, 0.52);
-  font-size: 0.52rem;
-  font-weight: 760;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.capabilityList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.8rem;
-}
-
-.capability,
-.growthCapability {
-  display: inline-flex;
-  gap: 0.4rem;
-  align-items: center;
-  padding: 0.42rem 0.58rem;
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  color: rgba(226, 232, 240, 0.72);
-  background: rgba(15, 23, 42, 0.36);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.growthCapability {
-  border-style: dashed;
-  border-color: rgba(125, 211, 252, 0.24);
-  color: rgba(186, 230, 253, 0.78);
-}
-
-.growthCapability small {
-  color: var(--services-sky);
-  font-size: 0.46rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.cardCorner {
+.bestFit {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-right: 1px solid color-mix(in srgb, var(--card-accent) 40%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--card-accent) 40%, transparent);
-  opacity: 0.6;
-}
-
-.collaborationLayout {
+  right: 1.35rem;
+  bottom: 1.25rem;
+  left: 3rem;
+  z-index: 3;
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(19rem, 0.88fr);
-  gap: clamp(1.25rem, 3vw, 2rem);
-  margin-top: clamp(5rem, 8vw, 7.5rem);
+  min-height: 6.75rem;
+  grid-template-columns: 5.55rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(0, 216, 223, 0.54);
+  border-left-color: rgba(255, 123, 101, 0.7);
+  background: rgba(1, 18, 31, 0.42);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 450ms 230ms var(--services-ease),
+    transform 500ms 230ms var(--services-ease);
 }
 
-.collaborationPanel,
-.workflowPanel {
+.serviceModule[data-service-variant="2"] .bestFit {
+  min-height: 7rem;
+}
+
+.serviceModule[data-service-variant="3"] .bestFit {
+  min-height: 5.65rem;
+}
+
+.bestFit > span {
+  color: var(--services-coral);
+  font-size: 0.61rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.bestFit p {
+  margin: 0;
+  color: var(--services-muted);
+  font-size: 0.92rem;
+  line-height: 1.48;
+}
+
+.serviceIllustration {
+  grid-area: visual;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(0.95rem);
+  filter: drop-shadow(0 0 1.4rem rgba(0, 199, 215, 0.055));
+  transition:
+    opacity 600ms 80ms var(--services-ease),
+    transform 680ms 80ms var(--services-ease);
+  pointer-events: none;
+}
+
+.serviceModule[data-service-variant="2"] .serviceIllustration {
+  transform: translateX(-0.95rem);
+}
+
+.browserIllustration {
+  aspect-ratio: 214 / 171;
+}
+
+.integrationIllustration {
+  aspect-ratio: 228 / 172;
+}
+
+.dashboardIllustration {
+  aspect-ratio: 230 / 155;
+}
+
+.serviceIllustration svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.illustrationFrame {
+  fill: rgba(1, 24, 43, 0.52);
+  stroke: #24617a;
+  stroke-width: 1;
+}
+
+.illustrationRule {
+  fill: none;
+  stroke: #1b4c66;
+  stroke-width: 1;
+}
+
+.illustrationDotStrong,
+.illustrationDot {
+  fill: none;
+  stroke-width: 1;
+}
+
+.illustrationDotStrong {
+  stroke: #00e9ee;
+}
+
+.illustrationDot {
+  stroke: #58a7bf;
+}
+
+.illustrationBarDark {
+  fill: #0c3753;
+}
+
+.illustrationBarBright {
+  fill: #0e6580;
+}
+
+.illustrationNavBars,
+.illustrationContentBars,
+.illustrationTopBar,
+.illustrationDataBars {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.illustrationNavBars {
+  stroke: #0f6080;
+  stroke-width: 5;
+}
+
+.illustrationContentBars {
+  stroke: #0d5d7c;
+  stroke-width: 5;
+}
+
+.illustrationTopBar {
+  stroke: #0e3d58;
+  stroke-width: 5;
+}
+
+.illustrationDataBars {
+  stroke: #135b79;
+  stroke-width: 4;
+}
+
+.illustrationPane {
+  fill: rgba(6, 44, 70, 0.45);
+  stroke: #155f7c;
+  stroke-width: 1;
+}
+
+.illustrationMountain {
+  fill: #1474aa;
+  opacity: 0.92;
+}
+
+.integrationConnector {
+  fill: none;
+  stroke-width: 1.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 820ms 160ms var(--services-ease);
+}
+
+.integrationNode {
+  opacity: 0;
+  transform: scale(0.94);
+  transform-origin: center;
+  transition:
+    opacity 330ms var(--services-ease),
+    transform 360ms var(--services-ease);
+}
+
+.integrationNode:nth-of-type(2) {
+  transition-delay: 230ms;
+}
+
+.integrationNode:nth-of-type(3) {
+  transition-delay: 300ms;
+}
+
+.integrationNode:nth-of-type(4) {
+  transition-delay: 370ms;
+}
+
+.integrationNode:nth-of-type(5) {
+  transition-delay: 440ms;
+}
+
+.integrationNode rect {
+  fill: rgba(4, 33, 52, 0.8);
+  stroke: #1383a0;
+  stroke-width: 1;
+}
+
+.integrationNode path,
+.integrationNode ellipse {
+  fill: none;
+  stroke: #a8d9ef;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.integrationNodePrimary path {
+  fill: rgba(60, 180, 232, 0.88);
+  stroke: #a4e1f8;
+  stroke-width: 1;
+}
+
+.dashboardStatus {
+  fill: transparent;
+  stroke: var(--services-coral);
+  stroke-width: 1;
+}
+
+.dashboardStatusFill {
+  fill: var(--services-coral);
+}
+
+.dashboardTrend {
+  fill: none;
+  stroke: #00e4e7;
+  stroke-width: 1.4;
+}
+
+.dashboardRingBase,
+.dashboardRingValue {
+  fill: none;
+  stroke-width: 8;
+}
+
+.dashboardRingBase {
+  stroke: #103e58;
+}
+
+.dashboardRingValue {
+  stroke: #74c9e9;
+}
+
+.dashboardPointCool {
+  fill: #64c8ff;
+}
+
+.dashboardPointBright {
+  fill: #00dce2;
+}
+
+.serviceModule[data-services-visible="true"] .serviceCard,
+.serviceModule[data-services-visible="true"] .serviceIllustration {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.serviceModule[data-services-visible="true"] .warmTrace,
+.serviceModule[data-services-visible="true"] .coolTrace {
+  clip-path: inset(0);
+}
+
+.serviceModule[data-services-visible="true"] .serviceIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.serviceModule[data-services-visible="true"] .bestFit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.serviceModule[data-services-visible="true"] .integrationConnector {
+  stroke-dashoffset: 0;
+}
+
+.serviceModule[data-services-visible="true"] .integrationNode {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Collaboration */
+
+.collaborationSection {
+  margin-top: 6.4rem;
+}
+
+.sectionIntro {
+  max-width: 56rem;
+  margin: 0.85rem 0 0;
+  color: var(--services-muted);
+  font-size: 0.94rem;
+  line-height: 1.54;
+}
+
+.collaborationGrid {
+  display: grid;
+  grid-template-columns: 1.03fr 1fr 1fr;
+  gap: 1.15rem;
+  margin-top: 3.15rem;
+}
+
+.collaborationCard {
   position: relative;
   min-width: 0;
-  padding: clamp(1.5rem, 3vw, 2.3rem);
-  border-top: 1px solid rgba(255, 143, 120, 0.28);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-  background: rgba(4, 12, 23, 0.68);
+  min-height: 11.8rem;
+  padding: 2.35rem 1.1rem 1.2rem 9.55rem;
+  overflow: hidden;
+  border: 1px solid rgba(78, 145, 166, 0.28);
+  background:
+    radial-gradient(circle at 7% 10%, rgba(255, 124, 103, 0.11), transparent 38%),
+    rgba(3, 18, 32, 0.62);
   opacity: 0;
-  transform: translateY(1.5rem);
+  transform: translateY(0.75rem);
+  transition:
+    opacity 480ms var(--services-ease),
+    transform 520ms var(--services-ease),
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
-.workflowPanel {
-  border-top-color: rgba(94, 234, 212, 0.28);
+.collaborationCard::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 42%;
+  height: 62%;
+  border-top: 1px solid rgba(255, 124, 103, 0.72);
+  border-left: 1px solid rgba(255, 124, 103, 0.82);
+  content: "";
+  pointer-events: none;
 }
 
-.collaborationPanel[data-services-visible="true"],
-.workflowPanel[data-services-visible="true"] {
-  animation: services-rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+.collaborationCard:nth-child(2) {
+  transition-delay: 90ms;
 }
 
-.workflowPanel[data-services-visible="true"] {
-  animation-delay: 90ms;
+.collaborationCard:nth-child(3) {
+  transition-delay: 180ms;
 }
 
-.panelHeading {
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
-}
-
-.panelIcon {
-  display: grid;
-  width: 3rem;
-  height: 3rem;
-  place-items: center;
-  border: 1px solid rgba(255, 143, 120, 0.24);
+.collaborationNumber {
+  position: absolute;
+  top: 1.2rem;
+  left: 0.8rem;
+  z-index: 2;
   color: var(--services-coral);
-}
-
-.workflowPanel .panelIcon {
-  border-color: rgba(94, 234, 212, 0.24);
-  color: var(--services-mint);
-}
-
-.panelIcon svg {
-  width: 1.35rem;
-  height: 1.35rem;
-}
-
-.panelHeading h3 {
-  max-width: 18ch;
-  font-size: clamp(1.7rem, 3vw, 2.55rem);
-}
-
-.workflowPanel .panelHeading p {
-  color: var(--services-mint);
-}
-
-.panelDescription {
-  max-width: 60ch;
-  margin: 1.4rem 0 0;
-  color: rgba(164, 179, 196, 0.78);
-  font-size: 0.91rem;
-  line-height: 1.74;
-}
-
-.collaborationList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 1.8rem;
-  border-top: 1px solid rgba(148, 163, 184, 0.13);
-  border-left: 1px solid rgba(148, 163, 184, 0.13);
-}
-
-.collaborationItem {
-  display: grid;
-  grid-template-columns: 1.65rem minmax(0, 1fr);
-  gap: 0.8rem;
-  min-width: 0;
-  padding: 1.15rem;
-  border-right: 1px solid rgba(148, 163, 184, 0.13);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.13);
-  transition: background 200ms ease;
-}
-
-.collaborationItem:hover {
-  background: rgba(255, 143, 120, 0.045);
-}
-
-.collaborationItem > span {
-  color: rgba(255, 143, 120, 0.7);
-  font-size: 0.56rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
 }
 
-.collaborationItem h4,
-.workflowRail h4 {
-  margin: 0;
-  color: rgba(248, 250, 252, 0.94);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.collaborationItem h4 {
-  font-size: 0.88rem;
-  line-height: 1.3;
-}
-
-.collaborationItem p,
-.workflowRail p {
-  margin: 0.55rem 0 0;
-  color: rgba(164, 179, 196, 0.7);
-  line-height: 1.58;
-}
-
-.collaborationItem p {
-  font-size: 0.76rem;
-}
-
-.workflowRail {
-  position: relative;
+.collaborationIcon {
+  position: absolute;
+  top: 2rem;
+  left: 3.25rem;
+  z-index: 2;
   display: grid;
-  gap: 0;
-  margin: 1.8rem 0 0;
+  width: 5.15rem;
+  height: 5.2rem;
+  place-items: center;
+  border: 1px solid rgba(255, 116, 96, 0.42);
+  border-radius: 0.35rem;
+  color: var(--services-coral);
+  background: rgba(10, 28, 43, 0.62);
+}
+
+.collaborationIcon svg {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.collaborationCopy {
+  position: relative;
+  z-index: 2;
+}
+
+.collaborationCopy h4 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.1rem;
+  font-weight: 640;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.collaborationCopy p {
+  margin: 0.75rem 0 0;
+  color: var(--services-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.collaborationCorner {
+  position: absolute;
+  right: -0.08rem;
+  bottom: -0.08rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-right: 1px solid var(--services-cyan-bright);
+  border-bottom: 1px solid var(--services-cyan-bright);
+  pointer-events: none;
+}
+
+.collaborationSection[data-services-visible="true"] .collaborationCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delivery */
+
+.deliverySection {
+  margin-top: 5rem;
+}
+
+.deliveryTrack {
+  display: flex;
+  width: 100%;
+  margin: 3rem 0 0;
   padding: 0;
+  isolation: isolate;
   list-style: none;
 }
 
-.workflowRail::before {
+.deliveryStep {
+  position: relative;
+  width: 25.9%;
+  min-height: 13.7rem;
+  margin-left: -0.85rem;
+  padding: 1.8rem 2.45rem 1.35rem 2.7rem;
+  clip-path: polygon(0 0, 86% 0, 100% 50%, 86% 100%, 0 100%, 13% 50%);
+  background: rgba(0, 216, 225, 0.64);
+  opacity: 0;
+  transform: translateX(-0.55rem);
+  transition:
+    opacity 430ms var(--services-ease),
+    transform 480ms var(--services-ease);
+}
+
+.deliveryStep:first-child {
+  margin-left: 0;
+  padding-left: 1.2rem;
+  clip-path: polygon(0 0, 86% 0, 100% 50%, 86% 100%, 0 100%);
+}
+
+.deliveryStep::before {
   position: absolute;
-  top: 1.15rem;
-  bottom: 1.15rem;
-  left: 1.15rem;
-  width: 1px;
-  background: linear-gradient(
-    180deg,
-    var(--services-mint),
-    rgba(125, 211, 252, 0.35),
-    rgba(255, 209, 138, 0.16)
-  );
+  inset: 1px;
+  z-index: 0;
+  clip-path: inherit;
+  background: linear-gradient(105deg, rgba(2, 27, 45, 0.97), rgba(1, 21, 38, 0.95));
   content: "";
 }
 
-.workflowRail li {
-  position: relative;
-  display: grid;
-  grid-template-columns: 2.3rem minmax(0, 1fr);
-  gap: 1rem;
-  padding: 0 0 1.45rem;
+.deliveryStep:nth-child(2) {
+  transition-delay: 105ms;
 }
 
-.workflowRail li:last-child {
-  padding-bottom: 0;
+.deliveryStep:nth-child(3) {
+  transition-delay: 210ms;
 }
 
-.workflowNode {
+.deliveryStep:nth-child(4) {
+  transition-delay: 315ms;
+}
+
+.deliveryHeader,
+.deliveryStep > p {
   position: relative;
   z-index: 1;
-  display: grid;
-  width: 2.3rem;
-  height: 2.3rem;
-  place-items: center;
-  border: 1px solid rgba(94, 234, 212, 0.28);
-  background: #07111f;
-  transform: rotate(45deg);
 }
 
-.workflowNode span {
-  color: var(--services-mint);
-  font-size: 0.52rem;
+.deliveryHeader {
+  display: grid;
+  grid-template-columns: 1.6rem 1.85rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.deliveryHeader > span {
+  color: var(--services-cyan-bright);
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  transform: rotate(-45deg);
 }
 
-.workflowNode i {
-  position: absolute;
-  inset: 0.35rem;
-  border: 1px solid rgba(94, 234, 212, 0.07);
+.deliveryHeader svg {
+  width: 1.65rem;
+  height: 1.65rem;
+  color: var(--services-cyan-bright);
 }
 
-.workflowRail h4 {
-  padding-top: 0.12rem;
-  font-size: 0.95rem;
+.deliveryHeader h4 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.08rem;
+  font-weight: 610;
+  letter-spacing: -0.015em;
 }
 
-.workflowRail p {
-  font-size: 0.78rem;
+.deliveryStep > p {
+  margin: 1.15rem 0 0;
+  color: var(--services-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
+
+.deliverySection[data-services-visible="true"] .deliveryStep {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Handoff / section end */
 
 .contactHandoff {
   position: relative;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
+  min-height: 12.65rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
   align-items: center;
-  margin-top: clamp(4rem, 7vw, 6rem);
-  padding: clamp(1.5rem, 3.5vw, 2.6rem);
-  border: 1px solid rgba(148, 163, 184, 0.17);
+  margin-top: 11.6rem;
+  padding: 3.8rem 1.75rem 1.5rem 7.75rem;
+  overflow: visible;
+  border: 1px solid rgba(78, 145, 166, 0.35);
   background:
-    linear-gradient(100deg, rgba(255, 143, 120, 0.08), transparent 34%),
-    rgba(4, 12, 23, 0.78);
+    radial-gradient(circle at 3% 15%, rgba(255, 124, 103, 0.13), transparent 26%),
+    linear-gradient(105deg, rgba(4, 20, 35, 0.8), rgba(2, 14, 28, 0.66));
   opacity: 0;
-  transform: translateY(1.5rem);
+  transform: translateY(0.85rem);
+  transition:
+    opacity 600ms var(--services-ease),
+    transform 650ms var(--services-ease);
 }
 
-.contactHandoff::before {
+.handoffWarmTrace,
+.handoffCoolTrace {
   position: absolute;
+  pointer-events: none;
+}
+
+.handoffWarmTrace {
   top: -1px;
-  left: clamp(1.5rem, 3.5vw, 2.6rem);
-  width: clamp(5rem, 12vw, 9rem);
-  height: 2px;
-  background: linear-gradient(90deg, var(--services-coral), var(--services-sky));
-  content: "";
+  left: -1px;
+  width: 24%;
+  height: 72%;
+  border-top: 1px solid rgba(255, 124, 103, 0.9);
+  border-left: 1px solid rgba(255, 124, 103, 0.9);
 }
 
-.contactHandoff[data-services-visible="true"] {
-  animation: services-rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+.handoffCoolTrace {
+  right: -1px;
+  bottom: -1px;
+  width: 42%;
+  height: 68%;
+  border-right: 1px solid rgba(0, 231, 233, 0.88);
+  border-bottom: 1px solid rgba(0, 231, 233, 0.6);
 }
 
-.handoffMarker {
-  display: grid;
-  width: 4rem;
-  height: 4rem;
-  place-items: center;
-  border: 1px solid rgba(255, 143, 120, 0.3);
+.handoffLabel {
+  position: absolute;
+  top: 1rem;
+  left: 1.55rem;
   color: var(--services-coral);
-}
-
-.handoffMarker span {
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
 }
 
-.handoffMarker i {
-  width: 1.4rem;
-  height: 1px;
-  background: rgba(255, 143, 120, 0.5);
+.handoffIcon {
+  position: absolute;
+  top: 3.45rem;
+  left: 1.55rem;
+  display: grid;
+  width: 5.25rem;
+  height: 5.25rem;
+  place-items: center;
+  border: 1px solid rgba(255, 119, 98, 0.48);
+  border-radius: 0.35rem;
+  color: var(--services-coral);
+  background: rgba(13, 30, 44, 0.7);
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 380ms 100ms var(--services-ease),
+    transform 420ms 100ms var(--services-ease);
 }
 
-.handoffMarker svg {
-  width: 1.1rem;
-  height: 1.1rem;
+.handoffIcon svg {
+  width: 2.9rem;
+  height: 2.9rem;
 }
 
 .handoffCopy {
   min-width: 0;
+  opacity: 0;
+  transform: translateY(0.45rem);
+  transition:
+    opacity 460ms 150ms var(--services-ease),
+    transform 500ms 150ms var(--services-ease);
 }
 
 .handoffCopy h3 {
-  max-width: 25ch;
-  font-size: clamp(1.55rem, 3vw, 2.5rem);
+  max-width: 39rem;
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.9rem;
+  font-weight: 560;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
-.handoffCopy > span {
-  display: block;
-  max-width: 62ch;
-  margin-top: 0.85rem;
-  color: rgba(164, 179, 196, 0.76);
-  font-size: 0.86rem;
-  line-height: 1.68;
+.handoffCopy p {
+  max-width: 48rem;
+  margin: 0.8rem 0 0;
+  color: var(--services-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .contactAction {
   display: inline-flex;
-  min-height: 3.35rem;
-  gap: 0.9rem;
+  width: 15.9rem;
+  min-height: 3.85rem;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
-  padding: 0.82rem 1.15rem 0.82rem 1.35rem;
-  border: 1px solid rgba(255, 143, 120, 0.52);
+  justify-content: space-between;
+  padding: 0 1.45rem;
+  border: 1px solid rgba(255, 123, 100, 0.84);
+  border-radius: 0.35rem;
   color: #fff8f5;
-  background: rgba(255, 143, 120, 0.09);
-  font-size: 0.82rem;
-  font-weight: 720;
-  letter-spacing: 0.01em;
+  background: rgba(52, 26, 30, 0.18);
+  font-size: 0.92rem;
+  font-weight: 610;
+  opacity: 0;
+  transform: translateY(0.35rem);
   transition:
-    border-color 200ms ease,
-    background 200ms ease,
-    color 200ms ease,
-    transform 200ms ease;
+    opacity 420ms 230ms var(--services-ease),
+    transform 420ms 230ms var(--services-ease),
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
 .contactAction svg {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.4rem;
+  height: 1.4rem;
   color: var(--services-coral);
-  transition: transform 200ms ease;
+  transition: transform 180ms ease;
 }
 
-.contactAction:hover {
-  border-color: rgba(125, 211, 252, 0.58);
-  color: #ffffff;
-  background: rgba(125, 211, 252, 0.08);
-  transform: translateY(-0.15rem);
-}
-
-.contactAction:hover svg {
-  color: var(--services-sky);
-  transform: translateX(0.22rem);
-}
-
+.contactAction:hover,
 .contactAction:focus-visible {
-  outline: 2px solid var(--services-sky);
-  outline-offset: 4px;
+  border-color: rgba(0, 225, 230, 0.72);
+  background: rgba(0, 211, 220, 0.075);
 }
 
-@keyframes services-rise {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.contactAction:hover svg,
+.contactAction:focus-visible svg {
+  transform: translateX(0.2rem);
 }
 
-@keyframes services-card-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(1.6rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.contactHandoff[data-services-visible="true"],
+.contactHandoff[data-services-visible="true"] .handoffIcon,
+.contactHandoff[data-services-visible="true"] .handoffCopy,
+.contactHandoff[data-services-visible="true"] .contactAction {
+  opacity: 1;
+  transform: none;
 }
 
-@media (max-width: 1100px) {
-  .sectionHeader {
-    grid-template-columns: 6.5rem minmax(0, 1fr);
-    gap: 2.5rem;
-  }
-
-  .phaseMark {
-    min-height: 17rem;
-  }
-
-  .collaborationLayout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .workflowPanel {
-    display: grid;
-    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-    gap: 1.5rem 2.5rem;
-  }
-
-  .workflowPanel .panelHeading,
-  .workflowPanel .panelDescription {
-    grid-column: 1;
-  }
-
-  .workflowPanel .workflowRail {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    margin-top: 0;
-  }
-
-  .contactHandoff {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .contactAction {
-    grid-column: 2;
-    justify-self: start;
-  }
+.sectionEnd {
+  display: flex;
+  width: min(30rem, 100%);
+  gap: 1.3rem;
+  align-items: center;
+  justify-content: center;
+  margin: 5.6rem auto 0;
 }
 
-@media (max-width: 820px) {
+.sectionEnd i {
+  width: 5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 88, 0.78));
+}
+
+.sectionEnd i:last-child {
+  transform: scaleX(-1);
+}
+
+.sectionEnd span {
+  color: rgba(136, 157, 174, 0.72);
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+/* Laptop */
+
+@media (max-width: 1088px) {
   .section {
-    padding-inline: clamp(1rem, 4vw, 2rem);
+    padding-inline: clamp(1.25rem, 3.5vw, 2.25rem);
   }
 
   .sectionHeader {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: 11.3rem minmax(0, 1fr);
+    gap: 2.2rem;
+    min-height: 27rem;
   }
 
   .phaseMark {
-    position: relative;
-    top: auto;
-    display: flex;
-    min-height: 0;
-    gap: 0.8rem;
-    align-items: center;
-    padding: 0 0 0.8rem;
-    border-left: 0;
-    border-bottom: 1px solid rgba(255, 143, 120, 0.22);
-  }
-
-  .phaseMark::before,
-  .phaseMark::after {
-    display: none;
-  }
-
-  .phaseMark span,
-  .phaseMark small {
-    line-height: 1;
+    min-height: 25.6rem;
   }
 
   .phaseMark strong {
-    margin: 0;
-    font-size: 3.1rem;
+    font-size: 6rem;
   }
 
-  .phaseMark i {
-    width: 2.5rem;
-    margin: 0;
-  }
-
-  .phaseMark small {
-    max-width: none;
-  }
-
-  .subsectionHeader {
-    grid-template-columns: 1fr;
-    gap: 1.15rem;
-  }
-
-  .servicesGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .serviceCard {
-    min-height: 0;
-  }
-
-  .collaborationList {
-    grid-template-columns: 1fr;
-  }
-
-  .workflowPanel {
-    display: block;
-  }
-
-  .workflowPanel .workflowRail {
-    margin-top: 1.8rem;
-  }
-}
-
-@media (max-width: 620px) {
-  .section {
-    padding-top: 6.5rem;
-    padding-bottom: 6.5rem;
-  }
-
-  .headerMeta {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .headerMeta i {
-    width: 3rem;
+  .railMarkerMid {
+    top: 19.8rem;
   }
 
   .headerCopy h2 {
-    max-width: 14ch;
-    font-size: clamp(2.65rem, 14vw, 4.3rem);
+    max-width: 40rem;
+    font-size: clamp(3.35rem, 5.6vw, 4.05rem);
+  }
+
+  .headerCopy > p {
+    font-size: 0.96rem;
+  }
+
+  .headerSignals {
+    flex-wrap: wrap;
+  }
+
+  .headerSignals > span,
+  .headerSignals > span:nth-child(2),
+  .headerSignals > span:nth-child(3),
+  .headerSignals > span:nth-child(4) {
+    min-width: 9.6rem;
+  }
+
+  .servicesBlock {
+    margin-top: 5.5rem;
+  }
+
+  .serviceCopy h4 {
+    font-size: 1.15rem;
+  }
+
+  .serviceCopy p {
+    font-size: 0.9rem;
+  }
+
+  .bestFit p {
+    font-size: 0.875rem;
+  }
+
+  .collaborationCard {
+    min-height: 12rem;
+    padding-left: 8.5rem;
+  }
+
+  .collaborationIcon {
+    left: 2.75rem;
+    width: 4.7rem;
+    height: 4.7rem;
+  }
+
+  .collaborationCopy h4 {
+    font-size: 1rem;
+  }
+
+  .collaborationCopy p,
+  .deliveryStep > p {
+    font-size: 0.875rem;
+  }
+
+  .deliveryStep {
+    min-height: 13.6rem;
+    padding-right: 2rem;
+  }
+
+  .handoffCopy h3 {
+    font-size: 1.65rem;
+  }
+
+  .contactAction {
+    width: 14.2rem;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 895px) {
+  .sectionHeader {
+    grid-template-columns: 9.25rem minmax(0, 1fr);
+    gap: 1.8rem;
+    min-height: 24rem;
+  }
+
+  .phaseMark {
+    min-height: 22.5rem;
+  }
+
+  .phaseMark::after {
+    left: 4rem;
+  }
+
+  .phaseMark strong {
+    left: 1.75rem;
+    font-size: 5rem;
+  }
+
+  .phaseRule {
+    top: 11rem;
+    width: 5.8rem;
+  }
+
+  .phaseMark small {
+    top: 13rem;
+  }
+
+  .railMarkerMid {
+    top: 17.2rem;
+  }
+
+  .headerCopy h2 {
+    font-size: clamp(3rem, 6.6vw, 3.55rem);
   }
 
   .headerSignals {
@@ -1019,96 +1408,530 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .cardHeadingRow {
-    grid-template-columns: 3.2rem minmax(0, 1fr);
+  .headerSignals > span,
+  .headerSignals > span:nth-child(2),
+  .headerSignals > span:nth-child(3),
+  .headerSignals > span:nth-child(4) {
+    width: 100%;
+    min-width: 0;
   }
 
-  .cardIcon {
+  .serviceModule[data-service-variant="1"] {
+    grid-template-columns: 64% 31%;
+  }
+
+  .serviceModule[data-service-variant="2"] {
+    grid-template-columns: 31% 64%;
+  }
+
+  .serviceModule[data-service-variant="3"] {
+    grid-template-columns: 64% 31%;
+  }
+
+  .serviceCard,
+  .serviceModule[data-service-variant="2"] .serviceCard,
+  .serviceModule[data-service-variant="3"] .serviceCard {
+    min-height: 0;
+    padding: 6.8rem 1.25rem 1.35rem;
+  }
+
+  .serviceNumber {
+    top: 1rem;
+  }
+
+  .serviceIcon,
+  .serviceModule[data-service-variant="2"] .serviceIcon,
+  .serviceModule[data-service-variant="3"] .serviceIcon {
+    top: 1.65rem;
+    left: 3rem;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .serviceIcon svg {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .bestFit,
+  .serviceModule[data-service-variant="2"] .bestFit,
+  .serviceModule[data-service-variant="3"] .bestFit {
+    position: relative;
+    inset: auto;
+    min-height: 0;
+    margin-top: 1.25rem;
+  }
+
+  .collaborationGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .collaborationCard:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .deliveryTrack {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .deliveryStep,
+  .deliveryStep:first-child {
+    width: auto;
+    min-height: 11rem;
+    margin: 0;
+    padding: 1.5rem 2rem 1.35rem 1.35rem;
+    clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 50%, calc(100% - 1.5rem) 100%, 0 100%);
+  }
+
+  .contactHandoff {
+    grid-template-columns: minmax(0, 1fr) 13rem;
+    padding-left: 7rem;
+  }
+
+  .contactAction {
+    width: 13rem;
+    padding-inline: 1rem;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .section {
+    scroll-margin-top: 6.5rem;
+    padding: 6rem clamp(1rem, 4.5vw, 1.5rem) 4.5rem;
+  }
+
+  .sectionHeader {
+    display: block;
+    min-height: 0;
+  }
+
+  .phaseMark {
+    min-height: 7.6rem;
+    border-bottom: 1px solid rgba(0, 135, 161, 0.25);
+  }
+
+  .phaseMark::after {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 4rem;
+  }
+
+  .phaseLabel {
+    top: 0.8rem;
+    left: 1rem;
+  }
+
+  .phaseMark strong {
+    top: 1.75rem;
+    left: 1.35rem;
+    font-size: 4.5rem;
+  }
+
+  .phaseRule {
+    top: 6.35rem;
+    left: 1rem;
+    width: 5.4rem;
+  }
+
+  .phaseMark small {
+    top: 2rem;
+    left: 7.9rem;
+  }
+
+  .railMarkerMid {
+    top: 7.25rem;
+  }
+
+  .headerCopy {
+    padding-top: 2.2rem;
+  }
+
+  .headerMeta {
+    gap: 1.4rem;
+    font-size: 0.62rem;
+  }
+
+  .headerCopy h2 {
+    max-width: 13ch;
+    margin-top: 1.35rem;
+    font-size: clamp(2.85rem, 8.4vw, 3.55rem);
+  }
+
+  .headerCopy > p {
+    max-width: 60ch;
+    font-size: 0.95rem;
+  }
+
+  .headerSignals {
+    margin-top: 1.5rem;
+  }
+
+  .servicesBlock {
+    margin-top: 5rem;
+  }
+
+  .subsectionHeader h3,
+  .collaborationSection > h3,
+  .deliverySection > h3 {
+    font-size: clamp(1.9rem, 6vw, 2.35rem);
+  }
+
+  .serviceModules {
+    margin-top: 2.7rem;
+  }
+
+  .serviceModule,
+  .serviceModule[data-service-variant="1"],
+  .serviceModule[data-service-variant="2"],
+  .serviceModule[data-service-variant="3"] {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 2.1rem;
+    margin-top: 0;
+  }
+
+  .serviceModule + .serviceModule,
+  .serviceModule[data-service-variant="2"],
+  .serviceModule[data-service-variant="3"] {
+    margin-top: 4.75rem;
+  }
+
+  .serviceCard,
+  .serviceModule[data-service-variant="2"] .serviceCard,
+  .serviceModule[data-service-variant="3"] .serviceCard {
+    width: 100%;
+    padding: 6.7rem 1.2rem 1.25rem;
+  }
+
+  .serviceCopy h4 {
+    font-size: 1.08rem;
+  }
+
+  .serviceCopy p {
+    font-size: 0.88rem;
+  }
+
+  .serviceIllustration {
+    width: min(82%, 24rem);
+    align-self: center;
+  }
+
+  .bestFit {
+    grid-template-columns: 5rem minmax(0, 1fr);
+    padding: 0.8rem 0.9rem;
+  }
+
+  .collaborationSection {
+    margin-top: 5.25rem;
+  }
+
+  .collaborationGrid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-top: 2.5rem;
+  }
+
+  .collaborationCard:last-child {
+    grid-column: auto;
+  }
+
+  .collaborationCard {
+    min-height: 10.5rem;
+  }
+
+  .deliverySection {
+    margin-top: 4.75rem;
+  }
+
+  .contactHandoff {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+    margin-top: 6.5rem;
+    padding: 7.2rem 1.25rem 1.35rem;
+  }
+
+  .handoffIcon {
+    top: 2.6rem;
+    left: 1.25rem;
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+
+  .handoffIcon svg {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .handoffLabel {
+    left: 1.25rem;
+  }
+
+  .handoffCopy h3 {
+    max-width: 28rem;
+    font-size: 1.55rem;
+  }
+
+  .contactAction {
+    width: 100%;
+  }
+
+  .sectionEnd {
+    margin-top: 4.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .headerCopy h2 br {
+    display: none;
+  }
+
+  .headerCopy h2 {
+    max-width: 12ch;
+    font-size: clamp(2.6rem, 11.4vw, 3.25rem);
+    line-height: 0.98;
+  }
+
+  .headerMeta {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .headerSignals {
+    gap: 0.7rem;
+  }
+
+  .headerSignals > span {
+    height: 3rem;
+    padding-inline: 0.9rem;
+  }
+
+  .sectionKicker {
+    font-size: 0.61rem;
+  }
+
+  .kickerWarmLine {
     width: 3.2rem;
-    height: 3.2rem;
+    margin-left: 0.8rem;
   }
 
-  .bestFor {
+  .bestFit {
     grid-template-columns: 1fr;
     gap: 0.45rem;
   }
 
-  .panelHeading {
-    grid-template-columns: 2.7rem minmax(0, 1fr);
+  .collaborationCard {
+    padding-left: 8.2rem;
   }
 
-  .panelIcon {
-    width: 2.7rem;
-    height: 2.7rem;
+  .collaborationIcon {
+    left: 2.55rem;
+    width: 4.5rem;
+    height: 4.5rem;
   }
 
-  .contactHandoff {
+  .deliveryTrack {
     grid-template-columns: 1fr;
+    gap: 0.7rem;
   }
 
-  .handoffMarker {
-    width: 3.5rem;
-    height: 3.5rem;
+  .deliveryStep,
+  .deliveryStep:first-child {
+    min-height: 9.6rem;
+    padding: 1.35rem 2.1rem 1.25rem 1.2rem;
   }
 
-  .contactAction {
-    grid-column: 1;
-    width: 100%;
-    justify-self: stretch;
+  .deliveryStep > p {
+    margin-top: 0.85rem;
+    font-size: 0.875rem;
+  }
+
+  .sectionEnd {
+    gap: 0.9rem;
+  }
+
+  .sectionEnd i {
+    width: 3.2rem;
   }
 }
 
 @media (max-width: 420px) {
+  .section {
+    padding-inline: 0.95rem;
+  }
+
   .phaseMark small {
-    display: none;
+    left: 7.2rem;
+    font-size: 0.46rem;
+  }
+
+  .headerSignals {
+    grid-template-columns: 1fr;
+  }
+
+  .headerSignals > span {
+    min-height: 3.1rem;
   }
 
   .serviceCard,
-  .collaborationPanel,
-  .workflowPanel,
-  .contactHandoff {
-    padding: 1.25rem;
+  .serviceModule[data-service-variant="2"] .serviceCard,
+  .serviceModule[data-service-variant="3"] .serviceCard {
+    padding-top: 6.35rem;
   }
 
-  .collaborationItem {
-    padding: 1rem;
+  .serviceIcon,
+  .serviceModule[data-service-variant="2"] .serviceIcon,
+  .serviceModule[data-service-variant="3"] .serviceIcon {
+    left: 2.65rem;
+    width: 4.2rem;
+    height: 4.2rem;
   }
 
-  .capability,
-  .growthCapability {
-    font-size: 0.54rem;
+  .collaborationCard {
+    min-height: 0;
+    padding: 6.9rem 1rem 1.2rem;
+  }
+
+  .collaborationIcon {
+    top: 1.75rem;
+    left: 2.7rem;
+  }
+
+  .sectionEnd span {
+    font-size: 0.48rem;
   }
 }
 
-@media (hover: none) {
-  .serviceCard:hover,
-  .contactAction:hover {
-    transform: none;
+@media (hover: hover) and (pointer: fine) {
+  .serviceCard:hover {
+    border-color: rgba(75, 181, 199, 0.44);
+    background:
+      radial-gradient(circle at 5% 8%, rgba(255, 124, 103, 0.17), transparent 38%),
+      linear-gradient(108deg, rgba(5, 23, 40, 0.86), rgba(2, 15, 29, 0.7));
   }
 
-  .serviceCard:hover .cardIcon {
-    transform: rotate(-4deg);
+  .serviceCard:hover .serviceIcon {
+    border-color: rgba(255, 135, 116, 0.58);
+    background: rgba(16, 32, 47, 0.8);
+  }
+
+  .collaborationCard:hover {
+    border-color: rgba(75, 181, 199, 0.38);
+    background:
+      radial-gradient(circle at 7% 10%, rgba(255, 124, 103, 0.125), transparent 40%),
+      rgba(3, 19, 34, 0.68);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sectionHeader,
+  .phaseMark,
+  .headerMeta,
+  .headerCopy h2,
+  .headerCopy > p,
+  .headerSignals,
   .subsectionHeader,
+  .collaborationSection > .sectionKicker,
+  .collaborationSection > h3,
+  .collaborationSection > .sectionIntro,
+  .deliverySection > .sectionKicker,
+  .deliverySection > h3,
   .serviceCard,
-  .collaborationPanel,
-  .workflowPanel,
-  .contactHandoff {
-    opacity: 1;
-    transform: none;
-    animation: none !important;
+  .serviceIllustration,
+  .serviceIcon,
+  .bestFit,
+  .integrationNode,
+  .collaborationCard,
+  .deliveryStep,
+  .contactHandoff,
+  .handoffIcon,
+  .handoffCopy,
+  .contactAction {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .phaseMark::after {
+    transform: scaleY(1);
+    transition: none;
+  }
+
+  .warmTrace,
+  .coolTrace {
+    clip-path: inset(0);
+    transition: none;
+  }
+
+  .integrationConnector {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .contactAction svg {
+    transition: none;
+  }
+}
+
+@media print {
+  .section {
+    padding: 2rem 0;
+    color: #111827;
+  }
+
+  .phaseMark,
+  .serviceIllustration,
+  .sectionEnd,
+  .kickerWarmLine,
+  .kickerCoolLine {
+    display: none;
+  }
+
+  .sectionHeader {
+    display: block;
+    min-height: 0;
+  }
+
+  .headerCopy h2,
+  .subsectionHeader h3,
+  .collaborationSection > h3,
+  .deliverySection > h3,
+  .handoffCopy h3,
+  .serviceCopy h4,
+  .collaborationCopy h4,
+  .deliveryHeader h4 {
+    color: #111827 !important;
+  }
+
+  .headerCopy > p,
+  .serviceCopy p,
+  .bestFit p,
+  .sectionIntro,
+  .collaborationCopy p,
+  .deliveryStep > p,
+  .handoffCopy p {
+    color: #374151 !important;
+  }
+
+  .serviceModule,
+  .collaborationGrid,
+  .deliveryTrack {
+    display: block;
   }
 
   .serviceCard,
-  .serviceCard::before,
-  .serviceCard::after,
-  .cardIcon,
-  .contactAction,
-  .contactAction svg {
-    transition: none;
+  .collaborationCard,
+  .deliveryStep,
+  .contactHandoff {
+    break-inside: avoid;
+    margin: 1rem 0;
+    border: 1px solid #d1d5db;
+    background: #ffffff !important;
+    opacity: 1;
+    transform: none;
   }
 }

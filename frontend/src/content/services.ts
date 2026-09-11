@@ -20,8 +20,7 @@ export const servicesContent = {
         "Developing new interfaces or improving existing ones with attention to structure, responsive behavior, reusable components, interaction, and overall usability.",
       bestFor:
         "Product interfaces, responsive websites, dashboards, portfolio and business websites, UI implementation, frontend refinement, and existing interface fixes.",
-      icon: "frontend",
-      accent: "coral",
+      icon: "interface",
       capabilities: [
         { label: "HTML5" },
         { label: "CSS3" },
@@ -38,9 +37,8 @@ export const servicesContent = {
       description:
         "Implementing practical application flows that move beyond the interface itself, including forms, validation, authentication-aware behavior, API communication, persistent data, and feature-level integration.",
       bestFor:
-        "CRUD workflows, authenticated features, API-connected interfaces, application extensions, forms, data-driven features, and end-to-end feature implementation.",
-      icon: "react",
-      accent: "sky",
+        "CRUD workflows, authentication features, API-connected interfaces, application extensions, forms, data-driven features, and end-to-end feature implementation.",
+      icon: "integration",
       capabilities: [
         { label: "React" },
         { label: "Next.js" },
@@ -57,9 +55,8 @@ export const servicesContent = {
       description:
         "Building interfaces for workflows involving users, roles, records, status changes, operational data, and day-to-day management tasks.",
       bestFor:
-        "Admin panels, internal tools, academic systems, small-business applications, management systems, and data-centered dashboards.",
-      icon: "api",
-      accent: "mint",
+        "Admin panels, internal tools, academic systems, small business applications, management systems, and data-centered dashboards.",
+      icon: "analytics",
       capabilities: [
         { label: "REST APIs" },
         { label: "Node.js" },
@@ -76,7 +73,7 @@ export const servicesContent = {
     //   description:
     //     "Building practical dashboards and management interfaces that organize users, records, roles, workflows, and operational data into clearer day-to-day software experiences.",
     //   bestFor:
-    //     "Admin panels, academic systems, internal tools, small-business applications, and structured data-management workflows.",
+    //     "Admin panels, academic systems, internal tools, small business applications, and structured data-management workflows.",
     //   icon: "dashboard",
     //   accent: "amber",
     //   capabilities: [
@@ -93,22 +90,25 @@ export const servicesContent = {
   collaborationLabel: "COLLABORATION FIT",
   collaborationHeading: "Where I can contribute most effectively.",
   collaborationDescription:
-    "I work best when the goal is concrete, responsibilities are clear, and I work best when the goal is concrete, responsibilities are clear, and progress can be reviewed through practical implementation and iterative feedback.",
+    "I work best when the goal is concrete, responsibilities are clear, and progress can be reviewed through practical implementation and iterative feedback.",
   collaborationTypes: [
     {
       title: "Project-based development",
       description:
         "A defined interface, feature, integration, or application improvement with a clear expected outcome.",
+      icon: "collaboration",
     },
     {
       title: "Team contribution",
       description:
         "Focused frontend, backend integration, database, or feature work inside an existing development workflow and codebase.",
+      icon: "team",
     },
     {
       title: "Early-stage products",
       description:
         "Turning a defined idea or workflow into a usable first version that can be tested, reviewed, and developed further.",
+      icon: "launch",
     },
     // {
     //   title: "Academic prototypes & student collaboration",
@@ -137,24 +137,28 @@ export const servicesContent = {
       title: "Define",
       description:
         "Confirm the problem, expected outcome, important constraints, and the scope that needs to be implemented.",
+      icon: "define",
     },
     {
       index: "02",
       title: "Implement",
       description:
         "Build the agreed interface, feature, integration, or workflow with clear and maintainable structure.",
+      icon: "implement",
     },
     {
       index: "03",
       title: "Review",
       description:
         "Check behavior, responsiveness, edge cases, data flow, and alignment with the original requirement.",
+      icon: "review",
     },
     {
       index: "04",
       title: "Handoff",
       description:
         "Refine the finished work and leave the implementation in a clear state for continued development.",
+      icon: "handoff",
     },
   ],
 
