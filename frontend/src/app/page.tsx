@@ -17,8 +17,8 @@ export default function HomePage() {
       {/* <ExpertiseSection /> */}
       <SkillsSection />
       <FeaturedProjectsSection />
-      <EducationSection />
-      <GitHubSection />
+      {/* <EducationSection />
+      <GitHubSection /> */}
       <ServicesSection />
       <ProfessionalProfileSection />
       <ContactSection />

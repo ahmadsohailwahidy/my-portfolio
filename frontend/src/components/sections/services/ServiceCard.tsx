@@ -33,10 +33,10 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
       <p className={styles.cardDescription}>{service.description}</p>
 
       <div className={styles.bestFor}>
-        <span>Best for</span>
+        <span>Best fit</span>
         <p>{service.bestFor}</p>
       </div>
-
+{/* 
       <div className={styles.capabilityBlock}>
         <span className={styles.capabilityLabel}>Capabilities</span>
         <div className={styles.capabilityList}>
@@ -54,7 +54,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
             </span>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <span className={styles.cardCorner} aria-hidden="true" />
     </article>

@@ -18,8 +18,8 @@ export function ServicesSection() {
       <div className={styles.container}>
         <header className={styles.sectionHeader} data-services-reveal>
           <div className={styles.phaseMark} aria-hidden="true">
-            <span>PHASE</span>
-            <strong>08</strong>
+            <span>SERVICES</span>
+            <strong>04</strong>
             <i />
             <small>SERVICE BLUEPRINT</small>
           </div>
@@ -54,7 +54,7 @@ export function ServicesSection() {
                 {servicesContent.servicesHeading}
               </h3>
             </div>
-            <p>{servicesContent.servicesDescription}</p>
+            {/* <p>{servicesContent.servicesDescription}</p> */}
           </div>
 
           <div className={styles.servicesGrid}>
@@ -114,9 +114,9 @@ export function ServicesSection() {
               </div>
             </div>
 
-            <p className={styles.panelDescription}>
+            {/* <p className={styles.panelDescription}>
               {servicesContent.workflowDescription}
-            </p>
+            </p> */}
 
             <ol className={styles.workflowRail}>
               {servicesContent.workflow.map((step) => (
@@ -137,7 +137,7 @@ export function ServicesSection() {
 
         <aside className={styles.contactHandoff} data-services-reveal>
           <div className={styles.handoffMarker} aria-hidden="true">
-            <span>08</span>
+            <span>04</span>
             <i />
             <ServicesIcon name="check" />
           </div>

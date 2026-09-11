@@ -1,25 +1,25 @@
 import type { ServicesContentData } from "@/types/services";
 
 export const servicesContent = {
-  label: "SERVICES / 08",
-  meta: "PRACTICAL BUILD & COLLABORATION",
-  heading: "Practical development support, from interface to working system.",
+  label: "SERVICES / 04",
+  meta: "SERVICES & COLLABORATION",
+  heading: "Development support focused on clear, useful outcomes.",
   introduction:
-    "I can help turn clear requirements into responsive interfaces, React and Next.js applications, connected API workflows, and structured management tools. The focus is practical implementation grounded in the systems and technologies already demonstrated across this portfolio.",
+    "I contribute to focused web and software projects where the requirements are defined and the result needs to be functional, maintainable, and ready to move forward. My strongest fit is implementing or improving interfaces, application features, integrations, and structured workflows.",
 
-  servicesLabel: "WHAT I CAN HELP BUILD",
-  servicesHeading: "Focused services for useful, maintainable web products.",
+  servicesLabel: "WHAT I CAN HELP WITH",
+  servicesHeading: "Practical development work across three focused areas.",
   servicesDescription:
     "Four areas where my current project experience is strongest, presented as realistic development support rather than agency-style service claims.",
   services: [
     {
       id: "frontend-web-development",
       index: "01",
-      title: "Frontend Web Development",
+      title: "FRONTEND & PRODUCT INTERFACES",
       description:
-        "Building responsive, readable, and user-friendly interfaces with careful attention to layout, interaction, reusable styling, and behavior across screen sizes.",
+        "Developing new interfaces or improving existing ones with attention to structure, responsive behavior, reusable components, interaction, and overall usability.",
       bestFor:
-        "Landing pages, responsive interfaces, UI refinement, and existing frontend bug fixing.",
+        "Product interfaces, responsive websites, dashboards, portfolio and business websites, UI implementation, frontend refinement, and existing interface fixes.",
       icon: "frontend",
       accent: "coral",
       capabilities: [
@@ -34,11 +34,11 @@ export const servicesContent = {
     {
       id: "react-next-development",
       index: "02",
-      title: "React & Next.js Development",
+      title: "APPLICATION FEATURES & INTEGRATIONS",
       description:
-        "Developing component-driven web applications and interactive product interfaces with modern React patterns, Next.js structure, and maintainable frontend organization.",
+        "Implementing practical application flows that move beyond the interface itself, including forms, validation, authentication-aware behavior, API communication, persistent data, and feature-level integration.",
       bestFor:
-        "Product interfaces, multi-page applications, dashboards, and modern business or portfolio websites.",
+        "CRUD workflows, authenticated features, API-connected interfaces, application extensions, forms, data-driven features, and end-to-end feature implementation.",
       icon: "react",
       accent: "sky",
       capabilities: [
@@ -53,11 +53,11 @@ export const servicesContent = {
     {
       id: "api-backend-integration",
       index: "03",
-      title: "REST API & Backend Integration",
+      title: "DASHBOARDS & WORKFLOW SYSTEMS",
       description:
-        "Connecting interfaces with backend services and data flows, including REST endpoints, CRUD workflows, validation, authentication-aware UI states, and database-backed application behavior.",
+        "Building interfaces for workflows involving users, roles, records, status changes, operational data, and day-to-day management tasks.",
       bestFor:
-        "Forms, authenticated workflows, CRUD applications, API-connected interfaces, and frontend-to-database product flows.",
+        "Admin panels, internal tools, academic systems, small-business applications, management systems, and data-centered dashboards.",
       icon: "api",
       accent: "mint",
       capabilities: [
@@ -69,100 +69,99 @@ export const servicesContent = {
         { label: "Python / FastAPI", status: "growth" },
       ],
     },
-    {
-      id: "dashboard-management-systems",
-      index: "04",
-      title: "Dashboard & Management Systems",
-      description:
-        "Building practical dashboards and management interfaces that organize users, records, roles, workflows, and operational data into clearer day-to-day software experiences.",
-      bestFor:
-        "Admin panels, academic systems, internal tools, small-business applications, and structured data-management workflows.",
-      icon: "dashboard",
-      accent: "amber",
-      capabilities: [
-        { label: "React / Next.js" },
-        { label: "PostgreSQL" },
-        { label: "MySQL" },
-        { label: "SQL" },
-        { label: "NoSQL" },
-        { label: "Role-based workflows" },
-      ],
-    },
+    // {
+    //   id: "dashboard-management-systems",
+    //   index: "04",
+    //   title: "Dashboard & Management Systems",
+    //   description:
+    //     "Building practical dashboards and management interfaces that organize users, records, roles, workflows, and operational data into clearer day-to-day software experiences.",
+    //   bestFor:
+    //     "Admin panels, academic systems, internal tools, small-business applications, and structured data-management workflows.",
+    //   icon: "dashboard",
+    //   accent: "amber",
+    //   capabilities: [
+    //     { label: "React / Next.js" },
+    //     { label: "PostgreSQL" },
+    //     { label: "MySQL" },
+    //     { label: "SQL" },
+    //     { label: "NoSQL" },
+    //     { label: "Role-based workflows" },
+    //   ],
+    // },
   ],
 
   collaborationLabel: "COLLABORATION FIT",
-  collaborationHeading: "Ways we can work together.",
+  collaborationHeading: "Where I can contribute most effectively.",
   collaborationDescription:
-    "I am most useful where the scope is clear, the product can be built iteratively, and communication stays close to the actual implementation.",
+    "I work best when the goal is concrete, responsibilities are clear, and I work best when the goal is concrete, responsibilities are clear, and progress can be reviewed through practical implementation and iterative feedback.",
   collaborationTypes: [
     {
-      title: "Freelance & short-term builds",
+      title: "Project-based development",
       description:
-        "Focused implementation work with a defined outcome, feature set, or improvement target.",
+        "A defined interface, feature, integration, or application improvement with a clear expected outcome.",
     },
     {
-      title: "Small-business web applications",
+      title: "Team contribution",
       description:
-        "Practical websites, dashboards, and internal tools for straightforward operational needs.",
+        "Focused frontend, backend integration, database, or feature work inside an existing development workflow and codebase.",
     },
     {
-      title: "Team-based development",
+      title: "Early-stage products",
       description:
-        "Contributing frontend, integration, database, or feature work inside a collaborative development workflow.",
+        "Turning a defined idea or workflow into a usable first version that can be tested, reviewed, and developed further.",
     },
-    {
-      title: "Academic prototypes & student collaboration",
-      description:
-        "Legitimate learning projects, prototypes, and team builds where the goal is shared implementation and understanding.",
-    },
-    {
-      title: "Open-source collaboration",
-      description:
-        "Growing toward useful, well-scoped contributions where I can understand the code and make a responsible change.",
-    },
-    {
-      title: "Personal & early-stage startup products",
-      description:
-        "Helping shape an idea into a testable interface, working feature, or structured first version.",
-    },
+    // {
+    //   title: "Academic prototypes & student collaboration",
+    //   description:
+    //     "Legitimate learning projects, prototypes, and team builds where the goal is shared implementation and understanding.",
+    // },
+    // {
+    //   title: "Open-source collaboration",
+    //   description:
+    //     "Growing toward useful, well-scoped contributions where I can understand the code and make a responsible change.",
+    // },
+    // {
+    //   title: "Personal & early-stage startup products",
+    //   description:
+    //     "Helping shape an idea into a testable interface, working feature, or structured first version.",
+    // },
   ],
 
-  workflowLabel: "DELIVERY RHYTHM",
-  workflowHeading: "A compact path from idea to usable result.",
+  workflowLabel: "DELIVERY APPROACH",
+  workflowHeading: "A simple path from requirement to usable result.",
   workflowDescription:
     "The process stays intentionally simple: understand the task, build the right scope, review the result, and leave the work in a usable state.",
   workflow: [
     {
       index: "01",
-      title: "Discover",
+      title: "Define",
       description:
-        "Clarify the problem, users, required features, constraints, and the most useful first outcome.",
+        "Confirm the problem, expected outcome, important constraints, and the scope that needs to be implemented.",
     },
     {
       index: "02",
-      title: "Build",
+      title: "Implement",
       description:
-        "Implement the agreed interface, feature, integration, or data workflow with maintainable structure.",
+        "Build the agreed interface, feature, integration, or workflow with clear and maintainable structure.",
     },
     {
       index: "03",
       title: "Review",
       description:
-        "Check responsiveness, behavior, edge cases, clarity, and alignment with the original requirement.",
+        "Check behavior, responsiveness, edge cases, data flow, and alignment with the original requirement.",
     },
     {
       index: "04",
-      title: "Deliver",
+      title: "Handoff",
       description:
-        "Refine the result, document important handoff details, and leave the work ready for its next step.",
+        "Refine the finished work and leave the implementation in a clear state for continued development.",
     },
   ],
 
   ctaEyebrow: "PROJECT HANDOFF",
-  ctaHeading:
-    "Have a project in mind? Let’s discuss what would make it useful.",
+  ctaHeading: "Have something specific you want to build or improve?",
   ctaDescription:
-    "If you have a web interface, application feature, API integration, dashboard, or management workflow to build or improve, the Contact section is the best place to start.",
-  ctaLabel: "Start a Conversation",
+    "If you have an interface, application feature, integration, dashboard, or workflow that could benefit from focused implementation, send me the current context and the outcome you are aiming for.",
+  ctaLabel: "Discuss the project",
   ctaHref: "#contact",
 } satisfies ServicesContentData;
