@@ -15,7 +15,7 @@ export const resumeContent = {
   href: "/resume/Ahmad_Sohail_Wahidy_Resume.pdf",
   fileName: "Ahmad_Sohail_Wahidy_Resume.pdf",
   description:
-    "A concise overview of my professional profile, technical skills, selected project work, education, and current career direction.",
+    "My resume provides a focused overview of my technical skills, selected projects, education, and current professional direction.",
   downloadLabel: "Download Resume",
   openPrintLabel: "Open / Print Resume",
   lastUpdatedLabel: "August 2026",

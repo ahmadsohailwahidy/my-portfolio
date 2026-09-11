@@ -12,7 +12,7 @@ const iconProps = {
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.6,
+  strokeWidth: 1.7,
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
   "aria-hidden": true,
@@ -68,7 +68,7 @@ export function DirectionIcon(props: IconProps) {
   return (
     <svg {...iconProps} {...props}>
       <circle cx="12" cy="12" r="8.5" />
-      <path d="m15 9-1.8 4.2L9 15l1.8-4.2L15 9Z" />
+      <path d="m15.25 8.75-2 4.5-4.5 2 2-4.5 4.5-2Z" />
     </svg>
   );
 }
@@ -76,9 +76,9 @@ export function DirectionIcon(props: IconProps) {
 export function LanguageIcon(props: IconProps) {
   return (
     <svg {...iconProps} {...props}>
-      <path d="M4 5h10v9H8l-4 3V5Z" />
-      <path d="M10 18h6l4 3V9h-3" />
-      <path d="M7 9h4" />
+      <path d="M4.5 5.5h10v8.4H8.2L4.5 17V5.5Z" />
+      <path d="M10.5 17.3h5.3l3.7 2.7V9h-2.7" />
+      <path d="M7.5 9h4" />
     </svg>
   );
 }
@@ -131,6 +131,33 @@ export function ArrowIcon(props: IconProps) {
     <svg {...iconProps} {...props}>
       <path d="M5 12h14" />
       <path d="m14 7 5 5-5 5" />
+    </svg>
+  );
+}
+
+export function WorldMapGraphic(props: IconProps) {
+  return (
+    <svg viewBox="0 0 360 122" fill="none" aria-hidden="true" {...props}>
+      <defs>
+        <pattern
+          id="profile-world-dots"
+          width="7"
+          height="7"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="2" cy="2" r="1.2" fill="currentColor" />
+        </pattern>
+      </defs>
+      <g fill="url(#profile-world-dots)">
+        <path d="M18 22 42 10l35 3 18 12 19-4 17 10-12 15-18 4-9 12-16 1-11 18-11-8-5-17-14-7-12-15Z" />
+        <path d="m95 71 14 8 9 15-6 23-10-4-5-18-9-10Z" />
+        <path d="m152 22 17-8 29 4 11 9 22-8 27 5 12 12 23-2 20 13-5 12-20 4-13 12-17 1-15-10-13 5-12-8-18 1-13-9-14 4-13-10-18-2-8-11Z" />
+        <path d="m199 58 18 3 10 12-6 22-9 17-15-4-7-20 3-16Z" />
+        <path d="m292 84 17-7 21 5 12 12-9 10-18-1-13 7-14-12Z" />
+      </g>
+      <g stroke="currentColor" strokeWidth="0.8" opacity="0.22">
+        <path d="M3 17h48M305 17h48M329 111h24" />
+      </g>
     </svg>
   );
 }

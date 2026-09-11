@@ -6,12 +6,15 @@ import {
   DocumentIcon,
   DownloadIcon,
   LanguageIcon,
-  OpportunityIcon,
   PrintIcon,
-  StrengthIcon,
+  WorldMapGraphic,
 } from "./ProfileIcons";
 import { ProfileReveal } from "./ProfileReveal";
 import styles from "./ProfessionalProfileSection.module.css";
+
+const directionKeywords = ["SYSTEMS", "BACKEND", "DATA", "AI"] as const;
+const directionPath = ["BUILD", "LEARN", "GROW"] as const;
+const worldWords = ["PEOPLE", "IDEAS", "OPPORTUNITIES", "WORLDWIDE"] as const;
 
 export function ProfessionalProfileSection() {
   const content = professionalProfileContent;
@@ -21,185 +24,120 @@ export function ProfessionalProfileSection() {
     <section
       id="profile"
       className={styles.section}
-      aria-labelledby="professional-profile-heading"
+      aria-label="Professional Profile"
       data-profile-root
     >
       <ProfileReveal />
 
       <div className={styles.container}>
-        <div className={styles.sectionDivider} aria-hidden="true">
-          <span>PROFESSIONAL PROFILE</span>
-          <i />
-          <span>09 / DOSSIER</span>
-        </div>
+        <h2 className={styles.srOnly}>Professional Profile</h2>
 
-        <header className={styles.masthead} data-profile-reveal>
-          <div className={styles.headerMeta}>
-            <span>{content.label}</span>
-            <i aria-hidden="true" />
-            <span>{content.meta}</span>
-          </div>
-
-          <div className={styles.mastheadGrid}>
-            <div className={styles.headingBlock}>
-              <h2 id="professional-profile-heading">
-                <span>{content.headingLead}</span>
-                <strong>{content.headingAccent}</strong>
-              </h2>
-              <p>{content.introduction}</p>
+        <div className={styles.profileGrid}>
+          <article
+            className={`${styles.panel} ${styles.careerCard}`}
+            aria-labelledby="career-direction-heading"
+            data-profile-reveal
+          >
+            <div className={styles.editorialMarker} aria-hidden="true">
+              <strong>01</strong>
+              <span />
+              <p>{content.directionLabel}</p>
             </div>
 
-            <aside className={styles.snapshot} aria-label="Current profile">
-              <span className={styles.snapshotLabel}>
-                {content.snapshotLabel}
+            <div className={styles.careerCopy}>
+              <h3 id="career-direction-heading">{content.directionHeading}</h3>
+              <p>{content.direction}</p>
+            </div>
+
+            <div className={styles.directionOrbit} aria-hidden="true">
+              <span className={styles.directionOrbitOuter} />
+              <span className={styles.directionOrbitInner}>
+                <DirectionIcon />
               </span>
-              <p>{content.snapshot}</p>
-              <div className={styles.snapshotRule} aria-hidden="true">
-                <span />
+            </div>
+
+            <div className={styles.directionKeywords} aria-hidden="true">
+              <i />
+              {directionKeywords.map((keyword) => (
+                <span key={keyword}>{keyword}</span>
+              ))}
+            </div>
+
+            <div className={styles.careerFooter} aria-hidden="true">
+              <div className={styles.careerFooterRule} />
+              <div className={styles.careerPath}>
+                {directionPath.map((item, index) => (
+                  <span key={item}>
+                    {item}
+                    {index < directionPath.length - 1 ? <i>›</i> : null}
+                  </span>
+                ))}
+              </div>
+              <div className={styles.technicalSlashes}>
                 <i />
-                <span />
+                <i />
+                <i />
+                <i />
+                <i />
               </div>
-            </aside>
-          </div>
-        </header>
+            </div>
+          </article>
 
-        <div className={styles.dossierLayout}>
-          <div className={styles.mainColumn}>
-            <section
-              className={styles.directionBrief}
-              aria-labelledby="career-direction-heading"
-              data-profile-reveal
-            >
-              <div className={styles.editorialMarker}>
-                <span>01</span>
-                <i aria-hidden="true" />
-                <p>{content.directionLabel}</p>
-              </div>
-
-              <div className={styles.directionContent}>
-                <span className={styles.directionIcon} aria-hidden="true">
-                  <DirectionIcon />
-                </span>
-                <h3 id="career-direction-heading">
-                  {content.directionHeading}
-                </h3>
-                <p>{content.direction}</p>
-              </div>
-            </section>
-
-            <section
-              className={styles.strengthsSection}
-              aria-labelledby="professional-strengths-heading"
-              data-profile-reveal
-            >
-              <div className={styles.subsectionHeading}>
-                <div>
-                  <span>02</span>
-                  <p>{content.strengthsLabel}</p>
-                </div>
-                <div>
-                  <h3 id="professional-strengths-heading">
-                    {content.strengthsHeading}
-                  </h3>
-                  <p>{content.strengthsDescription}</p>
-                </div>
-              </div>
-
-              <ol className={styles.strengthLedger}>
-                {content.strengths.map((strength) => (
-                  <li key={strength.index} className={styles.strengthEntry}>
-                    <div className={styles.strengthTopline}>
-                      <span>{strength.index}</span>
-                      <span className={styles.strengthIcon} aria-hidden="true">
-                        <StrengthIcon name={strength.icon} />
-                      </span>
-                    </div>
-                    <h4>{strength.title}</h4>
-                    <p>{strength.description}</p>
-                  </li>
-                ))}
-              </ol>
-            </section>
-          </div>
-
-          <aside
-            className={styles.sideIndex}
-            aria-label="Professional profile details"
+          <article
+            className={`${styles.panel} ${styles.languageCard}`}
+            aria-labelledby="languages-heading"
+            data-profile-reveal
           >
-            <section
-              className={styles.languageSection}
-              aria-labelledby="languages-heading"
-              data-profile-reveal
-            >
-              <div className={styles.railHeading}>
-                <span className={styles.railIcon} aria-hidden="true">
-                  <LanguageIcon />
-                </span>
-                <div>
-                  <p>{content.languagesLabel}</p>
-                  <h3 id="languages-heading">{content.languagesHeading}</h3>
+            <div className={styles.languageHeadingRow}>
+              <span className={styles.languageIcon} aria-hidden="true">
+                <LanguageIcon />
+              </span>
+
+              <div className={styles.languageHeadingCopy}>
+                <div className={styles.eyebrowLine}>
+                  <span>{content.languagesLabel}</span>
+                  <i aria-hidden="true" />
                 </div>
+                <h3 id="languages-heading">{content.languagesHeading}</h3>
               </div>
+            </div>
 
-              <p className={styles.railDescription}>
-                {content.languagesDescription}
-              </p>
-
-              <dl className={styles.languageList}>
-                {content.languages.map((language) => (
-                  <div key={language.name} className={styles.languageRow}>
-                    <dt>
-                      <strong>{language.name}</strong>
-                      <span>{language.context}</span>
-                    </dt>
-                    <dd>{language.proficiency}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-
-            <section
-              className={styles.opportunitySection}
-              aria-labelledby="opportunity-heading"
-              data-profile-reveal
-            >
-              <div className={styles.railHeading}>
-                <span className={styles.railIcon} aria-hidden="true">
-                  <OpportunityIcon />
-                </span>
-                <div>
-                  <p>{content.opportunityLabel}</p>
-                  <h3 id="opportunity-heading">{content.opportunityHeading}</h3>
+            <dl className={styles.languageList}>
+              {content.languages.map((language) => (
+                <div key={language.name} className={styles.languageRow}>
+                  <dt>
+                    <strong>{language.name}</strong>
+                    <span>{language.context}</span>
+                  </dt>
+                  <dd>
+                    <i aria-hidden="true" />
+                    <span>{language.proficiency}</span>
+                  </dd>
                 </div>
-              </div>
+              ))}
+            </dl>
 
-              <blockquote className={styles.opportunityStatement}>
-                {content.opportunityStatement}
-              </blockquote>
-
-              <dl className={styles.preferenceList}>
-                {content.opportunityPreferences.map((preference) => (
-                  <div key={preference.label} className={styles.preferenceRow}>
-                    <dt>{preference.label}</dt>
-                    <dd>
-                      <strong>{preference.value}</strong>
-                      <span>{preference.description}</span>
-                    </dd>
-                  </div>
+            <div className={styles.languageFooter} aria-hidden="true">
+              <div className={styles.worldWords}>
+                <i />
+                {worldWords.map((word) => (
+                  <span key={word}>{word}</span>
                 ))}
-              </dl>
-            </section>
-          </aside>
+              </div>
+              <WorldMapGraphic className={styles.worldMap} />
+            </div>
+          </article>
         </div>
 
         <section
-          className={styles.resumeIndex}
+          className={`${styles.panel} ${styles.resumeCard}`}
           aria-labelledby="resume-heading"
           data-profile-reveal
         >
           <div className={styles.resumeDocumentMark} aria-hidden="true">
             <DocumentIcon />
             <span>PDF</span>
+            <i />
           </div>
 
           <div className={styles.resumeCopy}>
@@ -210,11 +148,11 @@ export function ProfessionalProfileSection() {
 
           <dl className={styles.resumeMetadata}>
             <div>
-              <dt>File</dt>
+              <dt>FILE</dt>
               <dd>{resume.fileName}</dd>
             </div>
             <div>
-              <dt>Last updated</dt>
+              <dt>LAST UPDATED</dt>
               <dd>
                 {resume.lastUpdatedDateTime ? (
                   <time dateTime={resume.lastUpdatedDateTime}>

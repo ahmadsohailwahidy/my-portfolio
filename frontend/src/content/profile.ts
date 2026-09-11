@@ -3,12 +3,12 @@ import { resumeContent } from "@/content/resume";
 import type { ProfessionalProfileContentData } from "@/types/profile";
 
 export const professionalProfileContent = {
-  label: "PROFILE / 09",
-  meta: "PROFESSIONAL DOSSIER · WORK STYLE · CAREER DIRECTION",
-  headingLead: "A concise professional brief,",
+  label: "PROFILE / 05",
+  meta: "PROFESSIONAL PROFILE & RESUME",
+  headingLead: "A concise professional brief, ",
   headingAccent: "beyond the code.",
   introduction:
-    "A recruiter-friendly view of how I approach software work, communicate across languages, continue learning, and evaluate the opportunities that fit my current direction.",
+    "A quick view of my career direction, language profile, and professional resume.",
 
   snapshotLabel: "CURRENT PROFILE",
   snapshot:
@@ -16,9 +16,9 @@ export const professionalProfileContent = {
 
   directionLabel: "CAREER DIRECTION",
   directionHeading:
-    "Growing toward reliable software engineering for systems, data, and modern products.",
+    "Building toward stronger software engineering across systems, backend, and data.",
   direction:
-    "My next step is to deepen backend engineering, cloud, system design, database, and data-engineering capability while continuing to build complete web applications and responsibly explore AI-enabled systems.",
+    "I’m continuing to deepen my backend, system design, database, cloud, and data-engineering capabilities while building complete web applications and exploring practical AI-enabled systems.",
 
   strengthsLabel: "WORKING PRINCIPLES",
   strengthsHeading: "Four strengths that shape how I approach implementation.",
@@ -108,6 +108,6 @@ export const professionalProfileContent = {
   ],
 
   resumeLabel: "RESUME ACCESS",
-  resumeHeading: "The concise record behind this portfolio.",
+  resumeHeading: "A concise record of my background and work.",
   resume: resumeContent,
 } satisfies ProfessionalProfileContentData;
