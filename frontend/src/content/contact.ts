@@ -12,7 +12,7 @@ export const contactContent = {
   responseWindow: "24–48 hours",
   directHeading: "Choose the channel that works for you.",
   directDescription:
-    "Email is the fastest way to start a conversation. GitHub and LinkedIn are available when you want more professional or technical context first.",
+    "Email is the easiest way to reach me. You can also find my work and professional profile on GitHub and LinkedIn.",
   directLinks: [
     {
       label: "GitHub",
@@ -41,12 +41,12 @@ export const contactContent = {
     { label: "Collaboration", icon: "collaboration" },
   ],
   formLabel: "MESSAGE COMPOSER",
-  formHeading: "Give me the useful context.",
+  formHeading: "Tell me what you’re working on.",
   formDescription:
     "A few clear details are enough: who you are, what you’re working on, and where you think I can help.",
   formPrivacyNote:
     "This form prepares the message in your default email app. The portfolio does not store your message or personal details.",
   footerKicker: "END OF PORTFOLIO · OPEN TO CONVERSATION",
   footerMessage: "Thanks for taking the time to explore my work.",
-  footerNavigationIds: ["home", "projects", "services", "profile", "contact"],
+  footerNavigationIds: ["home", "services", "projects", "profile", "contact"],
 } satisfies ContactContentData;

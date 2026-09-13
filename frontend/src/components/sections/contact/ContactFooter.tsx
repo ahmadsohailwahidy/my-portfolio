@@ -1,11 +1,11 @@
-import { contactContent } from "@/content/contact";
 import { heroContent } from "@/content/hero";
+import { contactContent } from "@/content/contact";
 import { navigationItems } from "@/content/navigation";
 
 import {
+  ArrowRightIcon,
   ArrowUpIcon,
   ContactLinkIcon,
-  ExternalIcon,
   MailIcon,
 } from "./ContactIcons";
 import styles from "./ContactSection.module.css";
@@ -22,19 +22,28 @@ export function ContactFooter({ navigationIds, email }: ContactFooterProps) {
     .map((id) => navigationItems.find((item) => item.id === id))
     .filter((item): item is (typeof navigationItems)[number] => Boolean(item));
 
+  const role = heroContent.primaryTitle.join(" ");
+
   return (
     <footer className={styles.footer} data-contact-reveal>
-      <div className={styles.footerHeadline}>
-        <div className={styles.footerMonogram} aria-hidden="true">
-          <span>&lt;</span>
-          <strong>AS</strong>
-          <span>/&gt;</span>
+      <span className={styles.footerRule} aria-hidden="true" />
+
+      <div className={styles.footerTop}>
+        <div className={styles.footerIdentity}>
+          <div className={styles.footerMonogram} aria-hidden="true">
+            &lt; AS /&gt;
+          </div>
+
+          <div className={styles.footerIdentityCopy}>
+            <strong>{heroContent.name}</strong>
+            <span>
+              <i aria-hidden="true" />
+              {role}
+            </span>
+          </div>
         </div>
 
-        <div className={styles.footerHeadlineCopy}>
-          <p>{contactContent.footerKicker}</p>
-          <h3>{contactContent.footerMessage}</h3>
-        </div>
+        <p className={styles.footerMessage}>{contactContent.footerMessage}</p>
 
         <a href="#home" className={styles.backToTop}>
           <span>Back to top</span>
@@ -44,68 +53,58 @@ export function ContactFooter({ navigationIds, email }: ContactFooterProps) {
         </a>
       </div>
 
-      <div className={styles.footerGrid}>
-        <div className={styles.footerIdentity}>
-          <span>PORTFOLIO BY</span>
-          <strong>{heroContent.name}</strong>
-          <p>{heroContent.primaryTitle}</p>
-        </div>
+      <div className={styles.footerBottomWrap}>
+        <div className={styles.footerBottom}>
+          <p className={styles.copyright}>
+            © {COPYRIGHT_YEAR} {heroContent.name}. All rights reserved.
+          </p>
 
-        <nav className={styles.footerNavigation} aria-label="Footer navigation">
-          <span>EXPLORE</span>
-          <div>
-            {miniNavigation.map((item) => (
-              <a key={item.id} href={item.href}>
-                <span>{item.shortLabel}</span>
-                <ExternalIcon aria-hidden="true" />
+          <nav className={styles.footerNavigation} aria-label="Footer navigation">
+            <span className={styles.footerGroupLabel}>Explore</span>
+            <div>
+              {miniNavigation.map((item) => (
+                <a key={item.id} href={item.href}>
+                  <span>{item.shortLabel}</span>
+                  <ArrowRightIcon aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          <div className={styles.footerConnections}>
+            <span className={styles.footerGroupLabel}>Connect</span>
+            <div>
+              <a href={`mailto:${email}`} aria-label={`Email ${heroContent.name}`}>
+                <span className={styles.footerSocialIcon} aria-hidden="true">
+                  <MailIcon />
+                </span>
+                <span>Email</span>
               </a>
-            ))}
-          </div>
-        </nav>
-
-        <div className={styles.footerConnections}>
-          <span>CONNECT</span>
-          <div>
-            <a
-              href={`mailto:${email}`}
-              aria-label={`Email ${heroContent.name}`}
-            >
-              <span className={styles.footerSocialIcon} aria-hidden="true">
-                <MailIcon />
-              </span>
-              <span>Email</span>
-            </a>
-            <a
-              href={heroContent.socials.github.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Open ${heroContent.name}'s GitHub profile`}
-            >
-              <span className={styles.footerSocialIcon} aria-hidden="true">
-                <ContactLinkIcon name="github" />
-              </span>
-              <span>GitHub</span>
-            </a>
-            <a
-              href={heroContent.socials.linkedin.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Open ${heroContent.name}'s LinkedIn profile`}
-            >
-              <span className={styles.footerSocialIcon} aria-hidden="true">
-                <ContactLinkIcon name="linkedin" />
-              </span>
-              <span>LinkedIn</span>
-            </a>
+              <a
+                href={heroContent.socials.github.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={heroContent.socials.github.ariaLabel}
+              >
+                <span className={styles.footerSocialIcon} aria-hidden="true">
+                  <ContactLinkIcon name="github" />
+                </span>
+                <span>GitHub</span>
+              </a>
+              <a
+                href={heroContent.socials.linkedin.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={heroContent.socials.linkedin.ariaLabel}
+              >
+                <span className={styles.footerSocialIcon} aria-hidden="true">
+                  <ContactLinkIcon name="linkedin" />
+                </span>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className={styles.footerBottom}>
-        <p>
-          © {COPYRIGHT_YEAR} {heroContent.name}. All rights reserved.
-        </p>
-        <span>Designed & built as a personal developer portfolio.</span>
       </div>
     </footer>
   );

@@ -135,15 +135,6 @@ export function ArrowUpIcon(props: IconProps) {
   );
 }
 
-export function ArrowRightIcon(props: IconProps) {
-  return (
-    <svg {...commonProps} {...props}>
-      <path d="M5 12h13" />
-      <path d="m14 8 4 4-4 4" />
-    </svg>
-  );
-}
-
 export function ContactLinkIcon({ name, ...props }: ContactLinkIconProps) {
   if (name === "github") {
     return (

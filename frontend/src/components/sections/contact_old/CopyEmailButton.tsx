@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import { CopyIcon } from "./ContactIcons";
 import styles from "./ContactSection.module.css";
@@ -13,26 +13,6 @@ type CopyState = "idle" | "copied" | "error";
 
 export function CopyEmailButton({ email }: CopyEmailButtonProps) {
   const [copyState, setCopyState] = useState<CopyState>("idle");
-  const resetTimerRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (resetTimerRef.current !== null) {
-        window.clearTimeout(resetTimerRef.current);
-      }
-    };
-  }, []);
-
-  const scheduleReset = (delay: number) => {
-    if (resetTimerRef.current !== null) {
-      window.clearTimeout(resetTimerRef.current);
-    }
-
-    resetTimerRef.current = window.setTimeout(() => {
-      setCopyState("idle");
-      resetTimerRef.current = null;
-    }, delay);
-  };
 
   const copyEmail = async () => {
     try {
@@ -47,13 +27,8 @@ export function CopyEmailButton({ email }: CopyEmailButtonProps) {
         document.body.appendChild(helper);
         helper.select();
 
-        let copied = false;
-
-        try {
-          copied = document.execCommand("copy");
-        } finally {
-          document.body.removeChild(helper);
-        }
+        const copied = document.execCommand("copy");
+        document.body.removeChild(helper);
 
         if (!copied) {
           throw new Error("Copy command was not available.");
@@ -61,10 +36,10 @@ export function CopyEmailButton({ email }: CopyEmailButtonProps) {
       }
 
       setCopyState("copied");
-      scheduleReset(2200);
+      window.setTimeout(() => setCopyState("idle"), 2200);
     } catch {
       setCopyState("error");
-      scheduleReset(2600);
+      window.setTimeout(() => setCopyState("idle"), 2600);
     }
   };
 
@@ -82,10 +57,8 @@ export function CopyEmailButton({ email }: CopyEmailButtonProps) {
       onClick={copyEmail}
       aria-label={`${label}: ${email}`}
     >
-      <CopyIcon aria-hidden="true" />
-      <span className={styles.copyButtonLabel} aria-live="polite">
-        {label}
-      </span>
+      <CopyIcon />
+      <span>{label}</span>
     </button>
   );
 }
